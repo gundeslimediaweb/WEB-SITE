@@ -1,1 +1,1 @@
-# web-s-te
+# web-sıte
