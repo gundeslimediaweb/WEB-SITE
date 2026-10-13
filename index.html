@@ -2353,6 +2353,42 @@
   });
 })();
 </script>
+<style>
+  .contact-list .contact-row {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .contact-list .contact-row span {
+    display: none !important;
+  }
+
+  .contact-list .contact-row strong {
+    font-size: 16px;
+  }
+</style>
+
+<script>
+(function () {
+  const rows = document.querySelectorAll(
+    '#iletisim .contact-list .contact-row'
+  );
+
+  rows.forEach(function (row) {
+    const title = row.querySelector('strong');
+    if (!title) return;
+
+    const text = title.textContent.trim().toLowerCase();
+
+    if (text.includes('whatsapp')) {
+      title.textContent = 'WhatsApp';
+    } else if (text.includes('instagram')) {
+    } else if (text.includes('telefon')) {
+      title.textContent = 'Telefon';
+    }
+  });
+})();
+</script>
 </body>
 </html>
 
