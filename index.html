@@ -1,85 +1,123 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0c1734">
-  <meta name="description" content="Gündeşli Media dijital platformlarını keşfedin. Usta Bul, dijital hizmetler ve platformlar tek bir noktada.">
-  <title>Gündeşli Media | Dijital Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Gündeşli Media dijital platformlarını, yerel toplulukları ve hizmetleri keşfedin.">
+  <title>Gündeşli Media | Dijital Ekosistem</title>
 
   <style>
     :root {
-      --blue: #386bff;
-      --blue-dark: #204bd1;
-      --navy: #0c1734;
-      --text: #17233e;
-      --muted: #71809b;
-      --bg: #f5f7fc;
-      --white: #ffffff;
-      --border: #e5eaf4;
+      --blue: #2563eb;
+      --blue-dark: #1746b5;
+      --ink: #172033;
+      --muted: #69758a;
+      --line: #e8edf5;
+      --paper: #ffffff;
+      --soft: #f6f8fc;
+      --green: #16865c;
       --radius: 24px;
-      --shadow: 0 24px 70px rgba(20, 42, 90, .09);
+      --shadow: 0 18px 55px rgba(36, 65, 120, .08);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 100px;
+      scroll-padding-top: 90px;
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
+      color: var(--ink);
+      background: var(--paper);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
         Roboto, Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    body.modal-open { overflow: hidden; }
 
-    button, input, textarea, select {
-      font: inherit;
-    }
-
-    button, a {
-      -webkit-tap-highlight-color: transparent;
-    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { color: inherit; }
 
     .container {
-      width: min(1160px, calc(100% - 44px));
+      width: min(1160px, calc(100% - 40px));
       margin-inline: auto;
     }
 
-    .announcement {
-      background: var(--navy);
-      color: #e2eaff;
-      text-align: center;
-      padding: 10px 16px;
-      font-size: 12px;
-      letter-spacing: .3px;
+    /* HAFİF, BEYAZ VE HAREKETLİ ARKA PLAN */
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+      background: #fff;
     }
 
-    .announcement span {
-      color: #82a6ff;
-      margin-right: 8px;
+    .ambient-shape {
+      position: absolute;
+      border-radius: 48% 52% 64% 36% / 42% 43% 57% 58%;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.98),
+        rgba(244,248,255,.85),
+        rgba(226,237,255,.62)
+      );
+      box-shadow:
+        inset 0 0 80px rgba(255,255,255,.9),
+        0 25px 100px rgba(65,113,220,.07);
+      filter: blur(1px);
+      animation: drift 20s ease-in-out infinite alternate;
     }
+
+    .ambient-shape.shape-a {
+      width: min(75vw, 850px);
+      height: min(75vw, 850px);
+      top: -320px;
+      right: -260px;
+    }
+
+    .ambient-shape.shape-b {
+      width: min(62vw, 700px);
+      height: min(62vw, 700px);
+      top: 42%;
+      left: -390px;
+      animation-delay: -8s;
+      animation-duration: 25s;
+    }
+
+    .ambient-shape.shape-c {
+      width: min(55vw, 620px);
+      height: min(55vw, 620px);
+      bottom: -360px;
+      right: -160px;
+      animation-delay: -12s;
+      animation-duration: 23s;
+    }
+
+    @keyframes drift {
+      0% { transform: translate3d(0,0,0) rotate(0deg) scale(1); }
+      50% { transform: translate3d(-35px,30px,0) rotate(12deg) scale(1.06); }
+      100% { transform: translate3d(25px,-20px,0) rotate(-8deg) scale(.97); }
+    }
+
+    /* ÜST MENÜ */
 
     header {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255, 255, 255, .88);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(229, 234, 244, .9);
+      background: rgba(255,255,255,.82);
+      border-bottom: 1px solid rgba(232,237,245,.8);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
     }
 
     .nav {
@@ -87,21 +125,17 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 25px;
+      gap: 24px;
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 11px;
-      font-size: 17px;
+      flex-shrink: 0;
+      font-size: 16px;
       font-weight: 800;
-      letter-spacing: -.6px;
-      white-space: nowrap;
-    }
-
-    .brand span:last-child {
-      color: var(--blue);
+      letter-spacing: -.5px;
     }
 
     .brand-icon {
@@ -109,38 +143,49 @@
       height: 43px;
       display: grid;
       place-items: center;
-      color: white;
-      border-radius: 14px;
-      font-size: 22px;
-      background: linear-gradient(145deg, #5b8aff, #204bd1);
-      box-shadow: 0 9px 22px #386bff38;
+      color: #fff;
+      background: linear-gradient(145deg, #4382ff, #2053ce);
+      border-radius: 15px;
+      box-shadow: 0 8px 22px rgba(37,99,235,.2);
+      font-size: 23px;
+      font-weight: 850;
     }
+
+    .brand-name span { color: var(--blue); }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 28px;
-      color: #52617a;
-      font-size: 13px;
-      font-weight: 650;
+      gap: 25px;
+      color: #526078;
+      font-size: 12px;
+      font-weight: 700;
     }
 
-    .nav-links a {
-      transition: color .2s;
+    .nav-links a { transition: color .2s; }
+    .nav-links a:hover { color: var(--blue); }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+      cursor: pointer;
+      font-size: 23px;
     }
 
-    .nav-links a:hover {
-      color: var(--blue);
-    }
+    /* BUTONLAR */
 
     .btn {
-      min-height: 48px;
-      padding: 0 21px;
+      min-height: 47px;
+      padding: 0 20px;
       display: inline-flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       gap: 9px;
-      border: 0;
+      border: 1px solid transparent;
       border-radius: 14px;
       font-size: 13px;
       font-weight: 750;
@@ -148,68 +193,44 @@
       transition: transform .2s, box-shadow .2s, background .2s;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-    }
+    .btn:hover { transform: translateY(-2px); }
 
     .btn-primary {
-      color: white;
-      background: linear-gradient(135deg, #477cff, #2852db);
-      box-shadow: 0 10px 25px #386bff32;
+      color: #fff;
+      background: linear-gradient(135deg, #3978fa, #2454d3);
+      box-shadow: 0 9px 23px rgba(37,99,235,.18);
     }
 
     .btn-primary:hover {
-      box-shadow: 0 15px 30px #386bff45;
+      box-shadow: 0 13px 28px rgba(37,99,235,.26);
     }
 
     .btn-light {
-      background: white;
-      border: 1px solid var(--border);
-      color: var(--text);
+      color: var(--ink);
+      background: rgba(255,255,255,.9);
+      border-color: #e1e7f1;
     }
 
-    .menu-toggle {
-      display: none;
-      width: 44px;
-      height: 44px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      font-size: 23px;
-      cursor: pointer;
+    .btn-whatsapp {
+      color: white;
+      background: #16865c;
+      box-shadow: 0 9px 23px rgba(22,134,92,.15);
     }
 
-    /* HERO */
+    .btn-whatsapp:hover { background: #11734e; }
+
+    /* ANA ALAN */
 
     .hero {
       position: relative;
-      overflow: hidden;
-      padding: 85px 0 80px;
-      background:
-        radial-gradient(ellipse at 78% 20%, #dce6ff 0, transparent 34%),
-        linear-gradient(180deg, #fff, #f5f7fc);
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      right: -300px;
-      top: -350px;
-      border: 1px solid #386bff1c;
-      border-radius: 50%;
-      box-shadow:
-        0 0 0 50px #386bff08,
-        0 0 0 100px #386bff05;
+      padding: 94px 0 88px;
     }
 
     .hero-grid {
-      position: relative;
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
+      grid-template-columns: 1.08fr .92fr;
       align-items: center;
-      gap: 40px;
+      gap: 45px;
     }
 
     .eyebrow {
@@ -218,148 +239,145 @@
       gap: 9px;
       color: var(--blue);
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 2px;
+      font-weight: 850;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
     }
 
     .eyebrow::before {
       content: "";
-      width: 25px;
+      width: 23px;
       height: 2px;
       background: var(--blue);
+      border-radius: 5px;
     }
 
     h1 {
-      margin: 25px 0 22px;
-      max-width: 680px;
-      font-size: clamp(44px, 5.8vw, 75px);
+      max-width: 690px;
+      margin: 23px 0;
+      font-size: clamp(44px, 5.7vw, 75px);
       line-height: 1.04;
       letter-spacing: -4px;
-      font-weight: 820;
+      font-weight: 850;
     }
 
-    h1 span {
+    h1 .accent {
       color: var(--blue);
+      display: inline;
     }
 
     .hero-description {
-      max-width: 520px;
+      max-width: 540px;
       color: var(--muted);
-      font-size: 16px;
-      line-height: 1.9;
+      font-size: 15px;
+      line-height: 1.95;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 30px;
+      margin-top: 29px;
     }
 
     .hero-note {
-      margin-top: 25px;
-      color: #78859b;
-      font-size: 12px;
+      margin-top: 23px;
+      color: #778399;
+      font-size: 11px;
+      line-height: 1.8;
     }
 
     .hero-visual {
-      min-height: 430px;
+      min-height: 420px;
       position: relative;
       display: grid;
       place-items: center;
     }
 
-    .orb {
+    .orbit {
       position: absolute;
       width: 315px;
       height: 315px;
+      border: 1px solid rgba(63,117,237,.14);
       border-radius: 50%;
-      background: radial-gradient(circle at 32% 24%,
-        #fff 0, #e4ecff 40%, #b9ccff 100%);
-      box-shadow: 0 40px 100px #315dc42b;
+      animation: orbitSpin 40s linear infinite;
     }
 
-    .orb::before,
-    .orb::after {
+    .orbit::before,
+    .orbit::after {
       content: "";
       position: absolute;
-      inset: -35px;
-      border: 1px solid #386bff28;
+      border: 1px solid rgba(63,117,237,.13);
       border-radius: 50%;
-      transform: scaleY(.7) rotate(-25deg);
     }
 
-    .orb::after {
-      inset: -60px;
-      transform: scaleY(.6) rotate(30deg);
+    .orbit::before { inset: 27px -24px; transform: rotate(40deg); }
+    .orbit::after { inset: -24px 28px; transform: rotate(-30deg); }
+
+    @keyframes orbitSpin {
+      to { transform: rotate(360deg); }
     }
 
-    .core {
-      z-index: 2;
-      width: 115px;
-      height: 115px;
+    .hero-core {
+      width: 140px;
+      height: 140px;
       display: grid;
       place-items: center;
-      border-radius: 32px;
+      position: relative;
+      z-index: 2;
+      border-radius: 43px;
       color: white;
-      font-size: 53px;
+      background: linear-gradient(145deg, #78a4ff, #2854d2);
+      box-shadow: 0 30px 75px rgba(37,99,235,.27);
+      font-size: 76px;
       font-weight: 850;
-      background: linear-gradient(145deg, #6594ff, #2045bd);
-      box-shadow: 0 24px 55px #386bff55;
       transform: rotate(-7deg);
+      animation: coreFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes coreFloat {
+      0%,100% { transform: translateY(0) rotate(-7deg); }
+      50% { transform: translateY(-12px) rotate(-3deg); }
     }
 
     .float-card {
       position: absolute;
       z-index: 3;
-      padding: 15px 18px;
-      min-width: 175px;
+      min-width: 178px;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      background: #ffffffeb;
-      border: 1px solid white;
+      gap: 11px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(255,255,255,.95);
       border-radius: 18px;
-      box-shadow: 0 18px 45px #19366d17;
-      backdrop-filter: blur(12px);
-      animation: float 6s ease-in-out infinite;
+      box-shadow: 0 16px 42px rgba(32,61,120,.1);
+      backdrop-filter: blur(15px);
+      animation: cardFloat 6s ease-in-out infinite;
     }
 
-    .float-card.one {
-      top: 40px;
-      left: 0;
-    }
+    .float-card.one { top: 35px; left: 0; }
+    .float-card.two { top: 155px; right: -4px; animation-delay: -2s; }
+    .float-card.three { bottom: 27px; left: 22px; animation-delay: -4s; }
 
-    .float-card.two {
-      top: 150px;
-      right: -5px;
-      animation-delay: -2s;
-    }
-
-    .float-card.three {
-      bottom: 30px;
-      left: 20px;
-      animation-delay: -4s;
+    @keyframes cardFloat {
+      0%,100% { translate: 0 0; }
+      50% { translate: 0 -9px; }
     }
 
     .float-icon {
       width: 39px;
       height: 39px;
-      flex-shrink: 0;
       display: grid;
       place-items: center;
+      flex-shrink: 0;
       border-radius: 13px;
       color: var(--blue);
-      background: #edf2ff;
-      font-size: 19px;
+      background: #edf3ff;
+      font-size: 20px;
     }
 
-    .float-card strong {
-      display: block;
-      font-size: 12px;
-    }
-
+    .float-card strong { display: block; font-size: 12px; }
     .float-card small {
       display: block;
       margin-top: 5px;
@@ -367,23 +385,18 @@
       font-size: 10px;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-9px); }
-    }
+    /* ORTAK BÖLÜMLER */
 
-    /* SECTIONS */
-
-    .section {
-      padding: 88px 0;
-    }
+    .section { padding: 84px 0; }
 
     .section-white {
-      background: white;
+      background: rgba(255,255,255,.78);
+      border-block: 1px solid rgba(232,237,245,.75);
+      backdrop-filter: blur(4px);
     }
 
     .section-heading {
-      max-width: 660px;
+      max-width: 680px;
       margin-bottom: 38px;
     }
 
@@ -392,65 +405,71 @@
       text-align: center;
     }
 
+    .section-heading.center .eyebrow { justify-content: center; }
+
     h2 {
       margin: 15px 0;
-      font-size: clamp(31px, 4vw, 46px);
-      line-height: 1.13;
+      font-size: clamp(30px, 4vw, 45px);
+      line-height: 1.14;
       letter-spacing: -2px;
     }
 
-    .section-heading p {
+    .section-heading p,
+    .body-copy {
       color: var(--muted);
       font-size: 14px;
       line-height: 1.9;
     }
 
+    /* PLATFORM KARTLARI */
+
     .platform-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
     }
 
     .platform-card {
       min-height: 250px;
-      padding: 26px;
+      padding: 25px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(226,232,243,.95);
       border-radius: var(--radius);
-      background: white;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 8px 30px rgba(31,55,105,.025);
       transition: transform .25s, box-shadow .25s, border-color .25s;
     }
 
     .platform-card:hover {
-      transform: translateY(-6px);
-      border-color: #cbd8ff;
+      transform: translateY(-5px);
+      border-color: #cbd9ff;
       box-shadow: var(--shadow);
     }
 
     .platform-icon {
-      width: 52px;
-      height: 52px;
+      width: 51px;
+      height: 51px;
       display: grid;
       place-items: center;
       border-radius: 16px;
-      background: #edf2ff;
       color: var(--blue);
+      background: #edf3ff;
       font-size: 23px;
     }
 
     .platform-card h3 {
-      margin: 22px 0 9px;
-      font-size: 18px;
-      letter-spacing: -.5px;
+      margin: 20px 0 9px;
+      font-size: 17px;
+      letter-spacing: -.4px;
     }
 
     .platform-card p {
-      margin-bottom: 22px;
+      margin-bottom: 19px;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
+      font-size: 12px;
+      line-height: 1.85;
     }
 
     .card-link {
@@ -465,136 +484,152 @@
       transition: transform .2s;
     }
 
-    .card-link:hover span {
-      transform: translateX(5px);
-    }
+    .card-link:hover span { transform: translateX(4px); }
 
     .status {
-      margin-top: 12px;
-      color: #78859b;
+      margin-top: 13px;
+      padding: 6px 9px;
+      border-radius: 8px;
+      color: #66738a;
+      background: #f2f5fa;
       font-size: 10px;
       font-weight: 750;
-      letter-spacing: .4px;
-      text-transform: uppercase;
     }
 
-    /* USTA BUL */
+    /* USTA BUL ALANI */
 
     .feature {
+      position: relative;
+      overflow: hidden;
       display: grid;
-      grid-template-columns: 1fr .8fr;
+      grid-template-columns: 1fr .75fr;
       align-items: center;
-      gap: 45px;
+      gap: 30px;
       padding: 42px;
-      border: 1px solid #e0e7fb;
+      border: 1px solid #e2eaff;
       border-radius: 30px;
-      background:
-        radial-gradient(ellipse at 90% 20%, #dce7ff, transparent 40%),
-        linear-gradient(130deg, #fff, #f1f5ff);
+      background: linear-gradient(125deg, #fff, #f4f7ff);
       box-shadow: var(--shadow);
     }
 
+    .feature::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      right: -150px;
+      top: -160px;
+      border-radius: 50%;
+      background: rgba(210,225,255,.3);
+      pointer-events: none;
+    }
+
     .feature p {
-      margin: 15px 0 25px;
+      max-width: 580px;
+      margin: 15px 0 24px;
       color: var(--muted);
       font-size: 14px;
       line-height: 1.9;
     }
 
     .feature-art {
-      min-height: 250px;
+      min-height: 220px;
       display: grid;
       place-items: center;
     }
 
     .feature-symbol {
-      width: 175px;
-      height: 175px;
+      width: 155px;
+      height: 155px;
       display: grid;
       place-items: center;
       border-radius: 42px;
-      color: white;
-      font-size: 70px;
-      background: linear-gradient(145deg, #6895ff, #2449c4);
-      box-shadow: 0 28px 65px #386bff44;
+      color: #fff;
+      background: linear-gradient(145deg, #75a0ff, #2452ce);
+      box-shadow: 0 25px 65px rgba(37,99,235,.23);
+      font-size: 65px;
       transform: rotate(-8deg);
+      animation: coreFloat 5s ease-in-out infinite;
     }
 
-    /* ABOUT */
+    /* HAKKIMIZDA */
 
     .about-grid {
       display: grid;
       grid-template-columns: .8fr 1.2fr;
       align-items: center;
-      gap: 70px;
+      gap: 65px;
     }
 
     .about-art {
       min-height: 300px;
       display: grid;
       place-items: center;
-      border-radius: 28px;
-      background: linear-gradient(145deg, #eaf0ff, #f8faff);
       position: relative;
       overflow: hidden;
+      border: 1px solid #e7edfa;
+      border-radius: 28px;
+      background: linear-gradient(145deg, #fff, #f1f5ff);
     }
 
     .about-art::before,
     .about-art::after {
       content: "";
       position: absolute;
-      width: 250px;
-      height: 250px;
-      border: 1px solid #386bff20;
+      width: 245px;
+      height: 245px;
+      border: 1px solid #b8ccff6b;
       border-radius: 50%;
+      animation: orbitSpin 32s linear infinite;
     }
 
     .about-art::after {
-      width: 330px;
-      height: 330px;
+      width: 310px;
+      height: 310px;
+      animation-direction: reverse;
+      animation-duration: 45s;
     }
 
     .about-mark {
-      position: relative;
       z-index: 1;
       width: 100px;
       height: 100px;
       display: grid;
       place-items: center;
-      border-radius: 28px;
+      border-radius: 30px;
       color: white;
-      font-size: 48px;
+      background: linear-gradient(145deg, #75a0ff, #2452ce);
+      box-shadow: 0 20px 50px rgba(37,99,235,.23);
+      font-size: 49px;
       font-weight: 850;
-      background: linear-gradient(145deg, #6594ff, #2045bd);
-      box-shadow: 0 20px 50px #386bff44;
       transform: rotate(-7deg);
     }
 
     .about-copy p {
+      margin-top: 14px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.95;
-      margin-top: 15px;
     }
 
-    /* CONTACT */
+    /* İLETİŞİM */
 
     .contact-panel {
       display: grid;
-      grid-template-columns: 1fr .8fr;
-      gap: 35px;
-      padding: 38px;
-      background: white;
-      border: 1px solid var(--border);
+      grid-template-columns: 1fr .85fr;
+      gap: 32px;
+      padding: 35px;
+      border: 1px solid var(--line);
       border-radius: 28px;
+      background: rgba(255,255,255,.92);
       box-shadow: var(--shadow);
     }
 
     .contact-panel p {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.9;
       margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
     }
 
     .contact-links {
@@ -607,48 +642,85 @@
     .contact-link {
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 17px;
-      border: 1px solid var(--border);
+      gap: 13px;
+      padding: 15px;
+      border: 1px solid var(--line);
       border-radius: 17px;
+      background: white;
       transition: border-color .2s, transform .2s;
     }
 
     .contact-link:hover {
-      border-color: #cbd8ff;
+      border-color: #c7d7ff;
       transform: translateX(3px);
     }
 
     .contact-link-icon {
-      width: 43px;
-      height: 43px;
+      width: 42px;
+      height: 42px;
       display: grid;
       place-items: center;
       flex-shrink: 0;
-      border-radius: 14px;
+      border-radius: 13px;
       color: var(--blue);
-      background: #edf2ff;
-      font-size: 20px;
+      background: #edf3ff;
+      font-size: 19px;
     }
 
-    .contact-link strong {
-      display: block;
-      font-size: 13px;
-    }
-
+    .contact-link strong { display: block; font-size: 12px; }
     .contact-link small {
       display: block;
       margin-top: 5px;
       color: var(--muted);
-      font-size: 11px;
+      font-size: 10px;
     }
 
-    /* FOOTER */
+    .contact-arrow { margin-left: auto; color: #8995a9; }
+
+    /* SORUMLULUK REDDİ */
+
+    .disclaimer {
+      padding: 32px 0;
+      background: rgba(247,249,253,.9);
+      border-block: 1px solid var(--line);
+    }
+
+    .disclaimer-inner {
+      display: grid;
+      grid-template-columns: 45px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .disclaimer-icon {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #e0e8f7;
+      border-radius: 14px;
+      color: var(--blue);
+      background: white;
+      font-size: 19px;
+    }
+
+    .disclaimer h2 {
+      margin: 2px 0 9px;
+      font-size: 17px;
+      letter-spacing: -.3px;
+    }
+
+    .disclaimer p {
+      color: #69758a;
+      font-size: 11px;
+      line-height: 1.9;
+    }
+
+    /* ALT ALAN */
 
     footer {
-      padding: 35px 0 22px;
-      background: white;
-      border-top: 1px solid var(--border);
+      padding: 34px 0 22px;
+      background: rgba(255,255,255,.94);
     }
 
     .footer-main {
@@ -656,41 +728,39 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 35px;
-      padding-bottom: 28px;
+      padding-bottom: 27px;
     }
 
     .footer-description {
       max-width: 330px;
-      margin-top: 14px;
+      margin-top: 13px;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 11px;
       line-height: 1.9;
     }
 
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 17px 24px;
-      color: #5e6b82;
-      font-size: 12px;
-      font-weight: 650;
+      gap: 15px 22px;
+      color: #5d6a80;
+      font-size: 11px;
+      font-weight: 700;
     }
 
-    .footer-links a:hover {
-      color: var(--blue);
-    }
+    .footer-links a:hover { color: var(--blue); }
 
     .footer-bottom {
-      padding-top: 20px;
       display: flex;
       justify-content: space-between;
       gap: 15px;
-      border-top: 1px solid var(--border);
-      color: #8792a5;
-      font-size: 11px;
+      padding-top: 19px;
+      border-top: 1px solid var(--line);
+      color: #8590a2;
+      font-size: 10px;
     }
 
-    /* MODAL */
+    /* TALEP FORMU */
 
     .modal-backdrop {
       position: fixed;
@@ -699,9 +769,10 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 18px;
-      background: #0b1734a8;
+      padding: 16px;
+      background: rgba(29,43,72,.36);
       backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
     }
 
     .modal-backdrop.open {
@@ -711,11 +782,12 @@
 
     .modal {
       width: min(620px, 100%);
-      max-height: 90vh;
+      max-height: 91vh;
       overflow-y: auto;
-      background: white;
+      border: 1px solid rgba(255,255,255,.8);
       border-radius: 25px;
-      box-shadow: 0 35px 100px #0003;
+      background: #fff;
+      box-shadow: 0 35px 100px rgba(21,42,82,.2);
       animation: modalUp .25s ease;
     }
 
@@ -725,63 +797,60 @@
     }
 
     @keyframes modalUp {
-      from { opacity: .5; transform: translateY(15px); }
+      from { opacity: .5; transform: translateY(14px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .modal-head {
       display: flex;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 15px;
-      align-items: flex-start;
-      padding: 25px;
-      border-bottom: 1px solid var(--border);
+      padding: 23px;
+      border-bottom: 1px solid var(--line);
     }
 
     .modal-head h2 {
       margin: 0 0 8px;
-      font-size: 24px;
+      font-size: 23px;
+      letter-spacing: -.8px;
     }
 
     .modal-head p {
       color: var(--muted);
-      font-size: 12px;
-      line-height: 1.7;
+      font-size: 11px;
+      line-height: 1.8;
     }
 
     .modal-close {
       width: 38px;
       height: 38px;
       flex-shrink: 0;
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
       border-radius: 12px;
       background: white;
       cursor: pointer;
-      font-size: 19px;
+      font-size: 22px;
     }
 
-    .form-body {
-      padding: 24px 25px 28px;
-    }
+    .form-body { padding: 23px; }
 
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 15px;
     }
 
     .field {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 7px;
     }
 
-    .field.full {
-      grid-column: 1 / -1;
-    }
+    .field.full { grid-column: 1 / -1; }
 
     .field label {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 750;
     }
 
@@ -789,13 +858,13 @@
     .field select,
     .field textarea {
       width: 100%;
-      min-height: 46px;
-      padding: 12px;
-      color: var(--text);
-      background: white;
-      border: 1px solid #dce3ef;
+      min-height: 45px;
+      padding: 11px 12px;
+      border: 1px solid #dfe5ef;
       border-radius: 12px;
-      font-size: 13px;
+      color: var(--ink);
+      background: white;
+      font-size: 12px;
     }
 
     .field textarea {
@@ -807,39 +876,54 @@
     .field input:focus,
     .field select:focus,
     .field textarea:focus {
-      outline: 3px solid #386bff1e;
-      border-color: #8ba7ff;
+      outline: 3px solid rgba(37,99,235,.1);
+      border-color: #8baaff;
     }
 
     .form-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 19px;
+    }
+
+    .form-actions .btn { flex: 1; }
+
+    .form-error {
+      display: none;
+      margin-top: 13px;
+      color: #b42318;
+      font-size: 11px;
     }
 
     .result-box {
       display: none;
       margin-top: 20px;
-      padding: 18px;
-      border: 1px solid #dbe4ff;
-      border-radius: 16px;
-      background: #f7f9ff;
+      padding: 17px;
+      border: 1px solid #dce6fa;
+      border-radius: 17px;
+      background: #f8faff;
     }
 
-    .result-box.show {
-      display: block;
-    }
+    .result-box.show { display: block; }
 
     .result-box h3 {
-      margin-bottom: 12px;
-      font-size: 15px;
+      margin-bottom: 11px;
+      font-size: 14px;
     }
 
     .result-text {
       white-space: pre-wrap;
+      overflow-wrap: anywhere;
       color: #526079;
-      font-size: 12px;
+      font-size: 11px;
+      line-height: 1.85;
+    }
+
+    .privacy-note {
+      margin-top: 13px;
+      color: #78859a;
+      font-size: 10px;
       line-height: 1.8;
     }
 
@@ -851,15 +935,16 @@
       width: max-content;
       max-width: calc(100% - 30px);
       padding: 13px 18px;
+      border: 1px solid #e7edf8;
       border-radius: 13px;
-      color: white;
-      background: var(--navy);
+      color: var(--ink);
+      background: white;
       font-size: 12px;
       box-shadow: var(--shadow);
       opacity: 0;
       transform: translate(-50%, 15px);
       pointer-events: none;
-      transition: .25s;
+      transition: opacity .25s, transform .25s;
     }
 
     .toast.show {
@@ -869,7 +954,7 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(18px);
       transition: opacity .65s ease, transform .65s ease;
     }
 
@@ -879,20 +964,20 @@
     }
 
     @media (max-width: 950px) {
-      .nav-links { gap: 16px; }
-      .nav-links a { font-size: 12px; }
+      .nav-links { gap: 15px; }
+      .nav-links a { font-size: 11px; }
       .hero-grid { gap: 15px; }
-      .platform-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-visual { transform: scale(.9); }
+      .platform-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .float-card.two { right: -12px; }
     }
 
     @media (max-width: 740px) {
       .container { width: calc(100% - 32px); }
       .nav { min-height: 68px; }
-      .brand { font-size: 15px; }
-      .brand-icon { width: 38px; height: 38px; }
-      .menu-toggle { display: block; }
+      .brand { font-size: 14px; }
+      .brand-icon { width: 39px; height: 39px; }
       .nav > .btn { display: none; }
+      .menu-toggle { display: block; }
 
       .nav-links {
         position: absolute;
@@ -903,57 +988,69 @@
         flex-direction: column;
         align-items: stretch;
         gap: 0;
-        padding: 10px 22px 20px;
-        background: white;
-        border-bottom: 1px solid var(--border);
-        box-shadow: 0 20px 35px #10182812;
+        padding: 8px 22px 18px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255,255,255,.98);
+        box-shadow: 0 18px 35px rgba(20,40,80,.07);
       }
 
       .nav-links.open { display: flex; }
 
       .nav-links a {
-        padding: 15px 3px;
-        border-bottom: 1px solid #f0f2f7;
-        font-size: 14px;
+        padding: 14px 2px;
+        border-bottom: 1px solid #eef1f6;
+        font-size: 13px;
       }
 
-      .hero { padding: 60px 0 45px; }
-      .hero-grid { grid-template-columns: 1fr; }
-      h1 { font-size: clamp(43px, 11vw, 63px); letter-spacing: -2.7px; }
-      .hero-description { font-size: 14px; }
-      .hero-visual { min-height: 340px; transform: scale(.82); margin: 0 -20px; }
-      .orb { width: 280px; height: 280px; }
-      .float-card.one { left: 3%; }
-      .float-card.two { right: 1%; }
-      .float-card.three { left: 5%; }
+      .hero { padding: 58px 0 40px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 5px; }
+      h1 { font-size: clamp(42px, 10.5vw, 62px); letter-spacing: -2.7px; }
+      .hero-description { font-size: 13px; }
+      .hero-visual {
+        min-height: 330px;
+        margin: 0 -15px;
+        transform: scale(.85);
+      }
 
-      .section { padding: 65px 0; }
+      .orbit { width: 270px; height: 270px; }
+      .hero-core { width: 120px; height: 120px; font-size: 65px; }
+      .float-card.one { left: 1%; }
+      .float-card.two { right: 0; }
+      .float-card.three { left: 2%; }
+
+      .section { padding: 62px 0; }
       .platform-grid { grid-template-columns: 1fr; }
-      .platform-card { min-height: 220px; }
-      .feature { grid-template-columns: 1fr; padding: 27px; gap: 5px; }
-      .feature-art { min-height: 200px; }
-      .feature-symbol { width: 145px; height: 145px; font-size: 60px; }
+      .platform-card { min-height: 215px; }
+      .feature { grid-template-columns: 1fr; padding: 26px; gap: 0; }
+      .feature-art { min-height: 175px; }
+      .feature-symbol { width: 125px; height: 125px; font-size: 54px; }
       .about-grid { grid-template-columns: 1fr; gap: 28px; }
-      .about-art { min-height: 245px; }
-      .contact-panel { grid-template-columns: 1fr; padding: 25px 20px; gap: 22px; }
-      .footer-main { flex-direction: column; gap: 25px; }
+      .about-art { min-height: 240px; }
+      .contact-panel { grid-template-columns: 1fr; padding: 24px 19px; gap: 22px; }
+      .footer-main { flex-direction: column; gap: 24px; }
       .footer-bottom { flex-direction: column; }
       .form-grid { grid-template-columns: 1fr; }
       .field.full { grid-column: auto; }
-      .modal-head, .form-body { padding: 20px; }
+      .modal-head, .form-body { padding: 19px; }
+      .disclaimer-inner { grid-template-columns: 38px 1fr; gap: 12px; }
+      .disclaimer-icon { width: 38px; height: 38px; }
     }
 
     @media (max-width: 400px) {
       .hero-actions { flex-direction: column; }
       .hero-actions .btn { width: 100%; }
-      .hero-visual { transform: scale(.72); min-height: 290px; }
-      .float-card { min-width: 155px; padding: 11px; }
+      .hero-visual { transform: scale(.74); min-height: 290px; margin: -5px -25px; }
+      .float-card { min-width: 152px; padding: 10px; }
+      .float-card strong { font-size: 11px; }
+      .form-actions { flex-direction: column; }
+      .form-actions .btn { width: 100%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        scroll-behavior: auto !important;
         animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
         transition-duration: .01ms !important;
       }
       .reveal { opacity: 1; transform: none; }
@@ -962,18 +1059,20 @@
 </head>
 
 <body>
-  <div class="announcement">
-    <span>✦</span> Gündeşli Media — Dijital dünyada yeni bağlantılar
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient-shape shape-a"></div>
+    <div class="ambient-shape shape-b"></div>
+    <div class="ambient-shape shape-c"></div>
   </div>
 
   <header>
     <div class="container nav">
       <a href="#ana-sayfa" class="brand" aria-label="Gündeşli Media ana sayfa">
         <span class="brand-icon">G</span>
-        <span>Gündeşli <span>Media</span></span>
+        <span class="brand-name">Gündeşli <span>Media</span></span>
       </a>
 
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" aria-label="Ana menü">
         <a href="#ana-sayfa">Ana Sayfa</a>
         <a href="#platformlar">Platformlarımız</a>
         <a href="#usta-bul">Usta Bul</a>
@@ -982,7 +1081,7 @@
         <a href="#iletisim">İletişim</a>
       </nav>
 
-      <a href="#usta-bul" class="btn btn-primary">Usta Bul ↗</a>
+      <a href="#platformlar" class="btn btn-primary">Platformları Keşfet ↗</a>
       <button class="menu-toggle" id="menuToggle"
         aria-label="Menüyü aç" aria-expanded="false">☰</button>
     </div>
@@ -991,26 +1090,26 @@
   <main>
     <section class="hero" id="ana-sayfa">
       <div class="container hero-grid">
-        <div>
+        <div class="reveal">
           <div class="eyebrow">Dijital ekosistem</div>
-          <h1>Dijital dünyada <span>bağlantı</span> kurmanın yeni yolu.</h1>
+          <h1>Dijital dünyada yeni bir <span class="accent">bağlantı noktası.</span></h1>
           <p class="hero-description">
             Gündeşli Media; dijital toplulukları, yerel platformları ve
-            hizmetleri ortak bir marka deneyimiyle bir araya getirir.
-            İhtiyacınız olan bağlantıyı kolayca keşfedin.
+            hizmet fikirlerini ortak bir marka çatısı altında buluşturur.
+            İhtiyacınıza uygun platformu keşfedin.
           </p>
 
           <div class="hero-actions">
             <a href="#platformlar" class="btn btn-primary">Platformları Keşfet ↗</a>
-            <button class="btn btn-light" data-open-request>Usta Bul →</button>
+            <button class="btn btn-light" type="button" data-open-request>Usta Bul →</button>
           </div>
 
-          <div class="hero-note">✦ Modern yaklaşım · Kolay erişim · Birleşik deneyim</div>
+          <p class="hero-note">Modern yaklaşım · Kolay erişim · Birleşik dijital deneyim</p>
         </div>
 
-        <div class="hero-visual" aria-label="Gündeşli Media marka görseli">
-          <div class="orb"></div>
-          <div class="core">G</div>
+        <div class="hero-visual reveal" aria-label="Gündeşli Media marka görseli">
+          <div class="orbit"></div>
+          <div class="hero-core">G</div>
 
           <div class="float-card one">
             <div class="float-icon">✧</div>
@@ -1034,10 +1133,11 @@
       <div class="container">
         <div class="section-heading center reveal">
           <div class="eyebrow">Platformlarımız</div>
-          <h2>İhtiyacınız olan bağlantı, tek bir noktada.</h2>
+          <h2>Aradığınız bağlantı, doğru yerde başlar.</h2>
           <p>
-            Farklı kullanım alanlarına sahip platformları keşfedin.
-            Size uygun olanı seçin ve doğrudan ilgili kanala ulaşın.
+            Gündeşli Media çatısı altındaki platformları inceleyin.
+            Kullanıma açık kanallar ile tanıtım aşamasındaki fikirler
+            kartlarda ayrı şekilde belirtilir.
           </p>
         </div>
 
@@ -1058,34 +1158,34 @@
             <div class="platform-icon">◎</div>
             <h3>Maraş Durum & Trafik Bilgi</h3>
             <p>Yerel durum paylaşımları ve trafik bilgilerine odaklanan platform.</p>
-            <span class="status">Platform bilgisi</span>
+            <span class="status">Platform tanıtımı</span>
           </article>
 
           <article class="platform-card reveal">
             <div class="platform-icon">↗</div>
             <h3>Dijital Yolculuk Platformu</h3>
-            <p>Dijital araçları, hizmetleri ve yeni gelişim fırsatlarını keşfedin.</p>
+            <p>Dijital araçları, hizmetleri ve gelişim fırsatlarını keşfetmeye yönelik platform.</p>
             <span class="status">Platform tanıtımı</span>
           </article>
 
           <article class="platform-card reveal">
             <div class="platform-icon">⌘</div>
             <h3>İş & Staj</h3>
-            <p>İş ve staj fırsatlarına odaklanan platform hakkında bilgi edinin.</p>
+            <p>İş ve staj fırsatlarına odaklanan platform projesi.</p>
             <span class="status">Platform tanıtımı</span>
           </article>
 
           <article class="platform-card reveal">
             <div class="platform-icon">◇</div>
             <h3>Teklifim Gelsin</h3>
-            <p>Hizmet ihtiyaçları ve teklif süreçlerine yönelik platform fikri.</p>
+            <p>Hizmet ihtiyaçları ile teklif süreçlerini bir araya getirmeyi amaçlayan proje.</p>
             <span class="status">Platform tanıtımı</span>
           </article>
 
           <article class="platform-card reveal">
             <div class="platform-icon">✦</div>
             <h3>Gündeşli Media</h3>
-            <p>Dijital toplulukları ve hizmetleri ortak marka deneyiminde buluşturan yapı.</p>
+            <p>Dijital toplulukları ve hizmet fikirlerini ortak marka yaklaşımıyla buluşturan yapı.</p>
             <a class="card-link" href="#hakkimizda">Markayı tanı <span>→</span></a>
           </article>
         </div>
@@ -1097,12 +1197,13 @@
         <div class="feature reveal">
           <div>
             <div class="eyebrow">Usta Bul</div>
-            <h2>İhtiyacınızı anlatın. Talebinizi kolayca hazırlayın.</h2>
+            <h2>İhtiyacınızı anlatın, talebinizi hazırlayın.</h2>
             <p>
-              Hizmet kategorisini ve ihtiyacınızı belirleyin.
-              Bilgilerinizi kontrol edin ve paylaşmaya hazır bir talep özeti oluşturun.
+              Hizmet kategorisini ve konumunuzu girerek talep özeti oluşturun.
+              Özeti kontrol ettikten sonra belirlenen WhatsApp numarasına
+              gönderim için açabilirsiniz.
             </p>
-            <button class="btn btn-primary" data-open-request>
+            <button class="btn btn-primary" type="button" data-open-request>
               Talep Oluştur ↗
             </button>
           </div>
@@ -1120,10 +1221,10 @@
           <h2>Dijital dünyada daha güçlü bir görünürlük.</h2>
           <p>
             Tanıtım, sponsorluk ve platform iş birlikleri hakkında iletişime geçin.
-            İşletmenizin ihtiyaçlarını birlikte değerlendirelim.
+            İhtiyaçlarınızı birlikte değerlendirelim.
           </p>
           <div style="margin-top:25px">
-            <a href="#iletisim" class="btn btn-primary">İş Birliği Hakkında İletişim ↗</a>
+            <a href="#iletisim" class="btn btn-primary">İş Birliği İçin İletişim ↗</a>
           </div>
         </div>
       </div>
@@ -1137,7 +1238,7 @@
 
         <div class="about-copy reveal">
           <div class="eyebrow">Hakkımızda</div>
-          <h2>Dijital topluluklardan daha geniş bir ekosisteme.</h2>
+          <h2>Dijital topluluklardan geniş bir ekosisteme.</h2>
           <p>
             Gündeşli Media, dijital toplulukları ve farklı kullanım alanlarına
             sahip platformları ortak bir marka yaklaşımıyla bir araya getirmek
@@ -1145,12 +1246,10 @@
           </p>
           <p>
             Hedefimiz; kullanıcıların ilgili topluluklara, yerel platformlara
-            ve dijital hizmetlere daha kolay ulaşabildiği düzenli, anlaşılır
-            ve sürdürülebilir bir dijital deneyim geliştirmektir.
+            ve dijital hizmetlere daha kolay ulaşabildiği anlaşılır bir deneyim
+            geliştirmektir.
           </p>
-          <p>
-            <strong>Kurucu ve baş koordinatör:</strong> Melih Gündeşli
-          </p>
+          <p><strong>Kurucu ve baş koordinatör:</strong> Melih Gündeşli</p>
         </div>
       </div>
     </section>
@@ -1163,8 +1262,8 @@
             <h2>Birlikte yeni bağlantılar kuralım.</h2>
             <p>
               Gündeşli Media hakkında bilgi almak, iş birliği konuşmak
-              veya dijital platformlarımızı takip etmek için sosyal medya
-              kanalımıza ulaşabilirsiniz.
+              veya dijital platformlarımızı takip etmek için iletişim
+              kanallarımıza ulaşabilirsiniz.
             </p>
           </div>
 
@@ -1175,22 +1274,59 @@
               <span class="contact-link-icon">◎</span>
               <span>
                 <strong>Instagram</strong>
-                <small>Gündeşli Media ile bağlantı kurun</small>
+                <small>Instagram profilini ziyaret et</small>
               </span>
-              <span style="margin-left:auto;color:#98a2b3">↗</span>
+              <span class="contact-arrow">↗</span>
+            </a>
+
+            <a class="contact-link"
+              href="https://wa.me/905064676635"
+              target="_blank" rel="noopener noreferrer">
+              <span class="contact-link-icon">◉</span>
+              <span>
+                <strong>WhatsApp İletişim</strong>
+                <small>0506 467 66 35</small>
+              </span>
+              <span class="contact-arrow">↗</span>
             </a>
 
             <a class="contact-link"
               href="https://chat.whatsapp.com/DBNYcyDrr5oCDfoKRzMrsF"
               target="_blank" rel="noopener noreferrer">
-              <span class="contact-link-icon">◉</span>
+              <span class="contact-link-icon">⌕</span>
               <span>
                 <strong>Kahramanmaraş Al Sat</strong>
-                <small>WhatsApp topluluğuna katılın</small>
+                <small>WhatsApp topluluğuna katıl</small>
               </span>
-              <span style="margin-left:auto;color:#98a2b3">↗</span>
+              <span class="contact-arrow">↗</span>
             </a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="disclaimer" id="sorumluluk">
+      <div class="container disclaimer-inner">
+        <div class="disclaimer-icon" aria-hidden="true">ⓘ</div>
+        <div>
+          <h2>Sorumluluk reddi ve kullanım bilgilendirmesi</h2>
+          <p>
+            Gündeşli Media bu internet sayfasında dijital platformları tanıtır
+            ve kullanıcıların talep metni hazırlamasına yardımcı olur.
+            Açıkça belirtilmediği sürece Gündeşli Media, tanıtılan toplulukların
+            veya üçüncü taraf hizmet sağlayıcıların yaptığı işlemlerin tarafı,
+            garantörü ya da temsilcisi değildir. Hizmetin kapsamı, fiyatı,
+            niteliği, güvenliği, teslimatı ve ödeme koşulları ilgili kullanıcı
+            ile hizmet sağlayıcı arasında ayrıca değerlendirilmelidir.
+          </p>
+          <p style="margin-top:9px">
+            Talep formu bu sayfada bir metin hazırlar; tek başına bir sipariş,
+            sözleşme veya hizmet garantisi oluşturmaz. WhatsApp üzerinden
+            gönderim kullanıcının onayına bağlıdır. Paylaşmadan önce kişisel
+            bilgilerinizi kontrol edin ve yalnızca gerekli bilgileri paylaşın.
+            Bu bilgilendirme, yürürlükteki mevzuattan doğan ve hukuken
+            sınırlandırılamayan sorumlulukları ortadan kaldırmaz.
+          </p>
         </div>
       </div>
     </section>
@@ -1202,10 +1338,10 @@
         <div>
           <a href="#ana-sayfa" class="brand">
             <span class="brand-icon">G</span>
-            <span>Gündeşli <span>Media</span></span>
+            <span class="brand-name">Gündeşli <span>Media</span></span>
           </a>
           <p class="footer-description">
-            Dijital toplulukları, yerel platformları ve hizmetleri
+            Dijital toplulukları, yerel platformları ve hizmet fikirlerini
             ortak bir marka deneyimiyle bir araya getirir.
           </p>
         </div>
@@ -1217,6 +1353,7 @@
           <a href="#isletmeler">İşletmelere</a>
           <a href="#hakkimizda">Hakkımızda</a>
           <a href="#iletisim">İletişim</a>
+          <a href="#sorumluluk">Sorumluluk reddi</a>
         </nav>
       </div>
 
@@ -1227,15 +1364,18 @@
     </div>
   </footer>
 
+  <!-- TALEP FORMU PENCERESİ -->
+
   <div class="modal-backdrop" id="requestModal"
     role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
       <div class="modal-head">
         <div>
           <h2 id="modalTitle">Usta Bul talebi oluştur</h2>
-          <p>İhtiyacınızı anlatın ve paylaşmaya hazır bir özet hazırlayın.</p>
+          <p>Bilgileri girin, özeti inceleyin ve WhatsApp üzerinden gönderin.</p>
         </div>
-        <button class="modal-close" id="closeModal" aria-label="Kapat">×</button>
+        <button class="modal-close" id="closeModal" type="button"
+          aria-label="Kapat">×</button>
       </div>
 
       <div class="form-body">
@@ -1258,13 +1398,13 @@
             <div class="field">
               <label for="city">İl *</label>
               <input id="city" required maxlength="80"
-                placeholder="Örn. Kahramanmaraş">
+                autocomplete="address-level1" placeholder="Örn. Kahramanmaraş">
             </div>
 
             <div class="field">
               <label for="district">İlçe</label>
               <input id="district" maxlength="80"
-                placeholder="İsteğe bağlı">
+                autocomplete="address-level2" placeholder="İsteğe bağlı">
             </div>
 
             <div class="field full">
@@ -1292,11 +1432,16 @@
             <div class="field">
               <label for="contact">İletişim bilgisi</label>
               <input id="contact" maxlength="80"
-                placeholder="İsteğe bağlı">
+                autocomplete="tel" placeholder="İsteğe bağlı">
             </div>
           </div>
 
-          <p id="formError" style="display:none;color:#b42318;font-size:12px;margin-top:15px">
+          <p class="privacy-note">
+            Form bilgileri bu sayfada talep metni hazırlamak için kullanılır.
+            WhatsApp'a geçmeden önce paylaşacağınız bilgileri kontrol edin.
+          </p>
+
+          <p class="form-error" id="formError">
             Lütfen zorunlu alanları doldurun.
           </p>
 
@@ -1310,9 +1455,17 @@
           <h3>Talep özetiniz hazır</h3>
           <div class="result-text" id="resultText"></div>
           <div class="form-actions">
-            <button class="btn btn-primary" type="button" id="copyRequest">Metni Kopyala</button>
-            <button class="btn btn-light" type="button" id="shareRequest">Paylaş</button>
+            <button class="btn btn-whatsapp" type="button" id="sendWhatsApp">
+              WhatsApp ile Gönder ↗
+            </button>
+            <button class="btn btn-light" type="button" id="copyRequest">
+              Metni Kopyala
+            </button>
           </div>
+          <p class="privacy-note">
+            WhatsApp açıldığında mesajı kontrol edin ve göndermek için
+            WhatsApp içindeki Gönder düğmesine basın.
+          </p>
         </div>
       </div>
     </div>
@@ -1326,8 +1479,13 @@
       const modal = $("#requestModal");
       const form = $("#requestForm");
       const toast = $("#toast");
+
+      // WhatsApp numarası: Türkiye ülke kodu + telefon numarası.
+      const whatsappNumber = "905064676635";
+
       let summary = "";
       let toastTimer;
+      let lastFocusedElement = null;
 
       $("#year").textContent = new Date().getFullYear();
 
@@ -1335,18 +1493,22 @@
         toast.textContent = message;
         toast.classList.add("show");
         clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 2800);
       }
 
       function openModal() {
+        lastFocusedElement = document.activeElement;
         modal.classList.add("open");
-        document.body.style.overflow = "hidden";
+        document.body.classList.add("modal-open");
         setTimeout(() => $("#service").focus(), 100);
       }
 
       function closeModal() {
         modal.classList.remove("open");
-        document.body.style.overflow = "";
+        document.body.classList.remove("modal-open");
+        if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+          lastFocusedElement.focus();
+        }
       }
 
       document.querySelectorAll("[data-open-request]").forEach(button => {
@@ -1361,9 +1523,12 @@
       });
 
       document.addEventListener("keydown", event => {
-        if (event.key === "Escape") closeModal();
+        if (event.key === "Escape" && modal.classList.contains("open")) {
+          closeModal();
+        }
       });
 
+      // Mobil menü
       const menuToggle = $("#menuToggle");
       const navLinks = $("#navLinks");
 
@@ -1383,6 +1548,7 @@
         });
       });
 
+      // Talep özeti oluştur
       form.addEventListener("submit", event => {
         event.preventDefault();
 
@@ -1411,48 +1577,58 @@
 
         $("#resultText").textContent = summary;
         $("#resultBox").classList.add("show");
-        $("#resultBox").scrollIntoView({ behavior: "smooth", block: "nearest" });
+        $("#resultBox").scrollIntoView({
+          behavior: "smooth",
+          block: "nearest"
+        });
       });
 
+      // WhatsApp sohbetini aç ve mesajı hazırla.
+      // Kullanıcı WhatsApp içinden Gönder'e basar.
+      $("#sendWhatsApp").addEventListener("click", () => {
+        if (!summary) {
+          showToast("Önce talep özetini oluşturun.");
+          return;
+        }
+
+        const whatsappUrl =
+          "https://wa.me/" + whatsappNumber +
+          "?text=" + encodeURIComponent(summary);
+
+        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      });
+
+      // Talep metnini kopyala
       $("#copyRequest").addEventListener("click", async () => {
+        if (!summary) {
+          showToast("Önce talep özetini oluşturun.");
+          return;
+        }
+
         try {
           await navigator.clipboard.writeText(summary);
           showToast("Talep metni kopyalandı.");
         } catch (error) {
           const area = document.createElement("textarea");
           area.value = summary;
+          area.setAttribute("readonly", "");
           area.style.position = "fixed";
-          area.style.opacity = "0";
+          area.style.left = "-9999px";
           document.body.appendChild(area);
           area.select();
+
           const success = document.execCommand("copy");
           area.remove();
-          showToast(success ? "Talep metni kopyalandı." : "Metni seçip kopyalayabilirsiniz.");
+
+          showToast(
+            success
+              ? "Talep metni kopyalandı."
+              : "Metni seçip kopyalayabilirsiniz."
+          );
         }
       });
 
-      $("#shareRequest").addEventListener("click", async () => {
-        if (navigator.share) {
-          try {
-            await navigator.share({
-              title: "Usta Bul talebi",
-              text: summary
-            });
-          } catch (error) {
-            if (error.name !== "AbortError") {
-              showToast("Paylaşım açılamadı; metni kopyalayabilirsiniz.");
-            }
-          }
-        } else {
-          try {
-            await navigator.clipboard.writeText(summary);
-            showToast("Paylaşım desteklenmiyor; metin kopyalandı.");
-          } catch (error) {
-            showToast("Metni kopyalayarak paylaşabilirsiniz.");
-          }
-        }
-      });
-
+      // Bölümleri kaydırdıkça yumuşak biçimde göster.
       const revealItems = document.querySelectorAll(".reveal");
 
       if ("IntersectionObserver" in window) {
