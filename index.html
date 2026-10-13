@@ -1,614 +1,2254 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#ffffff">
-<meta name="description" content="Gündeşli Media — projeler, topluluklar ve hizmetler.">
-<title>Gündeşli Media | B2B C2C Ticari Çözümler</title>
-<style>
-:root{
-  --blue:#1456c0;
-  --blue2:#3478f6;
-  --ink:#14213a;
-  --muted:#66758d;
-  --line:#e6ecf5;
-  --soft:#f5f8fe;
-  --white:#fff;
-  --shadow:0 22px 65px rgba(26,65,130,.10);
-  --radius:24px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{
-  margin:0;color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  background:#fff;line-height:1.6;overflow-x:hidden
-}
-a{color:inherit;text-decoration:none}
-button,input,select,textarea{font:inherit}
-button,a{-webkit-tap-highlight-color:transparent}
-button{cursor:pointer}
-.container{width:min(1160px,calc(100% - 40px));margin:auto}
-.bg-shape{
-  position:absolute;pointer-events:none;z-index:-1;
-  border-radius:48% 52% 62% 38%;
-  background:linear-gradient(135deg,rgba(70,139,255,.10),rgba(225,239,255,.16));
-  filter:blur(1px);animation:float 13s ease-in-out infinite alternate
-}
-.shape-one{width:460px;height:420px;top:70px;right:-180px}
-.shape-two{width:340px;height:300px;top:670px;left:-200px;animation-delay:-5s}
-.shape-three{width:420px;height:350px;bottom:250px;right:-220px;animation-delay:-8s}
-@keyframes float{from{transform:translate3d(0,-12px,0) rotate(-8deg)}to{transform:translate3d(20px,25px,0) rotate(10deg)}}
-header{
-  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);
-  backdrop-filter:blur(18px);border-bottom:1px solid rgba(230,236,245,.85)
-}
-.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:inline-flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.6px}
-.brand svg{width:42px;height:42px;flex:none}
-.brand span{font-size:19px}
-.nav-links{display:flex;align-items:center;gap:27px;color:#52617a;font-size:14px;font-weight:600}
-.nav-links a:hover{color:var(--blue)}
-.btn{
-  border:1px solid transparent;border-radius:13px;padding:12px 18px;
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  font-weight:700;font-size:14px;transition:.2s;min-height:46px
-}
-.btn:hover{transform:translateY(-2px)}
-.btn-primary{background:var(--blue);color:white;box-shadow:0 8px 20px rgba(20,86,192,.18)}
-.btn-primary:hover{background:#0d45a0}
-.btn-light{background:white;border-color:var(--line);color:var(--ink)}
-.btn-light:hover{border-color:#b8cae9}
-.menu-toggle{display:none;border:1px solid var(--line);background:#fff;border-radius:12px;width:44px;height:44px;font-size:22px}
-.hero{position:relative;padding:94px 0 78px}
-.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;align-items:center;gap:65px}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:8px;border:1px solid #dce8fb;
-  background:#f6f9ff;color:var(--blue);border-radius:999px;padding:7px 12px;
-  font-size:12px;font-weight:800;letter-spacing:.6px;text-transform:uppercase
-}
-.dot{width:7px;height:7px;border-radius:50%;background:#3a81f7}
-h1{font-size:clamp(42px,5.8vw,72px);line-height:1.04;letter-spacing:-3.4px;margin:23px 0}
-.gradient-text{background:linear-gradient(100deg,#1456c0,#5293ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{font-size:17px;line-height:1.8;color:var(--muted);max-width:570px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:29px}
-.hero-note{font-size:12px!important;margin-top:20px;color:#8995a8!important}
-.visual{min-height:400px;position:relative;display:grid;place-items:center}
-.visual-glow{position:absolute;width:310px;height:310px;border-radius:50%;background:#e8f1ff;filter:blur(3px)}
-.visual-card{
-  position:relative;width:min(100%,390px);background:rgba(255,255,255,.88);
-  border:1px solid #e3ebf7;border-radius:28px;padding:25px;
-  box-shadow:0 30px 90px rgba(33,75,142,.15);transform:rotate(2deg)
-}
-.visual-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
-.visual-title{font-weight:800;font-size:15px}
-.status{font-size:11px;color:#16835a;background:#eaf9f1;border-radius:999px;padding:6px 9px;font-weight:800}
-.visual-feature{padding:18px;border:1px solid var(--line);border-radius:18px;margin-top:12px;display:flex;align-items:center;gap:14px;background:white}
-.feature-icon{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:#edf4ff;color:var(--blue);font-size:22px;flex:none}
-.visual-feature strong{display:block;font-size:14px}
-.visual-feature small{color:var(--muted);font-size:12px}
-.float-chip{position:absolute;background:white;border:1px solid var(--line);border-radius:15px;padding:12px 15px;box-shadow:var(--shadow);font-size:12px;font-weight:800}
-.chip-one{top:38px;right:-6px}.chip-two{bottom:30px;left:-12px}
-.section{padding:78px 0}
-.section-soft{background:linear-gradient(180deg,#f8faff,#fff)}
-.section-heading{max-width:680px;margin:0 auto 40px;text-align:center}
-.kicker{color:var(--blue);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800}
-h2{font-size:clamp(30px,4vw,44px);line-height:1.15;letter-spacing:-1.6px;margin:12px 0 14px}
-.section-heading p{color:var(--muted);margin:0;font-size:15px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{
-  padding:25px;border:1px solid var(--line);border-radius:var(--radius);
-  background:rgba(255,255,255,.92);box-shadow:0 8px 35px rgba(23,54,105,.035);
-  transition:transform .22s,border-color .22s,box-shadow .22s;display:flex;flex-direction:column;min-height:245px
-}
-.card:hover{transform:translateY(-5px);border-color:#cbdcf7;box-shadow:var(--shadow)}
-.card-icon{width:53px;height:53px;border-radius:17px;display:grid;place-items:center;font-size:25px;background:#edf4ff;margin-bottom:19px}
-.card h3{font-size:19px;margin:0 0 8px;letter-spacing:-.4px}
-.card p{color:var(--muted);font-size:14px;margin:0 0 22px;flex:1}
-.card-link{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:13px;color:var(--blue)}
-.card-link:hover{gap:12px}
-.badge{display:inline-block;background:#f1f5fb;color:#64748b;border-radius:8px;padding:6px 9px;font-size:11px;font-weight:800;align-self:flex-start}
-.split{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:65px}
-.info-panel{background:linear-gradient(145deg,#f1f6ff,#fff);border:1px solid #e2ebfa;border-radius:28px;padding:30px}
-.info-panel h3{font-size:25px;letter-spacing:-.8px;margin:0 0 10px}
-.info-panel p{color:var(--muted);font-size:14px}
-.check-list{padding:0;margin:23px 0 0;list-style:none;display:grid;gap:13px}
-.check-list li{display:flex;gap:11px;align-items:flex-start;font-size:14px;color:#41516b}
-.check{display:grid;place-items:center;width:23px;height:23px;border-radius:50%;background:#e1f6ed;color:#14825b;flex:none;font-weight:900}
-.contact-card{padding:32px;border:1px solid var(--line);border-radius:25px;background:#fff}
-.contact-row{display:flex;gap:15px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
-.contact-row:last-child{border-bottom:0}
-.contact-row .feature-icon{width:44px;height:44px}
-.contact-row strong{display:block;font-size:14px}
-.contact-row small{display:block;color:var(--muted);font-size:12px;overflow-wrap:anywhere}
-.contact-row a{color:var(--blue);font-weight:700}
-.cta{padding:0 0 85px}
-.cta-box{
-  padding:48px;border-radius:30px;background:linear-gradient(115deg,#1049a7,#347bf0);
-  color:white;display:flex;align-items:center;justify-content:space-between;gap:25px;overflow:hidden;position:relative
-}
-.cta-box:after{content:"";position:absolute;width:300px;height:300px;border:50px solid rgba(255,255,255,.08);border-radius:50%;right:15%;top:-200px;pointer-events:none}
-.cta-box h2{margin:0 0 9px;letter-spacing:-1px}
-.cta-box p{color:#e2edff;margin:0;font-size:14px}
-.cta-box .btn{background:white;color:var(--blue);flex:none;position:relative;z-index:1}
-footer{border-top:1px solid var(--line);padding:29px 0 34px}
-.footer-top{display:flex;justify-content:space-between;align-items:center;gap:20px}
-.footer-links{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:12px}
-.footer-bottom{font-size:11px;color:#8995a8;margin-top:22px;line-height:1.8}
-.disclaimer{margin-top:12px;padding:14px;border-radius:12px;background:#f7f9fd;border:1px solid #edf1f7}
-.modal{position:fixed;inset:0;z-index:100;background:rgba(12,25,48,.55);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:16px}
-.modal.open{display:flex}
-.modal-box{width:min(620px,100%);max-height:92vh;overflow:auto;background:white;border-radius:24px;padding:27px;box-shadow:0 30px 100px rgba(0,0,0,.2)}
-.modal-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;margin-bottom:20px}
-.modal-head h2{font-size:25px;margin:0 0 5px}
-.modal-head p{margin:0;color:var(--muted);font-size:13px}
-.close{width:40px;height:40px;border:1px solid var(--line);background:white;border-radius:12px;font-size:22px;flex:none}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.field{display:flex;flex-direction:column;gap:7px}
-.field.full{grid-column:1/-1}
-.field label{font-size:12px;font-weight:800;color:#43516a}
-.field input,.field select,.field textarea{width:100%;border:1px solid #dfe6f0;border-radius:11px;padding:12px;background:white;color:var(--ink);outline:none;min-width:0}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:#76a5f7;box-shadow:0 0 0 3px #eaf2ff}
-.field textarea{min-height:100px;resize:vertical}
-.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.result{display:none;margin-top:17px;border:1px solid #cde8d9;background:#f0fbf5;border-radius:14px;padding:15px}
-.result.show{display:block}
-.result strong{font-size:13px}
-.result p{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;color:#3e5d4e}
-.toast{position:fixed;z-index:120;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#15243d;color:#fff;padding:12px 17px;border-radius:12px;font-size:13px;box-shadow:var(--shadow);transition:.25s}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
-.reveal.visible{opacity:1;transform:translateY(0)}
-@media(max-width:850px){
-  .nav-links{gap:15px}
-  .hero-grid{grid-template-columns:1fr;gap:30px}
-  .hero{padding-top:65px}
-  .visual{min-height:350px}
-  .visual-card{width:min(100%,420px)}
-  .cards{grid-template-columns:repeat(2,1fr)}
-  .split{gap:28px}
-}
-@media(max-width:640px){
-  .container{width:calc(100% - 30px)}
-  .nav{height:67px}
-  .brand span{font-size:17px}
-  .brand svg{width:37px;height:37px}
-  .menu-toggle{display:block}
-  .nav-links{
-    display:none;position:absolute;top:67px;left:0;right:0;background:white;
-    padding:17px 20px 21px;border-bottom:1px solid var(--line);
-    flex-direction:column;align-items:stretch;gap:4px
-  }
-  .nav-links.open{display:flex}
-  .nav-links a{padding:11px 5px}
-  .nav-links .btn{margin-top:7px}
-  h1{font-size:46px;letter-spacing:-2.3px}
-  .hero{padding:58px 0 44px}
-  .hero p{font-size:15px}
-  .hero-actions .btn{flex:1}
-  .visual{min-height:335px}
-  .visual-card{padding:18px}
-  .visual-glow{width:260px;height:260px}
-  .chip-one{right:-2px;top:10px}.chip-two{left:-2px;bottom:7px}
-  .section{padding:58px 0}
-  .cards{grid-template-columns:1fr}
-  .card{min-height:215px}
-  .split{grid-template-columns:1fr;gap:25px}
-  .info-panel,.contact-card{padding:23px}
-  .cta{padding-bottom:55px}
-  .cta-box{padding:29px 24px;align-items:flex-start;flex-direction:column}
-  .cta-box .btn{width:100%}
-  .footer-top{align-items:flex-start;flex-direction:column}
-  .footer-links{gap:12px}
-  .form-grid{grid-template-columns:1fr}
-  .field.full{grid-column:auto}
-  .modal-box{padding:20px}
-  .form-actions .btn{width:100%}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
-  .reveal{opacity:1;transform:none}
-}
-</style>
-</head>
-<body>
-<div class="bg-shape shape-one"></div>
-<div class="bg-shape shape-two"></div>
-<div class="bg-shape shape-three"></div>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f9fc">
+  <meta name="description" content="Gündeşli Media — dijital projeler, güvenlik sistemleri, bilgisayarlar ve teknoloji çözümleri.">
+  <title>Gündeşli Media | Teknoloji ve Dijital Çözümler</title>
 
-<header>
-  <div class="container nav">
-    <a class="brand" href="#anasayfa" aria-label="Gündeşli Media ana sayfa">
-      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <defs><linearGradient id="gm" x1="4" y1="4" x2="44" y2="44"><stop stop-color="#4389ff"/><stop offset="1" stop-color="#1048a8"/></linearGradient></defs>
-        <rect x="1" y="1" width="46" height="46" rx="15" fill="url(#gm)"/>
-        <path d="M34 15.5C31.5 12.9 28.5 11.8 24.5 11.8C17.4 11.8 12.2 17 12.2 24.1C12.2 31.2 17.3 36.2 24.3 36.2C28 36.2 31.2 34.7 33.8 32.2V24H24.4V29.1H28.1V29.7C27.1 30.6 25.8 31 24.4 31C20.4 31 17.6 28.1 17.6 24.1C17.6 20.1 20.4 17 24.5 17C26.9 17 28.7 17.8 30.1 19.3L34 15.5Z" fill="white"/>
-      </svg>
-      <span>Gündeşli Media</span>
-    </a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false">☰</button>
-    <nav class="nav-links" id="navLinks">
-      <a href="#projeler">Projeler</a>
-      <a href="#hakkimizda">Hakkımızda</a>
-      <a href="#iletisim">İletişim</a>
-      <button class="btn btn-primary" data-open-request>Usta Bul <span>↗</span></button>
-    </nav>
-  </div>
-</header>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<main id="anasayfa">
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="reveal">
-      <span class="eyebrow"><span class="dot"></span> Gündeşli Media</span>
-      <h1>Fikirleri<br><span class="gradient-text">birlikte</span> büyütelim.</h1>
-      <p>Toplulukları, faydalı projeleri ve insanları bir araya getiren çalışmalar. İhtiyacına uygun platformu keşfet veya bir hizmet talebi oluştur.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#projeler">Projeleri keşfet <span>→</span></a>
-        <button class="btn btn-light" data-open-request>Usta Bul <span>↗</span></button>
-      </div>
-      <p class="hero-note">Bağımsız projeler · Topluluk odaklı · Kolay iletişim</p>
-    </div>
-    <div class="visual reveal">
-      <div class="visual-glow"></div>
-      <div class="visual-card">
-        <div class="visual-top">
-          <div class="visual-title">Gündeşli Media</div>
-          <span class="status">● Aktif projeler</span>
-        </div>
-        <div class="visual-feature">
-          <div class="feature-icon">⌘</div>
-          <div><strong>Topluluklar</strong><small>İnsanlarla bağlantı kur</small></div>
-        </div>
-        <div class="visual-feature">
-          <div class="feature-icon">⚡</div>
-          <div><strong>Hizmet talepleri</strong><small>İhtiyacını kolayca ilet</small></div>
-        </div>
-        <div class="visual-feature">
-          <div class="feature-icon">↗</div>
-          <div><strong>Yeni projeler</strong><small>Gelişmeleri takip et</small></div>
-        </div>
-      </div>
-      <div class="float-chip chip-one">✦ Yeni fikirler</div>
-      <div class="float-chip chip-two">◉ Birlikte daha güçlü</div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-soft" id="projeler">
-  <div class="container">
-    <div class="section-heading reveal">
-      <span class="kicker">Projelerimiz</span>
-      <h2>İhtiyacına uygun projeyi keşfet.</h2>
-      <p>Topluluklara katıl, güncel bilgilere ulaş ve yeni projelerin duyurularını takip et.</p>
-    </div>
-    <div class="cards">
-      <article class="card reveal">
-        <div class="card-icon">🛍️</div>
-        <h3>Kahramanmaraş Al Sat</h3>
-        <p>Kahramanmaraş çevresinde alım satım paylaşımları için WhatsApp topluluğu.</p>
-        <a class="card-link" href="https://chat.whatsapp.com/DBNYcyDrr5oCDfoKRzMrsF" target="_blank" rel="noopener noreferrer">WhatsApp grubuna katıl <span>→</span></a>
-      </article>
-      <article class="card reveal">
-        <div class="card-icon">🚦</div>
-        <h3>Maraş Durum &amp; Trafik Bilgi</h3>
-        <p>Kahramanmaraş'tan durum ve trafik bilgilendirmeleri için hazırlanan proje.</p>
-        <span class="badge">Tanıtım aşamasında</span>
-      </article>
-      <article class="card reveal">
-        <div class="card-icon">💼</div>
-        <h3>İş &amp; Staj</h3>
-        <p>İş ve staj fırsatlarını bir araya getirmeyi amaçlayan proje.</p>
-        <span class="badge">Tanıtım aşamasında</span>
-      </article>
-      <article class="card reveal">
-        <div class="card-icon">📨</div>
-        <h3>Teklifim Gelsin</h3>
-        <p>İhtiyacını belirtip teklif alma fikri üzerine geliştirilen proje.</p>
-        <span class="badge">Tanıtım aşamasında</span>
-      </article>
-      <article class="card reveal">
-        <div class="card-icon">🧭</div>
-        <h3>Dijital Yolculuk</h3>
-        <p>Dijital araçları ve faydalı kaynakları keşfetmeye yönelik proje.</p>
-        <span class="badge">Tanıtım aşamasında</span>
-      </article>
-      <article class="card reveal">
-        <div class="card-icon">🛠️</div>
-        <h3>Usta Bul</h3>
-        <p>Hizmet ihtiyacını ilet. Talep bilgilerini WhatsApp üzerinden göndererek iletişime geç.</p>
-        <button class="card-link" style="border:0;background:none;padding:0;text-align:left" data-open-request>Talep oluştur <span>→</span></button>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="hakkimizda">
-  <div class="container split">
-    <div class="reveal">
-      <span class="kicker">Hakkımızda</span>
-      <h2>İnsanlara fayda sağlayan projeler geliştiriyoruz.</h2>
-      <p style="color:var(--muted);font-size:15px">Gündeşli Media, farklı ihtiyaçlara yönelik projeler geliştirmeyi ve insanların faydalı kaynaklara daha kolay ulaşmasını amaçlayan bir girişimdir.</p>
-      <p style="color:var(--muted);font-size:15px">Projelerimizi geliştirmeye devam ediyoruz. Yayında olmayan hizmetler, kullanıma hazır hâle geldikçe duyurulacaktır.</p>
-      <a class="btn btn-light" href="#iletisim">Bizimle iletişime geç <span>→</span></a>
-    </div>
-    <div class="info-panel reveal">
-      <h3>Nasıl ilerliyoruz?</h3>
-      <p>Amacımız, anlaşılır ve ulaşılabilir hizmetler sunmak.</p>
-      <ul class="check-list">
-        <li><span class="check">✓</span><span>İhtiyaçlara yönelik projeler geliştirmek</span></li>
-        <li><span class="check">✓</span><span>Topluluklarla iletişimi kolaylaştırmak</span></li>
-        <li><span class="check">✓</span><span>Yayındaki hizmetlerin durumunu açıkça belirtmek</span></li>
-        <li><span class="check">✓</span><span>Geri bildirimlerle projeleri geliştirmek</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="section section-soft" id="iletisim">
-  <div class="container split">
-    <div class="reveal">
-      <span class="kicker">İletişim</span>
-      <h2>Bir fikrin veya sorun mu var?</h2>
-      <p style="color:var(--muted);font-size:15px">Proje önerileri, iş birlikleri ve hizmet talepleri için bizimle iletişime geçebilirsin.</p>
-      <button class="btn btn-primary" data-open-request>Usta Bul talebi oluştur <span>→</span></button>
-    </div>
-    <div class="contact-card reveal">
-      <div class="contact-row">
-        <div class="feature-icon">◎</div>
-        <div><strong>Instagram</strong><small>Proje duyuruları ve iletişim</small><a href="https://www.instagram.com/melihgundsli/" target="_blank" rel="noopener noreferrer">Instagram profilini aç ↗</a></div>
-      </div>
-      <div class="contact-row">
-        <div class="feature-icon">☏</div>
-        <div><strong>WhatsApp</strong><small>Doğrudan iletişim</small><a href="https://wa.me/905064676635" target="_blank" rel="noopener noreferrer">0506 467 66 35 ↗</a></div>
-      </div>
-      <div class="contact-row">
-        <div class="feature-icon">✉</div>
-        <div><strong>Kurucu / Koordinasyon</strong><small>Melih Gündeşli</small></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="cta">
-  <div class="container">
-    <div class="cta-box reveal">
-      <div><h2>İhtiyacını bize ilet.</h2><p>Talep bilgilerini hazırla ve WhatsApp üzerinden iletişime geç.</p></div>
-      <button class="btn" data-open-request>Talep oluştur <span>↗</span></button>
-    </div>
-  </div>
-</section>
-</main>
-
-<footer>
-  <div class="container">
-    <div class="footer-top">
-      <a class="brand" href="#anasayfa">
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <rect x="1" y="1" width="46" height="46" rx="15" fill="#1456c0"/>
-          <path d="M34 15.5C31.5 12.9 28.5 11.8 24.5 11.8C17.4 11.8 12.2 17 12.2 24.1C12.2 31.2 17.3 36.2 24.3 36.2C28 36.2 31.2 34.7 33.8 32.2V24H24.4V29.1H28.1V29.7C27.1 30.6 25.8 31 24.4 31C20.4 31 17.6 28.1 17.6 24.1C17.6 20.1 20.4 17 24.5 17C26.9 17 28.7 17.8 30.1 19.3L34 15.5Z" fill="white"/>
-        </svg>
-        <span>Gündeşli Media</span>
-      </a>
-      <div class="footer-links">
-        <a href="#projeler">Projeler</a>
-        <a href="#hakkimizda">Hakkımızda</a>
-        <a href="#iletisim">İletişim</a>
-        <a href="https://www.instagram.com/melihgundsli/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      © <span id="year"></span> Gündeşli Media. Tüm hakları saklıdır.
-      <div class="disclaimer"><strong>Sorumluluk reddi:</strong> Bu internet sitesinde yer alan proje açıklamaları genel bilgilendirme amacı taşır. Tanıtım aşamasında olarak belirtilen projeler henüz kullanıma açılmamış olabilir. Harici platformlara verilen bağlantılar ilgili platformların kendi koşullarına tabidir. Gündeşli Media, üçüncü tarafların paylaşımlarından, işlemlerinden veya hizmetlerinden doğabilecek sonuçlardan, yürürlükteki mevzuatın izin verdiği ölçüde sorumlu tutulamaz. Herhangi bir hizmeti kullanmadan önce ilgili koşulları ve bilgileri kontrol etmeniz önerilir.</div>
-    </div>
-  </div>
-</footer>
-
-<div class="modal" id="requestModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div>
-        <h2 id="modalTitle">Usta Bul talebi</h2>
-        <p>Bilgileri doldur, ardından WhatsApp üzerinden gönder.</p>
-      </div>
-      <button class="close" id="closeModal" aria-label="Pencereyi kapat">×</button>
-    </div>
-    <form id="requestForm">
-      <div class="form-grid">
-        <div class="field">
-          <label for="service">Hizmet türü *</label>
-          <select id="service" required>
-            <option value="">Seçim yap</option>
-            <option>Kamera sistemi</option>
-            <option>Alarm sistemi</option>
-            <option>Bilgisayar / teknik servis</option>
-            <option>Elektrik / montaj</option>
-            <option>Bakım / onarım</option>
-            <option>Diğer</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="city">Şehir *</label>
-          <input id="city" value="Kahramanmaraş" required>
-        </div>
-        <div class="field">
-          <label for="district">İlçe</label>
-          <input id="district" placeholder="Örn. Onikişubat">
-        </div>
-        <div class="field">
-          <label for="time">Tercih edilen zaman</label>
-          <select id="time">
-            <option>Fark etmez</option>
-            <option>En kısa sürede</option>
-            <option>Bugün</option>
-            <option>Yarın</option>
-            <option>Kararlaştırılacak</option>
-          </select>
-        </div>
-        <div class="field full">
-          <label for="title">Talebin kısa başlığı *</label>
-          <input id="title" placeholder="Örn. 4 kameralı sistem kurulumu" required maxlength="120">
-        </div>
-        <div class="field full">
-          <label for="details">Açıklama *</label>
-          <textarea id="details" placeholder="İhtiyacını ve varsa önemli ayrıntıları yaz..." required maxlength="1500"></textarea>
-        </div>
-        <div class="field full">
-          <label for="contact">Adın ve iletişim bilgin *</label>
-          <input id="contact" placeholder="Ad soyad ve ulaşılabilecek telefon" required maxlength="150">
-        </div>
-      </div>
-      <div class="form-actions">
-        <button class="btn btn-primary" type="submit">Talep özetini hazırla <span>→</span></button>
-        <button class="btn btn-light" type="button" id="cancelModal">Vazgeç</button>
-      </div>
-    </form>
-    <div class="result" id="requestResult">
-      <strong>Talebin hazır.</strong>
-      <p id="requestSummary"></p>
-      <div class="form-actions">
-        <button class="btn btn-primary" id="sendWhatsApp" type="button">WhatsApp'ta aç ↗</button>
-        <button class="btn btn-light" id="copyRequest" type="button">Özeti kopyala</button>
-      </div>
-      <p style="margin-bottom:0">WhatsApp açıldığında mesajı kontrol edip kendin göndermelisin. Mesaj otomatik olarak gönderilmez.</p>
-    </div>
-  </div>
-</div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-<script>
-(function(){
-  const $ = (id) => document.getElementById(id);
-  const menuToggle = $("menuToggle");
-  const navLinks = $("navLinks");
-  const modal = $("requestModal");
-  const form = $("requestForm");
-  const result = $("requestResult");
-  const summaryNode = $("requestSummary");
-  let requestText = "";
-  let toastTimer;
-
-  $("year").textContent = new Date().getFullYear();
-
-  menuToggle.addEventListener("click", function(){
-    const open = navLinks.classList.toggle("open");
-    menuToggle.setAttribute("aria-expanded", String(open));
-    menuToggle.textContent = open ? "×" : "☰";
-  });
-
-  navLinks.querySelectorAll("a").forEach(function(link){
-    link.addEventListener("click", closeMenu);
-  });
-
-  function closeMenu(){
-    navLinks.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded","false");
-    menuToggle.textContent = "☰";
-  }
-
-  function showToast(message){
-    const toast = $("toast");
-    toast.textContent = message;
-    toast.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){toast.classList.remove("show");},2600);
-  }
-
-  function openModal(){
-    modal.classList.add("open");
-    document.body.style.overflow = "hidden";
-    closeMenu();
-    setTimeout(function(){$("service").focus();},100);
-  }
-
-  function closeModal(){
-    modal.classList.remove("open");
-    document.body.style.overflow = "";
-  }
-
-  document.querySelectorAll("[data-open-request]").forEach(function(button){
-    button.addEventListener("click",openModal);
-  });
-  $("closeModal").addEventListener("click",closeModal);
-  $("cancelModal").addEventListener("click",closeModal);
-  modal.addEventListener("click",function(event){
-    if(event.target===modal) closeModal();
-  });
-  document.addEventListener("keydown",function(event){
-    if(event.key==="Escape"){
-      closeModal();
-      closeMenu();
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --surface: #ffffff;
+      --text: #111827;
+      --muted: #697586;
+      --blue: #2463eb;
+      --blue-dark: #1749bd;
+      --blue-light: #eaf1ff;
+      --border: #e6eaf0;
+      --green: #16a36a;
+      --radius: 22px;
+      --shadow: 0 16px 45px rgba(22, 42, 80, .07);
+      --max: 1200px;
     }
-  });
 
-  form.addEventListener("submit",function(event){
-    event.preventDefault();
-    const service=$("service").value.trim();
-    const city=$("city").value.trim();
-    const district=$("district").value.trim();
-    const time=$("time").value.trim();
-    const title=$("title").value.trim();
-    const details=$("details").value.trim();
-    const contact=$("contact").value.trim();
+    * { box-sizing: border-box; }
 
-    requestText =
-      "GÜNDEŞLİ MEDIA — USTA BUL TALEBİ\n\n"+
-      "Hizmet: "+service+"\n"+
-      "Şehir: "+city+"\n"+
-      "İlçe: "+(district||"Belirtilmedi")+"\n"+
-      "Zaman: "+time+"\n"+
-      "Başlık: "+title+"\n\n"+
-      "Açıklama:\n"+details+"\n\n"+
-      "İletişim: "+contact;
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-    summaryNode.textContent=requestText;
-    result.classList.add("show");
-    result.scrollIntoView({behavior:"smooth",block:"nearest"});
-  });
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family: "DM Sans", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
 
-  $("sendWhatsApp").addEventListener("click",function(){
-    if(!requestText){showToast("Önce talep özetini hazırla.");return;}
-    const url="https://wa.me/905064676635?text="+encodeURIComponent(requestText);
-    window.open(url,"_blank","noopener,noreferrer");
-  });
+    body.locked { overflow: hidden; }
 
-  $("copyRequest").addEventListener("click",async function(){
-    if(!requestText){showToast("Önce talep özetini hazırla.");return;}
-    try{
-      if(navigator.clipboard && window.isSecureContext){
-        await navigator.clipboard.writeText(requestText);
-      }else{
-        const temp=document.createElement("textarea");
-        temp.value=requestText;
-        temp.style.position="fixed";
-        temp.style.opacity="0";
-        document.body.appendChild(temp);
-        temp.select();
-        const ok=document.execCommand("copy");
-        temp.remove();
-        if(!ok) throw new Error("copy failed");
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    section { scroll-margin-top: 90px; }
+
+    .container {
+      width: min(var(--max), calc(100% - 44px));
+      margin-inline: auto;
+    }
+
+    .section { padding: 100px 0; }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 38px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      border-radius: 4px;
+      background: var(--blue);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2, h3 {
+      font-family: "Manrope", sans-serif;
+      letter-spacing: -1.4px;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: clamp(30px, 4vw, 47px);
+      line-height: 1.14;
+    }
+
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .gradient-text {
+      color: var(--blue);
+      background: linear-gradient(110deg, #2463eb, #7959e9);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 21px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: white;
+      background: var(--blue);
+      box-shadow: 0 8px 22px rgba(36, 99, 235, .20);
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      box-shadow: 0 12px 25px rgba(36, 99, 235, .25);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: white;
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover { border-color: #b7c8ec; }
+
+    .btn-whatsapp {
+      color: white;
+      background: #159c68;
+    }
+
+    .btn-whatsapp:hover { background: #108253; }
+
+    .btn-small {
+      min-height: 41px;
+      padding: 0 15px;
+      font-size: 13px;
+    }
+
+    .icon {
+      display: inline-grid;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 14px;
+      color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    .icon svg {
+      width: 21px;
+      height: 21px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Açılış ekranı */
+    .intro {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(84, 133, 255, .13), transparent 45%),
+        #f8faff;
+      transition: opacity .75s ease, visibility .75s ease;
+    }
+
+    .intro::before, .intro::after {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border: 1px solid rgba(36, 99, 235, .10);
+      border-radius: 50%;
+      content: "";
+      animation: orbit 8s linear infinite;
+    }
+
+    .intro::after {
+      width: 420px;
+      height: 420px;
+      animation-direction: reverse;
+    }
+
+    .intro.done {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      animation: introBounce 1.1s ease both;
+    }
+
+    .intro-logo {
+      width: 112px;
+      height: 112px;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 20px rgba(36, 99, 235, .15));
+    }
+
+    .intro-fallback {
+      display: none;
+      width: 100px;
+      height: 100px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 29px;
+      color: white;
+      background: linear-gradient(135deg, #2874f0, #5849d8);
+      font-family: "Manrope", sans-serif;
+      font-size: 52px;
+      font-weight: 800;
+      box-shadow: 0 20px 45px rgba(36, 99, 235, .24);
+    }
+
+    .intro-name {
+      margin: 22px 0 5px;
+      font-family: "Manrope", sans-serif;
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .intro-caption {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    @keyframes introBounce {
+      0% { opacity: 0; transform: translateY(12px) scale(.92); }
+      22% { opacity: 1; transform: translateY(-8px) scale(1.04); }
+      34% { transform: translateY(0) scale(1); }
+      48% { transform: translateY(-5px) scale(1.025); }
+      62% { transform: translateY(0) scale(1); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes orbit {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Üst menü */
+    .header {
+      position: sticky;
+      z-index: 100;
+      top: 0;
+      border-bottom: 1px solid rgba(230, 234, 240, .85);
+      background: rgba(255, 255, 255, .84);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      display: flex;
+      min-height: 76px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      flex-shrink: 0;
+    }
+
+    .brand-logo {
+      width: 43px;
+      height: 43px;
+      object-fit: contain;
+    }
+
+    .brand-fallback {
+      display: none;
+      width: 43px;
+      height: 43px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 13px;
+      color: white;
+      background: linear-gradient(135deg, #2874f0, #5849d8);
+      font-weight: 800;
+      font-size: 23px;
+    }
+
+    .brand-name {
+      font-family: "Manrope", sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -.6px;
+    }
+
+    .brand-name span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: #596476;
+      font-size: 13px;
+      font-weight: 600;
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      color: var(--text);
+      background: white;
+    }
+
+    .menu-toggle svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 82px 0 74px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 82% 25%, rgba(101, 139, 255, .12), transparent 34%),
+        radial-gradient(ellipse at 10% 80%, rgba(129, 100, 235, .07), transparent 33%),
+        var(--bg);
+    }
+
+    .hero::after {
+      position: absolute;
+      top: 0;
+      right: -160px;
+      width: 420px;
+      height: 420px;
+      border: 1px solid rgba(36, 99, 235, .08);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 65px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 24px;
+      padding: 8px 12px;
+      border: 1px solid #dce6fc;
+      border-radius: 30px;
+      color: #3159a7;
+      background: rgba(255,255,255,.75);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #23bd7a;
+      box-shadow: 0 0 0 4px rgba(35, 189, 122, .12);
+    }
+
+    .hero h1 {
+      max-width: 670px;
+      margin-bottom: 22px;
+      font-size: clamp(43px, 5.6vw, 70px);
+      line-height: 1.07;
+      letter-spacing: -3.5px;
+    }
+
+    .hero-description {
+      max-width: 540px;
+      margin-bottom: 29px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.85;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 31px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .avatar-stack { display: flex; padding-left: 5px; }
+
+    .avatar-stack span {
+      display: grid;
+      width: 29px;
+      height: 29px;
+      margin-left: -5px;
+      place-items: center;
+      border: 2px solid var(--bg);
+      border-radius: 50%;
+      color: #345aa2;
+      background: #e1eaff;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-width: 0;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      min-height: 430px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 30px;
+      background: linear-gradient(140deg, #dce8ff, #f2efff 65%, #d9f0ff);
+      box-shadow: 0 28px 75px rgba(35, 65, 130, .13);
+    }
+
+    .hero-image-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mix-blend-mode: multiply;
+      opacity: .86;
+    }
+
+    .hero-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(18, 40, 87, .40), transparent 55%);
+    }
+
+    .hero-visual-label {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      left: 22px;
+      color: white;
+    }
+
+    .hero-visual-label span {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 6px 9px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 8px;
+      background: rgba(255,255,255,.15);
+      font-size: 10px;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-visual-label h3 {
+      margin-bottom: 4px;
+      font-size: 23px;
+      letter-spacing: -.6px;
+    }
+
+    .hero-visual-label p {
+      margin: 0;
+      color: rgba(255,255,255,.82);
+      font-size: 12px;
+    }
+
+    .float-card {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 17px;
+      background: rgba(255,255,255,.93);
+      box-shadow: 0 15px 38px rgba(28, 52, 100, .13);
+      backdrop-filter: blur(14px);
+    }
+
+    .float-card.top {
+      top: 30px;
+      left: -32px;
+    }
+
+    .float-card.bottom {
+      right: -22px;
+      bottom: 90px;
+    }
+
+    .float-card strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 12px;
+    }
+
+    .float-card small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* Güven/özet şeridi */
+    .trust-strip {
+      padding: 25px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: white;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .trust-item small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* Projeler */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 19px;
+    }
+
+    .project-card {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: white;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: #d1def8;
+      box-shadow: var(--shadow);
+    }
+
+    .project-card .icon { margin-bottom: 23px; }
+
+    .project-card h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+      letter-spacing: -.6px;
+    }
+
+    .project-card p {
+      flex: 1;
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .text-link {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 7px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .text-link span { transition: transform .2s ease; }
+    .text-link:hover span { transform: translateX(4px); }
+
+    /* Katalog */
+    .catalog-section { background: white; }
+
+    .catalog-top {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .catalog-top .section-heading { margin-bottom: 0; }
+
+    .catalog-search {
+      width: min(280px, 100%);
+      min-height: 47px;
+      padding: 0 15px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      outline: none;
+      background: #fafbfd;
+      transition: border .2s ease, box-shadow .2s ease;
+    }
+
+    .catalog-search:focus {
+      border-color: #91b0fa;
+      box-shadow: 0 0 0 4px rgba(36, 99, 235, .08);
+    }
+
+    .category-list {
+      display: flex;
+      gap: 9px;
+      margin-bottom: 28px;
+      padding: 3px 0 8px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .category-btn {
+      flex-shrink: 0;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      color: #667085;
+      background: white;
+      font-size: 12px;
+      font-weight: 700;
+      transition: .2s ease;
+    }
+
+    .category-btn:hover, .category-btn.active {
+      border-color: var(--blue);
+      color: white;
+      background: var(--blue);
+    }
+
+    .catalog-intro {
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      margin-bottom: 26px;
+      padding: 19px;
+      border: 1px solid #dce7fc;
+      border-radius: 17px;
+      background: linear-gradient(100deg, #f0f5ff, #fbfaff);
+    }
+
+    .catalog-intro .icon { background: white; }
+
+    .catalog-intro h3 {
+      margin-bottom: 5px;
+      font-size: 15px;
+      letter-spacing: -.3px;
+    }
+
+    .catalog-intro p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: white;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .product-image {
+      position: relative;
+      height: 218px;
+      overflow: hidden;
+      background: #edf2fa;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+
+    .product-card:hover .product-image img { transform: scale(1.045); }
+
+    .product-tag {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.65);
+      border-radius: 8px;
+      color: #254a89;
+      background: rgba(255,255,255,.91);
+      font-size: 10px;
+      font-weight: 800;
+      backdrop-filter: blur(8px);
+    }
+
+    .product-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 19px;
+    }
+
+    .product-category {
+      margin-bottom: 8px;
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+
+    .product-body h3 {
+      margin-bottom: 9px;
+      font-size: 17px;
+      letter-spacing: -.5px;
+    }
+
+    .product-body p {
+      flex: 1;
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.75;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .product-actions .btn { flex: 1; }
+
+    .catalog-note {
+      margin-top: 23px;
+      padding: 14px 17px;
+      border-radius: 12px;
+      color: #5d6a7d;
+      background: #f7f9fc;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .empty-state {
+      display: none;
+      padding: 45px 15px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Hakkımızda */
+    .about-grid {
+      display: grid;
+      align-items: center;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 65px;
+    }
+
+    .about-visual {
+      position: relative;
+      min-height: 390px;
+      overflow: hidden;
+      border-radius: 28px;
+      background: linear-gradient(140deg, #dfeaff, #f0edff);
+    }
+
+    .about-visual img {
+      width: 100%;
+      height: 390px;
+      object-fit: cover;
+    }
+
+    .about-visual-caption {
+      position: absolute;
+      right: 17px;
+      bottom: 17px;
+      left: 17px;
+      padding: 17px;
+      border: 1px solid rgba(255,255,255,.65);
+      border-radius: 15px;
+      color: white;
+      background: rgba(16, 35, 73, .72);
+      backdrop-filter: blur(12px);
+    }
+
+    .about-visual-caption strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .about-visual-caption span {
+      color: rgba(255,255,255,.78);
+      font-size: 11px;
+    }
+
+    .about-copy > p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .about-points {
+      display: grid;
+      gap: 17px;
+      margin: 25px 0 28px;
+    }
+
+    .about-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .check-icon {
+      display: grid;
+      width: 25px;
+      height: 25px;
+      flex-shrink: 0;
+      place-items: center;
+      border-radius: 8px;
+      color: #158457;
+      background: #e5f8ee;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .about-point strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .about-point p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* Topluluklar */
+    .community-section { background: #f0f4fb; }
+
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 19px;
+    }
+
+    .community-card {
+      padding: 25px;
+      border: 1px solid rgba(221,229,242,.9);
+      border-radius: 20px;
+      background: rgba(255,255,255,.87);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .community-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .community-card .icon { margin-bottom: 20px; }
+
+    .community-card h3 {
+      margin-bottom: 9px;
+      font-size: 17px;
+      letter-spacing: -.4px;
+    }
+
+    .community-card p {
+      min-height: 48px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* İletişim */
+    .contact-panel {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr .8fr;
+      gap: 55px;
+      overflow: hidden;
+      padding: 48px;
+      border: 1px solid #dce6fa;
+      border-radius: 28px;
+      background:
+        radial-gradient(ellipse at 90% 0%, rgba(119, 137, 255, .12), transparent 36%),
+        white;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-panel h2 { font-size: clamp(30px, 4vw, 42px); }
+
+    .contact-panel > div > p {
+      max-width: 470px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .contact-list {
+      display: grid;
+      align-content: center;
+      gap: 13px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(255,255,255,.85);
+    }
+
+    .contact-row strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .contact-row span {
+      display: block;
+      overflow-wrap: anywhere;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .contact-row .icon { width: 40px; height: 40px; }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 85px;
+      padding: 36px 0 24px;
+      border-top: 1px solid var(--border);
+      background: white;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 35px;
+      padding-bottom: 28px;
+    }
+
+    .footer-brand { max-width: 340px; }
+
+    .footer-brand p {
+      margin: 15px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 19px;
+      padding-top: 12px;
+    }
+
+    .footer-links a {
+      color: #657084;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .footer-links a:hover { color: var(--blue); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: #8992a2;
+      font-size: 11px;
+    }
+
+    /* WhatsApp sabit buton */
+    .whatsapp-float {
+      position: fixed;
+      z-index: 90;
+      right: 22px;
+      bottom: 22px;
+      display: grid;
+      width: 57px;
+      height: 57px;
+      place-items: center;
+      border: 3px solid white;
+      border-radius: 50%;
+      color: white;
+      background: #159c68;
+      box-shadow: 0 8px 24px rgba(21,156,104,.27);
+      transition: transform .2s ease;
+    }
+
+    .whatsapp-float:hover { transform: translateY(-4px); }
+
+    .whatsapp-float svg {
+      width: 27px;
+      height: 27px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Duyuru ve kampanya penceresi */
+    .modal-backdrop {
+      position: fixed;
+      z-index: 1200;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(13, 24, 45, .48);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      position: relative;
+      width: min(460px, 100%);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.65);
+      border-radius: 24px;
+      background: white;
+      box-shadow: 0 25px 90px rgba(10, 24, 50, .24);
+      animation: modalIn .3s ease both;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(10px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-art {
+      display: grid;
+      min-height: 145px;
+      place-items: center;
+      color: white;
+      background: linear-gradient(125deg, #2463eb, #7959e9);
+    }
+
+    .modal-art span {
+      font-size: 42px;
+      font-weight: 800;
+    }
+
+    .modal-content { padding: 25px; }
+
+    .modal-content h3 {
+      margin-bottom: 10px;
+      font-size: 24px;
+      letter-spacing: -.7px;
+    }
+
+    .modal-content p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .modal-price {
+      display: flex;
+      align-items: baseline;
+      gap: 11px;
+      margin: 16px 0;
+    }
+
+    .modal-price strong {
+      color: var(--blue);
+      font-size: 26px;
+    }
+
+    .modal-price del {
+      color: #929bad;
+      font-size: 14px;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 19px;
+    }
+
+    .modal-close {
+      position: absolute;
+      z-index: 2;
+      top: 12px;
+      right: 12px;
+      display: grid;
+      width: 35px;
+      height: 35px;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 50%;
+      color: white;
+      background: rgba(12, 26, 52, .2);
+      font-size: 20px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1050px) {
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 12px; }
+      .hero-grid { gap: 35px; }
+      .hero-image-wrap { min-height: 370px; }
+      .projects-grid, .products-grid, .community-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .about-grid { gap: 38px; }
+      .contact-panel { gap: 30px; padding: 35px; }
+      .float-card.top { left: -12px; }
+      .float-card.bottom { right: -10px; }
+    }
+
+    @media (max-width: 780px) {
+      .container { width: min(100% - 32px, var(--max)); }
+      .section { padding: 72px 0; }
+      .nav { min-height: 68px; }
+      .brand-name { font-size: 16px; }
+      .nav-actions > .btn { display: none; }
+      .menu-toggle { display: grid; }
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 20px 18px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(255,255,255,.98);
+        box-shadow: 0 16px 25px rgba(25, 43, 77, .07);
       }
-      showToast("Talep özeti kopyalandı.");
-    }catch(error){
-      showToast("Kopyalama başarısız. Metni seçip kopyalayabilirsin.");
-    }
-  });
 
-  if("IntersectionObserver" in window){
-    const observer=new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
+      .nav-links.open { display: flex; }
+
+      .nav-links a {
+        padding: 14px 0;
+        border-bottom: 1px solid #f0f2f6;
+        font-size: 14px;
+      }
+
+      .nav-links a:last-child { border-bottom: 0; }
+
+      .hero { padding: 58px 0 52px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero h1 { font-size: clamp(40px, 10vw, 59px); letter-spacing: -2.5px; }
+      .hero-description { font-size: 15px; }
+      .hero-image-wrap { min-height: 360px; }
+      .float-card.top { left: 12px; }
+      .float-card.bottom { right: 12px; bottom: 74px; }
+
+      .trust-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 23px 12px; }
+      .trust-item { justify-content: flex-start; }
+      .trust-item .icon { width: 38px; height: 38px; }
+
+      .catalog-top { align-items: stretch; flex-direction: column; }
+      .catalog-search { width: 100%; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-visual, .about-visual img { min-height: 300px; height: 300px; }
+      .contact-panel { grid-template-columns: 1fr; padding: 28px; gap: 25px; }
+      .footer-top { flex-direction: column; gap: 20px; }
+      .footer-links { gap: 14px; }
+    }
+
+    @media (max-width: 520px) {
+      .section { padding: 60px 0; }
+      h2 { font-size: 32px; }
+      .hero h1 { font-size: 43px; }
+      .hero-buttons .btn { flex: 1; padding-inline: 13px; }
+      .hero-image-wrap { min-height: 310px; border-radius: 23px; }
+      .float-card { padding: 10px 11px; gap: 8px; }
+      .float-card .icon { width: 35px; height: 35px; }
+      .float-card strong { font-size: 11px; }
+      .float-card small { font-size: 9px; }
+      .projects-grid, .products-grid, .community-grid { grid-template-columns: 1fr; }
+      .project-card { padding: 22px; }
+      .product-image { height: 235px; }
+      .catalog-intro { align-items: flex-start; padding: 15px; }
+      .catalog-intro .icon { width: 38px; height: 38px; }
+      .contact-panel { padding: 23px; border-radius: 22px; }
+      .contact-actions .btn { flex: 1; }
+      .footer-bottom { flex-direction: column; }
+      .whatsapp-float { right: 15px; bottom: 15px; width: 52px; height: 52px; }
+      .intro-logo { width: 95px; height: 95px; }
+      .intro-name { font-size: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Açılış ekranı -->
+  <div class="intro" id="intro" aria-label="Gündeşli Media açılıyor">
+    <div class="intro-content">
+      <img
+        class="intro-logo"
+        src="gundesli_logo.png"
+        alt="Gündeşli Media logosu"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+      >
+      <div class="intro-fallback">G</div>
+      <div class="intro-name">Gündeşli <span class="gradient-text">Media</span></div>
+      <div class="intro-caption">Teknoloji · Dijital · Gelecek</div>
+    </div>
+  </div>
+
+  <!-- Üst navigasyon -->
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#anasayfa" aria-label="Gündeşli Media ana sayfa">
+        <img
+          class="brand-logo"
+          src="gundesli_logo.png"
+          alt="Gündeşli Media"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+        >
+        <span class="brand-fallback">G</span>
+        <span class="brand-name">Gündeşli <span>Media</span></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Ana menü">
+        <a href="#anasayfa">Ana Sayfa</a>
+        <a href="#projeler">Projelerimiz</a>
+        <a href="#urunler">Ürünler</a>
+        <a href="#hakkimizda">Hakkımızda</a>
+        <a href="#topluluklar">Topluluklar</a>
+        <a href="#iletisim">İletişim</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn-primary btn-small" href="#urunler">Ürünleri İncele <span>↗</span></a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Ana sayfa -->
+    <section class="hero" id="anasayfa">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="hero-pill"><span class="live-dot"></span> Dijital dünya ve teknoloji tek çatı altında</div>
+
+          <h1>Fikirleri gerçeğe dönüştüren <span class="gradient-text">teknoloji.</span></h1>
+
+          <p class="hero-description">
+            Gündeşli Media; dijital toplulukları, teknoloji ürünlerini ve güvenlik çözümlerini
+            bir araya getirerek ihtiyaçlarınıza uygun seçenekleri keşfetmenizi sağlar.
+          </p>
+
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#urunler">Ürünleri Keşfet <span>↗</span></a>
+            <a class="btn btn-secondary" href="#projeler">Projelerimizi Gör</a>
+          </div>
+
+          <div class="hero-note">
+            <div class="avatar-stack" aria-hidden="true">
+              <span>G</span><span>M</span><span>+</span>
+            </div>
+            <span>Dijital projeler, teknoloji ve çözüm odaklı yaklaşım.</span>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="hero-image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1100&q=85"
+              alt="Elektronik devre ve teknoloji bileşenleri"
+              fetchpriority="high"
+            >
+            <div class="hero-image-overlay"></div>
+            <div class="hero-visual-label">
+              <span>GÜNDEŞLİ MEDIA</span>
+              <h3>Teknolojinin yeni yüzü.</h3>
+              <p>İhtiyacınıza uygun ürün ve dijital çözümler.</p>
+            </div>
+          </div>
+
+          <div class="float-card top">
+            <div class="icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 21h8M12 19v2M7 9h10M7 13h6"/></svg>
+            </div>
+            <div><strong>Teknoloji Ürünleri</strong><small>Bilgisayar ve güvenlik</small></div>
+          </div>
+
+          <div class="float-card bottom">
+            <div class="icon" style="color:#168759;background:#e5f8ee">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <div><strong>İhtiyaca Uygun Çözümler</strong><small>Bilgi alın, birlikte değerlendirelim</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Özet -->
+    <div class="trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div><strong>Bilgisayar Sistemleri</strong><small>Donanım ve aksesuarlar</small></div>
+        </div>
+        <div class="trust-item">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M2 8a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 20h.01"/></svg>
+          </div>
+          <div><strong>Ağ ve Bağlantı</strong><small>Bağlantı çözümleri</small></div>
+        </div>
+        <div class="trust-item">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M4 10V6l8-4 8 4v4M4 10h16M6 10v10m6-10v10m6-10v10M3 22h18"/></svg>
+          </div>
+          <div><strong>Güvenlik Sistemleri</strong><small>Kamera ve alarm</small></div>
+        </div>
+        <div class="trust-item">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+          </div>
+          <div><strong>Dijital Topluluklar</strong><small>Yerel ve dijital projeler</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projeler -->
+    <section class="section" id="projeler">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Projelerimiz</div>
+          <h2>Dijital dünyada <span class="gradient-text">bağlantı kuruyoruz.</span></h2>
+          <p>İnsanları, fırsatları ve bilgiyi bir araya getirmeyi amaçlayan projelerimizi keşfedin.</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24"><path d="M3 7h18v13H3zM3 7l3-4h12l3 4M8 12h8M8 16h5"/></svg>
+            </div>
+            <h3>Kahramanmaraş Al Sat</h3>
+            <p>Alım satım ilanları üzerinden ürünlerini paylaşmak ve fırsatları takip etmek isteyenlere yönelik topluluk.</p>
+            <a class="text-link" href="https://www.instagram.com/gundesliticaret/" target="_blank" rel="noopener noreferrer">Projeyi incele <span>→</span></a>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+            <h3>Maraş Durum & Trafik</h3>
+            <p>Kahramanmaraş gündemi, trafik durumu ve yerel bilgilendirmeler için dijital paylaşım alanı.</p>
+            <a class="text-link" href="https://www.instagram.com/gundesliticaret/" target="_blank" rel="noopener noreferrer">Bilgi al <span>→</span></a>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></svg>
+            </div>
+            <h3>İş & Staj</h3>
+            <p>İş arayanları, staj fırsatlarını ve yeni kariyer olanaklarını bir araya getirmeyi hedefleyen proje.</p>
+            <a class="text-link" href="#iletisim">Proje hakkında <span>→</span></a>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z"/><path d="m3 7 9 6 9-6"/></svg>
+            </div>
+            <h3>Teklifim Gelsin</h3>
+            <p>İhtiyaçları ve teklifleri buluşturmaya yönelik dijital fikir ve proje çalışması.</p>
+            <a class="text-link" href="#iletisim">Proje hakkında <span>→</span></a>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg>
+            </div>
+            <h3>Dijital Yolculuk</h3>
+            <p>Dijital dünyaya dair bilgi, keşif ve yeni deneyimleri buluşturmayı amaçlayan platform fikri.</p>
+            <a class="text-link" href="#iletisim">Proje hakkında <span>→</span></a>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 11h.01M15 11h.01M9 15h.01M15 15h.01"/></svg>
+            </div>
+            <h3>Usta Bul</h3>
+            <p>İhtiyaca uygun usta ve hizmet taleplerini daha kolay iletebilmek için tasarlanan hizmet fikri.</p>
+            <a class="text-link" href="#iletisim">Talep oluştur <span>→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ürün kataloğu -->
+    <section class="section catalog-section" id="urunler">
+      <div class="container">
+        <div class="catalog-top">
+          <div class="section-heading reveal">
+            <div class="eyebrow">Ürün kataloğu</div>
+            <h2>Doğru teknoloji, <span class="gradient-text">doğru çözüm.</span></h2>
+            <p>Ürünleri kategorilere göre inceleyin. Güncel fiyat, stok ve teknik uygunluk için WhatsApp üzerinden bilgi alın.</p>
+          </div>
+          <input
+            class="catalog-search"
+            type="search"
+            id="productSearch"
+            placeholder="Ürün ara..."
+            aria-label="Katalogda ürün ara"
+          >
+        </div>
+
+        <div class="category-list" id="categoryList" aria-label="Ürün kategorileri">
+          <button class="category-btn active" data-category="all">Tüm Ürünler</button>
+          <button class="category-btn" data-category="kamera">Güvenlik Kameraları</button>
+          <button class="category-btn" data-category="bilgisayar">Bilgisayarlar</button>
+          <button class="category-btn" data-category="alarm">Alarm Sistemleri</button>
+          <button class="category-btn" data-category="ag">Ağ ve Aksesuarlar</button>
+        </div>
+
+        <div class="catalog-intro reveal">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></svg>
+          </div>
+          <div>
+            <h3>Size uygun ürünü birlikte belirleyelim.</h3>
+            <p>Kullanım alanınızı ve ihtiyaçlarınızı paylaşın. Fiyat, stok ve uyumluluk bilgilerini satış öncesinde teyit edin.</p>
+          </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid"></div>
+        <div class="empty-state" id="emptyState">Bu aramayla eşleşen ürün bulunamadı. Başka bir kelime deneyin.</div>
+
+        <div class="catalog-note">
+          <strong>Fiyatlandırma hakkında:</strong> Bu katalog örnek ürün gruplarını tanıtır. Belirli bir modelin fiyatı, stok durumu ve teknik özellikleri satış öncesinde teyit edilir. Katalogda belirtilmeyen fiyatlar tahmin edilmez.
+        </div>
+      </div>
+    </section>
+
+    <!-- Hakkımızda -->
+    <section class="section" id="hakkimizda">
+      <div class="container about-grid">
+        <div class="about-visual reveal">
+          <img
+            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85"
+            alt="Modern çalışma ve teknoloji ortamı"
+            loading="lazy"
+          >
+          <div class="about-visual-caption">
+            <strong>Gündeşli Media</strong>
+            <span>Dijital projeler ve teknoloji odaklı yaklaşım</span>
+          </div>
+        </div>
+
+        <div class="about-copy reveal">
+          <div class="eyebrow">Hakkımızda</div>
+          <h2>Bugünün ihtiyaçlarına, <span class="gradient-text">yarının bakışıyla.</span></h2>
+          <p>
+            Gündeşli Media; dijital topluluklar, yerel projeler ve teknoloji çözümlerini aynı çatı altında
+            buluşturan bir marka yapılanmasıdır. Amacımız, insanların aradıkları bilgiye ve çözümlere
+            daha kolay ulaşabilmesine katkı sağlamaktır.
+          </p>
+
+          <div class="about-points">
+            <div class="about-point">
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>İhtiyaç odaklı yaklaşım</strong>
+                <p>Önce ihtiyacı anlıyor, uygun seçenekleri değerlendirmeye önem veriyoruz.</p>
+              </div>
+            </div>
+            <div class="about-point">
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Farklı alanları bir araya getirme</strong>
+                <p>Dijital topluluklar, yerel projeler ve teknoloji alanlarında çalışmalar yürütüyoruz.</p>
+              </div>
+            </div>
+            <div class="about-point">
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Açık iletişim</strong>
+                <p>Ürünler, fiyatlar ve hizmetler hakkında doğrudan bilgi alabileceğiniz iletişim kanalları sunuyoruz.</p>
+              </div>
+            </div>
+          </div>
+
+          <a class="btn btn-primary" href="#iletisim">Bizimle iletişime geç <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topluluklar -->
+    <section class="section community-section" id="topluluklar">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Topluluklarımız</div>
+          <h2>Birlikte daha <span class="gradient-text">güçlüyüz.</span></h2>
+          <p>Projelerimizi takip edin, duyuruları keşfedin ve topluluklara katılın.</p>
+        </div>
+
+        <div class="community-grid">
+          <article class="community-card reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3H13a8.5 8.5 0 0 1 8 8v.5Z"/></svg>
+            </div>
+            <h3>WhatsApp Topluluğu</h3>
+            <p>Gündeşli Media topluluk bağlantısı üzerinden duyuruları ve paylaşımları takip edin.</p>
+            <a class="btn btn-secondary btn-small" href="https://chat.whatsapp.com/DBNYcyDrr5oCDfoKRzMrsF" target="_blank" rel="noopener noreferrer">Topluluğa Katıl ↗</a>
+          </article>
+
+          <article class="community-card reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
+            </div>
+            <h3>Instagram</h3>
+            <p>Projelerimizden ve paylaşımlarımızdan haberdar olmak için Instagram hesabımızı ziyaret edin.</p>
+            <a class="btn btn-secondary btn-small" href="https://www.instagram.com/melihgundsli/" target="_blank" rel="noopener noreferrer">Instagram'ı Aç ↗</a>
+          </article>
+
+          <article class="community-card reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16v13H8l-4 3z"/><path d="M8 9h8M8 13h5"/></svg>
+            </div>
+            <h3>Doğrudan İletişim</h3>
+            <p>Ürün, iş birliği, proje veya diğer sorularınız için bize WhatsApp üzerinden yazın.</p>
+            <a class="btn btn-secondary btn-small" href="https://wa.me/905064676635" target="_blank" rel="noopener noreferrer">Mesaj Gönder ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- İletişim -->
+    <section class="section" id="iletisim">
+      <div class="container">
+        <div class="contact-panel reveal">
+          <div>
+            <div class="eyebrow">İletişim</div>
+            <h2>Bir sorunuz mu var? <span class="gradient-text">Konuşalım.</span></h2>
+            <p>
+              Ürünler, fiyat teklifleri, güvenlik sistemleri, iş birlikleri veya projelerimiz hakkında
+              bizimle iletişime geçebilirsiniz.
+            </p>
+
+            <div class="contact-actions">
+              <a class="btn btn-whatsapp" href="https://wa.me/905064676635" target="_blank" rel="noopener noreferrer">WhatsApp'tan Yaz ↗</a>
+              <a class="btn btn-secondary" href="https://www.instagram.com/melihgundsli/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+            </div>
+          </div>
+
+          <div class="contact-list">
+            <a class="contact-row" href="https://wa.me/905064676635" target="_blank" rel="noopener noreferrer">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3H13a8.5 8.5 0 0 1 8 8v.5Z"/></svg>
+              </div>
+              <div><strong>WhatsApp</strong><span>0506 467 66 35</span></div>
+            </a>
+
+            <a class="contact-row" href="https://www.instagram.com/melihgundsli/" target="_blank" rel="noopener noreferrer">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
+              </div>
+              <div><strong>Instagram</strong><span>@melihgundsli</span></div>
+            </a>
+
+            <div class="contact-row">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              </div>
+              <div><strong>İletişim yöntemi</strong><span>WhatsApp üzerinden doğrudan iletişim</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Alt bilgi -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand" href="#anasayfa">
+            <img
+              class="brand-logo"
+              src="gundesli_logo.png"
+              alt="Gündeşli Media"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+            >
+            <span class="brand-fallback">G</span>
+            <span class="brand-name">Gündeşli <span>Media</span></span>
+          </a>
+          <p>Dijital projeler, teknoloji ürünleri ve ihtiyaç odaklı çözümler için bir aradayız.</p>
+        </div>
+
+        <nav class="footer-links" aria-label="Alt menü">
+          <a href="#anasayfa">Ana Sayfa</a>
+          <a href="#projeler">Projeler</a>
+          <a href="#urunler">Ürün Kataloğu</a>
+          <a href="#hakkimizda">Hakkımızda</a>
+          <a href="#topluluklar">Topluluklar</a>
+          <a href="#iletisim">İletişim</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Gündeşli Media. Tüm hakları saklıdır.</span>
+        <span>Teknoloji · Dijital · Gelecek</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sabit WhatsApp -->
+  <a
+    class="whatsapp-float"
+    href="https://wa.me/905064676635"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp üzerinden iletişim"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3H13a8.5 8.5 0 0 1 8 8v.5Z"/>
+      <path d="M8.5 9.5c.6 2.2 2.3 3.9 4.7 4.8l1.4-1.4 2 .9c.2.1.3.3.2.5-.3 1.2-1.3 1.8-2.5 1.6-3.7-.7-6.8-3.8-7.5-7.5-.2-1.2.4-2.2 1.6-2.5.2-.1.4 0 .5.2l.9 2-1.3 1.4Z"/>
+    </svg>
+  </a>
+
+  <!-- Kampanya/duyuru modalı: yalnızca geçerli içerik varsa gösterilir -->
+  <div class="modal-backdrop" id="announcementBackdrop" role="dialog" aria-modal="true" aria-labelledby="announcementTitle">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Duyuruyu kapat">×</button>
+      <div class="modal-art"><span id="modalSymbol">G</span></div>
+      <div class="modal-content">
+        <div class="eyebrow" id="modalEyebrow">Gündeşli Media</div>
+        <h3 id="announcementTitle"></h3>
+        <p id="announcementDescription"></p>
+        <div class="modal-price" id="modalPrice" hidden></div>
+        <div class="modal-actions">
+          <a class="btn btn-primary" id="modalAction" href="#urunler">İncele ↗</a>
+          <button class="btn btn-secondary" id="modalDismiss">Şimdi değil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    "use strict";
+
+    /* ==========================================================
+       AYARLAR
+       Telefon numarasını ülke koduyla, + işareti olmadan yazın.
+       ========================================================== */
+    const SITE_CONFIG = {
+      whatsappNumber: "905064676635",
+      instagramUrl: "https://www.instagram.com/melihgundsli/",
+      introDuration: 2600
+    };
+
+    /*
+      ÜRÜN EKLEME:
+      Aşağıdaki PRODUCTS listesine yeni bir nesne ekleyin.
+      category: kamera | bilgisayar | alarm | ag
+      price alanını yalnızca teyit edilmiş fiyat varsa doldurun.
+      image alanına kendi ürün görselinizin yolunu yazabilirsiniz.
+    */
+    const PRODUCTS = [
+      {
+        id: "kamera-ip",
+        name: "IP Güvenlik Kameraları",
+        category: "kamera",
+        categoryLabel: "Güvenlik Kamerası",
+        description: "Ağ üzerinden görüntü aktarımı sağlayan kamera seçenekleri. Kullanım alanına ve kayıt sistemine uygunluğu teyit edilmelidir.",
+        image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80",
+        tag: "Kamera Sistemleri",
+        price: null
+      },
+      {
+        id: "kamera-ahd",
+        name: "AHD Kamera Sistemleri",
+        category: "kamera",
+        categoryLabel: "Güvenlik Kamerası",
+        description: "Mevcut kablolu kamera altyapıları ve yeni kurulumlar için değerlendirilebilecek analog HD kamera seçenekleri.",
+        image: "https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=800&q=80",
+        tag: "Kablolu Sistemler",
+        price: null
+      },
+      {
+        id: "kayit-cihazi",
+        name: "DVR / NVR Kayıt Cihazları",
+        category: "kamera",
+        categoryLabel: "Kayıt Cihazı",
+        description: "Kamera sayısı, kayıt çözünürlüğü ve depolama ihtiyacına göre uygun kayıt cihazını belirlemek için bilgi alın.",
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+        tag: "Kayıt ve İzleme",
+        price: null
+      },
+      {
+        id: "bilgisayar-masaustu",
+        name: "Masaüstü Bilgisayarlar",
+        category: "bilgisayar",
+        categoryLabel: "Bilgisayar",
+        description: "Ofis, günlük kullanım ve farklı iş yükleri için ihtiyaca uygun masaüstü bilgisayar seçenekleri.",
+        image: "https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=800&q=80",
+        tag: "Masaüstü",
+        price: null
+      },
+      {
+        id: "bilgisayar-dizustu",
+        name: "Dizüstü Bilgisayarlar",
+        category: "bilgisayar",
+        categoryLabel: "Bilgisayar",
+        description: "Taşınabilirlik, performans ve bütçe ihtiyaçlarınıza göre dizüstü bilgisayar seçenekleri hakkında bilgi alın.",
+        image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
+        tag: "Dizüstü",
+        price: null
+      },
+      {
+        id: "oyuncu-donanimi",
+        name: "Oyuncu Bilgisayarı ve Donanımları",
+        category: "bilgisayar",
+        categoryLabel: "Bilgisayar ve Donanım",
+        description: "İşlemci, ekran kartı, bellek ve diğer bileşenlerin ihtiyacınıza göre değerlendirilmesine yardımcı oluyoruz.",
+        image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=800&q=80",
+        tag: "Performans",
+        price: null
+      },
+      {
+        id: "alarm-panel",
+        name: "Hırsız Alarm Sistemleri",
+        category: "alarm",
+        categoryLabel: "Alarm Sistemi",
+        description: "İş yeri ve ev güvenliği için panel, algılayıcı ve siren seçeneklerini birlikte değerlendirin.",
+        image: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80",
+        tag: "Güvenlik",
+        price: null
+      },
+      {
+        id: "alarm-sensor",
+        name: "Hareket ve Kapı Sensörleri",
+        category: "alarm",
+        categoryLabel: "Alarm Aksesuarı",
+        description: "Kurulacak sistemle uyumlu hareket, kapı ve pencere sensörleri hakkında bilgi alın.",
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
+        tag: "Sensörler",
+        price: null
+      },
+      {
+        id: "router",
+        name: "Router ve Ağ Ürünleri",
+        category: "ag",
+        categoryLabel: "Ağ Teknolojileri",
+        description: "İnternet erişimi, kablosuz bağlantı ve yerel ağ ihtiyacına göre ağ cihazları seçenekleri.",
+        image: "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?auto=format&fit=crop&w=800&q=80",
+        tag: "Ağ Sistemleri",
+        price: null
+      },
+      {
+        id: "kablolama",
+        name: "Kablolama ve Kurulum Aksesuarları",
+        category: "ag",
+        categoryLabel: "Aksesuar",
+        description: "Kamera, bilgisayar ve ağ kurulumlarında ihtiyaç duyulabilecek kablo ve bağlantı aksesuarları.",
+        image: "https://images.unsplash.com/photo-1558618047-f4b511d8e8b3?auto=format&fit=crop&w=800&q=80",
+        tag: "Kurulum",
+        price: null
+      }
+    ];
+
+    /*
+      KAMPANYA / DUYURU YÖNETİMİ:
+      Varsayılan liste boş; gerçek bir kampanya yoksa modal gösterilmez.
+
+      Örnek kampanya:
+      {
+        id: "ekim-kampanyasi",
+        type: "campaign",
+        title: "Ekim Ayına Özel",
+        description: "Kampanyanın kapsamını buraya yazın.",
+        imageSymbol: "%",
+        startDate: "2026-10-01",
+        endDate: "2026-10-31",
+        oldPrice: "Önceki fiyat",
+        newPrice: "Güncel fiyat",
+        discount: "%10",
+        buttonText: "Ürünleri İncele",
+        buttonUrl: "#urunler"
+      }
+
+      Tarihler YYYY-AA-GG biçiminde olmalı.
+      Kampanya sona erdiğinde otomatik gösterilmez.
+      Aynı duyuru kapatıldıktan sonra tekrar açılmaz.
+      Yeni bir id ile yeni duyuru eklenebilir.
+    */
+    const ANNOUNCEMENTS = [];
+
+    const CATEGORY_INFO = {
+      all: {
+        title: "Ürün gruplarını keşfedin",
+        description: "Kamera, bilgisayar, alarm ve ağ ürünlerini inceleyin. Fiyat ve stok bilgisini WhatsApp üzerinden teyit edin."
+      },
+      kamera: {
+        title: "Güvenlik Kameraları",
+        description: "IP ve AHD kameralar, iç ve dış mekân seçenekleri ile DVR/NVR kayıt cihazları. Seçim yapılırken çözünürlük, gece görüşü, kayıt süresi ve mevcut altyapı dikkate alınmalıdır."
+      },
+      bilgisayar: {
+        title: "Bilgisayar Çeşitleri",
+        description: "Masaüstü, dizüstü, oyuncu sistemleri, bileşenler ve aksesuarlar. Kullanım amacı, performans beklentisi ve bütçenize göre seçenekleri değerlendirin."
+      },
+      alarm: {
+        title: "Alarm Sistemleri",
+        description: "Alarm panelleri, hareket sensörleri, kapı sensörleri ve sirenler. Kablosuz veya kablolu sistem seçimi mekân ve kurulum koşullarına göre belirlenmelidir."
+      },
+      ag: {
+        title: "Ağ ve Kurulum Aksesuarları",
+        description: "Router, bağlantı ekipmanları, kablolar ve kurulum aksesuarları. Uyumluluk ve ihtiyaç duyulan teknik özellikler satın alma öncesinde kontrol edilmelidir."
+      }
+    };
+
+    const CATEGORY_ICONS = {
+      kamera: "◉",
+      bilgisayar: "▣",
+      alarm: "⌑",
+      ag: "⌁"
+    };
+
+    const productsGrid = document.getElementById("productsGrid");
+    const emptyState = document.getElementById("emptyState");
+    const productSearch = document.getElementById("productSearch");
+    const categoryButtons = [...document.querySelectorAll(".category-btn")];
+    let selectedCategory = "all";
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    function whatsappLink(message) {
+      return "https://wa.me/" + SITE_CONFIG.whatsappNumber +
+        "?text=" + encodeURIComponent(message);
+    }
+
+    function productMessage(product, intent) {
+      let message = "Merhaba Gündeşli Media, \"" + product.name +
+        "\" hakkında bilgi almak istiyorum.";
+
+      if (product.price) {
+        message += " Belirtilen fiyat: " + product.price + ".";
+      }
+
+      message += " Güncel fiyat, stok durumu ve teknik özellikleri paylaşabilir misiniz?";
+
+      if (intent === "buy") {
+        message += " Satın alma süreci hakkında da bilgi rica ediyorum.";
+      }
+
+      return message;
+    }
+
+    function renderProducts() {
+      const searchTerm = productSearch.value.trim().toLocaleLowerCase("tr-TR");
+
+      const filtered = PRODUCTS.filter(product => {
+        const categoryMatch = selectedCategory === "all" ||
+          product.category === selectedCategory;
+
+        const searchText = [
+          product.name,
+          product.categoryLabel,
+          product.description,
+          product.tag
+        ].join(" ").toLocaleLowerCase("tr-TR");
+
+        return categoryMatch && searchText.includes(searchTerm);
+      });
+
+      productsGrid.innerHTML = filtered.map(product => {
+        const image = escapeHTML(product.image);
+        const name = escapeHTML(product.name);
+        const categoryLabel = escapeHTML(product.categoryLabel);
+        const description = escapeHTML(product.description);
+        const tag = escapeHTML(product.tag);
+
+        const priceMarkup = product.price
+          ? `<strong class="product-price">${escapeHTML(product.price)}</strong>`
+          : "";
+
+        return `
+          <article class="product-card">
+            <div class="product-image">
+              <img src="${image}" alt="${name}" loading="lazy"
+                onerror="this.onerror=null;this.src='https://placehold.co/800x500/eaf1ff/2463eb?text=Gundesli+Media'">
+              <span class="product-tag">${tag}</span>
+            </div>
+            <div class="product-body">
+              <div class="product-category">${categoryLabel}</div>
+              <h3>${name}</h3>
+              <p>${description}</p>
+              ${priceMarkup}
+              <div class="product-actions">
+                <a class="btn btn-whatsapp btn-small"
+                  href="${whatsappLink(productMessage(product, "buy"))}"
+                  target="_blank" rel="noopener noreferrer">Satın Al ↗</a>
+                <a class="btn btn-secondary btn-small"
+                  href="${whatsappLink(productMessage(product, "info"))}"
+                  target="_blank" rel="noopener noreferrer">Bilgi Al</a>
+              </div>
+            </div>
+          </article>`;
+      }).join("");
+
+      emptyState.style.display = filtered.length ? "none" : "block";
+    }
+
+    categoryButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        selectedCategory = button.dataset.category;
+
+        categoryButtons.forEach(item => {
+          const isActive = item === button;
+          item.classList.toggle("active", isActive);
+          item.setAttribute("aria-pressed", String(isActive));
+        });
+
+        const info = CATEGORY_INFO[selectedCategory];
+        const intro = document.querySelector(".catalog-intro");
+
+        if (info && intro) {
+          intro.querySelector("h3").textContent = info.title;
+          intro.querySelector("p").textContent = info.description;
+          intro.querySelector(".icon").innerHTML =
+            `<span style="font-size:23px">${CATEGORY_ICONS[selectedCategory] || "✦"}</span>`;
+        }
+
+        renderProducts();
+      });
+    });
+
+    productSearch.addEventListener("input", renderProducts);
+
+    /* Mobil menü */
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Menüyü kapat" : "Menüyü aç");
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    /* Bölümler görünür olduğunda yumuşak giriş */
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if ("IntersectionObserver" in window && !reducedMotion) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .10 });
+
+      document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+    } else {
+      document.querySelectorAll(".reveal").forEach(element => element.classList.add("visible"));
+    }
+
+    /* Aktif menü bağlantısı */
+    const navAnchors = [...document.querySelectorAll(".nav-links a")];
+
+    if ("IntersectionObserver" in window) {
+      const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          navAnchors.forEach(anchor => {
+            anchor.classList.toggle(
+              "active",
+              anchor.getAttribute("href") === "#" + entry.target.id
+            );
+          });
+        });
+      }, { rootMargin: "-30% 0px -60% 0px" });
+
+      document.querySelectorAll("main section[id]").forEach(section => {
+        sectionObserver.observe(section);
+      });
+    }
+
+    /* Kampanya / duyuru modalı */
+    const backdrop = document.getElementById("announcementBackdrop");
+    const modalClose = document.getElementById("modalClose");
+    const modalDismiss = document.getElementById("modalDismiss");
+    const modalAction = document.getElementById("modalAction");
+    let activeAnnouncement = null;
+
+    function isAnnouncementActive(item) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const start = item.startDate ? new Date(item.startDate + "T00:00:00") : null;
+      const end = item.endDate ? new Date(item.endDate + "T23:59:59") : null;
+
+      if (start && today < start) return false;
+      if (end && today > end) return false;
+
+      return true;
+    }
+
+    function openAnnouncement(item) {
+      activeAnnouncement = item;
+
+      document.getElementById("modalSymbol").textContent =
+        item.imageSymbol || (item.type === "campaign" ? "%" : "G");
+
+      document.getElementById("modalEyebrow").textContent =
+        item.type === "campaign" ? "Sınırlı Süreli Kampanya" : "Gündeşli Media Duyurusu";
+
+      document.getElementById("announcementTitle").textContent = item.title || "Gündeşli Media";
+      document.getElementById("announcementDescription").textContent = item.description || "";
+
+      const priceBox = document.getElementById("modalPrice");
+
+      if (item.type === "campaign" && (item.oldPrice || item.newPrice || item.discount)) {
+        priceBox.hidden = false;
+        priceBox.innerHTML =
+          (item.newPrice ? `<strong>${escapeHTML(item.newPrice)}</strong>` : "") +
+          (item.oldPrice ? `<del>${escapeHTML(item.oldPrice)}</del>` : "") +
+          (item.discount ? `<span class="product-tag">${escapeHTML(item.discount)}</span>` : "");
+      } else {
+        priceBox.hidden = true;
+        priceBox.innerHTML = "";
+      }
+
+      modalAction.textContent = item.buttonText || "İncele ↗";
+      modalAction.href = item.buttonUrl || "#urunler";
+      backdrop.classList.add("open");
+      document.body.classList.add("locked");
+    }
+
+    function closeAnnouncement() {
+      if (activeAnnouncement) {
+        try {
+          localStorage.setItem("gm-announcement-" + activeAnnouncement.id, "closed");
+        } catch (error) {
+          // Tarayıcı depolaması kapalıysa pencere yine kapanır.
+        }
+      }
+
+      backdrop.classList.remove("open");
+      document.body.classList.remove("locked");
+    }
+
+    modalClose.addEventListener("click", closeAnnouncement);
+    modalDismiss.addEventListener("click", closeAnnouncement);
+
+    backdrop.addEventListener("click", event => {
+      if (event.target === backdrop) closeAnnouncement();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && backdrop.classList.contains("open")) {
+        closeAnnouncement();
+      }
+    });
+
+    function scheduleAnnouncement() {
+      const item = ANNOUNCEMENTS.find(announcement => {
+        if (!announcement.id || !isAnnouncementActive(announcement)) return false;
+
+        try {
+          return localStorage.getItem("gm-announcement-" + announcement.id) !== "closed";
+        } catch (error) {
+          return true;
         }
       });
-    },{threshold:.12});
-    document.querySelectorAll(".reveal").forEach(function(element){observer.observe(element);});
-  }else{
-    document.querySelectorAll(".reveal").forEach(function(element){element.classList.add("visible");});
-  }
-})();
-</script>
+
+      if (item) {
+        window.setTimeout(() => openAnnouncement(item), 900);
+      }
+    }
+
+    /* Açılış animasyonu: sayfayı her bölüm değişiminde tekrar göstermez. */
+    function finishIntro() {
+      document.getElementById("intro").classList.add("done");
+      document.body.classList.remove("locked");
+      scheduleAnnouncement();
+    }
+
+    document.body.classList.add("locked");
+
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+    renderProducts();
+
+    if (reducedMotion) {
+      finishIntro();
+    } else {
+      window.setTimeout(finishIntro, SITE_CONFIG.introDuration);
+    }
+  </script>
 </body>
 </html>
