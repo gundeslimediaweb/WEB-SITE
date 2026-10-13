@@ -404,3 +404,95 @@ button { font: inherit; }
   .hero-art { transform: scale(.92); margin-inline: -10px; width: calc(100% + 20px); }
   .community-name h3 { font-size: 13px; }
 }
+
+/* MOBİL EKRAN VE YANA TAŞMA DÜZELTMESİ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+}
+
+.container {
+  width: min(1160px, calc(100% - 32px));
+  min-width: 0;
+}
+
+.hero-grid,
+.split,
+.cards,
+.card,
+.visual,
+.visual-card,
+.contact-card,
+.info-panel {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.visual {
+  overflow: clip;
+}
+
+.float-chip {
+  max-width: calc(100% - 20px);
+  overflow-wrap: anywhere;
+}
+
+.cta-box {
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.nav-links {
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: calc(100% - 28px);
+  }
+
+  .hero-grid,
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  h1 {
+    font-size: clamp(38px, 11vw, 46px);
+    letter-spacing: -1.8px;
+    overflow-wrap: anywhere;
+  }
+
+  .visual-card {
+    width: calc(100% - 12px);
+    transform: none;
+  }
+
+  .chip-one {
+    right: 0;
+  }
+
+  .chip-two {
+    left: 0;
+  }
+
+  .cta-box {
+    padding: 24px 20px;
+  }
+
+  .footer-top {
+    min-width: 0;
+  }
+}
