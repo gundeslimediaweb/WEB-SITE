@@ -2318,6 +2318,41 @@
   }
 })();
 </script>
+<style>
+  .contact-row.reveal-hidden span {
+    cursor: pointer;
+    color: #1769e0;
+    font-weight: 600;
+  }
+</style>
+
+<script>
+(function () {
+  document.querySelectorAll(
+    '.contact-row[href*="wa.me"], .contact-row[href*="instagram.com"]'
+  ).forEach(function (row) {
+    const value = row.querySelector('span');
+    if (!value) return;
+
+    const originalText = value.textContent.trim();
+    value.textContent = 'Görüntülemek için dokun';
+    row.classList.add('reveal-hidden');
+    row.setAttribute('aria-label', 'Bilgiyi görüntülemek için dokun');
+
+    row.addEventListener('click', function (event) {
+      if (row.dataset.revealed !== 'true') {
+        event.preventDefault();
+        event.stopPropagation();
+
+        value.textContent = originalText;
+        row.dataset.revealed = 'true';
+        row.classList.remove('reveal-hidden');
+        row.setAttribute('aria-label', originalText);
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
 
