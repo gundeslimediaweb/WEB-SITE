@@ -1902,8 +1902,8 @@
         price: null
       }
     ];
-    
-    // Pages CMS ürünlerini GitHub'dan yükle
+
+    // Pages CMS üzerinden kaydedilen ürünleri yükle
     async function loadCmsProducts() {
       try {
         const response = await fetch(
@@ -1911,56 +1911,63 @@
         );
 
         if (!response.ok) {
-          throw new Error("Ürün dosyaları okunamadı");
+          throw new Error("CMS ürün listesi okunamadı.");
         }
 
         const files = await response.json();
-        const jsonFiles = files.filter(file =>
-          file.name.endsWith(".json") && file.download_url
+
+        const productFiles = files.filter(file =>
+          file.name.toLowerCase().endsWith(".json") &&
+          file.download_url
         );
 
-        const cmsProducts = await Promise.all(
-          jsonFiles.map(async file => {
-            const result = await fetch(file.download_url);
-            if (!result.ok) return null;
+        const loadedProducts = await Promise.all(
+          productFiles.map(async file => {
+            try {
+              const response = await fetch(file.download_url);
+              if (!response.ok) return null;
 
-            const product = await result.json();
-            const name = String(product.name || "");
-            const text = name.toLocaleLowerCase("tr-TR");
+              const item = await response.json();
+              if (!item.name) return null;
 
-            let category = "kamera";
-            let categoryLabel = "Güvenlik Kamerası";
+              const search = (
+                item.name + " " + (item.description || "")
+              ).toLocaleLowerCase("tr-TR");
 
-            if (/bilgisayar|laptop|dizüstü|masaüstü|oyuncu/.test(text)) {
-              category = "bilgisayar";
-              categoryLabel = "Bilgisayar";
-            } else if (/alarm|sensör/.test(text)) {
-              category = "alarm";
-              categoryLabel = "Alarm Sistemi";
-            } else if (/router|ağ |kablo|network/.test(text)) {
-              category = "ag";
-              categoryLabel = "Ağ Teknolojileri";
+              let category = "kamera";
+              let categoryLabel = "Güvenlik Kamerası";
+
+              if (/bilgisayar|laptop|dizüstü|masaüstü|oyuncu/.test(search)) {
+                category = "bilgisayar";
+                categoryLabel = "Bilgisayar";
+              } else if (/alarm|sensör/.test(search)) {
+                category = "alarm";
+                categoryLabel = "Alarm Sistemi";
+              } else if (/router|ağ ürünü|kablo|network/.test(search)) {
+                category = "ag";
+                categoryLabel = "Ağ ve Kurulum";
+              }
+
+              return {
+                id: file.name.replace(/\.json$/i, ""),
+                name: item.name,
+                category,
+                categoryLabel,
+                description: item.description || "",
+                image: item.image || "",
+                tag: "Gündeşli Media",
+                price: item.price || null,
+                whatsapp: item.whatsapp || ""
+              };
+            } catch (error) {
+              console.error("Ürün yüklenemedi:", file.name, error);
+              return null;
             }
-
-            return {
-              id: file.name.replace(/\.json$/i, ""),
-              name,
-              category,
-              categoryLabel,
-              description: product.description || "",
-              image: product.image || "",
-              tag: "Gündeşli Media",
-              price: product.price || null,
-              whatsapp: product.whatsapp || ""
-            };
           })
         );
 
-        const validProducts = cmsProducts.filter(product => product && product.name);
-
-        // CMS ürünleri mevcut ürünlerin üzerine eklenmez;
-        // aynı kimlik varsa CMS kaydı esas alınır.
-        const cmsIds = new Set(validProducts.map(product => product.id));
+        const validProducts = loadedProducts.filter(Boolean);
+        const cmsIds = new Set(validProducts.map(item => item.id));
 
         for (let i = PRODUCTS.length - 1; i >= 0; i--) {
           if (cmsIds.has(PRODUCTS[i].id)) {
@@ -1971,10 +1978,9 @@
         PRODUCTS.push(...validProducts);
         renderProducts();
       } catch (error) {
-        console.error("CMS ürünleri yüklenemedi:", error);
+        console.error("CMS bağlantı hatası:", error);
       }
     }
-
 
     /*
       KAMPANYA / DUYURU YÖNETİMİ:
