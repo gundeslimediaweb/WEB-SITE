@@ -1,0 +1,29 @@
+
+media:
+  input: media
+  output: /media
+
+content:
+  - name: products
+    label: Ürünler
+    type: collection
+    path: products
+    format: json
+    filename: "{primary}.json"
+    fields:
+      - name: name
+        label: Ürün adı
+        type: string
+        required: true
+      - name: price
+        label: Fiyat
+        type: string
+      - name: description
+        label: Açıklama
+        type: text
+      - name: image
+        label: Ürün görseli
+        type: image
+      - name: whatsapp
+        label: WhatsApp bağlantısı
+        type: string
