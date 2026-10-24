@@ -2,622 +2,537 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f7f9fc">
-<meta name="description" content="Gündeşli Media — B2B C2C Ticari Çözümler, teknoloji ürünleri ve dijital topluluklar.">
-<meta property="og:title" content="Gündeşli Media">
-<meta property="og:description" content="B2B C2C Ticari Çözümler">
-<title>Gündeşli Media | B2B C2C Ticari Çözümler</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f9ff">
+  <meta name="description" content="Gündeşli Soft tarafından geliştirilen Ofis360; işletme süreçlerini tek merkezden yönetmeyi hedefleyen yeni nesil işletme yönetim platformudur. Çok yakında.">
+  <title>Ofis360 — İşletmen için 360° kontrol | Gündeşli Soft</title>
 
-<style>
-:root{--bg:#f7f9fc;--white:#fff;--text:#111827;--muted:#697586;--blue:#2463eb;--blue2:#1749bd;--pale:#eaf1ff;--border:#e6eaf0;--green:#159c68;--radius:22px;--shadow:0 16px 45px #162a5012;--max:1200px}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{margin:0;color:var(--text);background:var(--bg);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body.locked{overflow:hidden}
-img{max-width:100%;display:block}
-a{color:inherit;text-decoration:none}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-.container{width:min(var(--max),calc(100% - 40px));margin:auto}
-.section{padding:82px 0}
-h1,h2,h3{font-family:"Manrope",sans-serif;letter-spacing:-.8px}
-h2{font-size:clamp(30px,4vw,44px);line-height:1.16;margin:0 0 15px}
-p{line-height:1.8}
-.gradient{color:var(--blue);background:linear-gradient(110deg,#2463eb,#7959e9);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:15px;color:var(--blue);font-size:11px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase}
-.eyebrow:before{content:"";width:22px;height:2px;background:var(--blue)}
-.heading{max-width:720px;margin-bottom:34px}
-.heading p,.muted{color:var(--muted)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:45px;padding:0 17px;border:1px solid transparent;border-radius:12px;font-size:12px;font-weight:800;transition:.2s}
-.btn:hover{transform:translateY(-2px)}
-.primary{color:#fff;background:var(--blue);box-shadow:0 8px 22px #2463eb22}
-.primary:hover{background:var(--blue2)}
-.secondary{background:#fff;border-color:var(--border)}
-.whatsapp-btn{color:#fff;background:var(--green)}
-.small{min-height:39px;padding:0 13px}
-.icon{display:grid;place-items:center;width:43px;height:43px;flex-shrink:0;border-radius:14px;color:var(--blue);background:var(--pale);font-size:19px}
-.intro{position:fixed;z-index:2000;inset:0;display:grid;place-items:center;background:radial-gradient(ellipse,#eaf1ff,#f8faff 68%);transition:opacity .5s,visibility .5s}
-.intro.done{opacity:0;visibility:hidden;pointer-events:none}
-.intro:before,.intro:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #2463eb20;border-radius:50%;animation:orbit 10s linear infinite}
-.intro:after{width:350px;height:350px;animation-direction:reverse}
-.intro-logo{position:relative;z-index:1;width:105px;height:105px;object-fit:contain;animation:dip 1.05s ease-in-out 2 both}
-@keyframes dip{0%,100%{transform:scale(1)}20%{transform:scale(.87)}40%{transform:scale(1.08)}60%{transform:scale(.97)}80%{transform:scale(1.02)}}
-@keyframes orbit{to{transform:rotate(360deg)}}
-.header{position:sticky;z-index:100;top:0;background:#ffffffed;backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:74px}
-.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.brand img{width:43px;height:43px;object-fit:contain}
-.brand-name{font-family:"Manrope",sans-serif;font-size:17px;font-weight:800;letter-spacing:-.5px}
-.brand-name span{color:var(--blue)}
-.nav-links{display:flex;align-items:center;gap:19px}
-.nav-links a{font-size:11px;font-weight:700;color:#596476}
-.nav-links a:hover,.nav-links a.active{color:var(--blue)}
-.nav-actions{display:flex;align-items:center;gap:8px}
-.menu-toggle{display:none;width:42px;height:42px;border:1px solid var(--border);border-radius:11px;background:#fff;font-size:20px}
-.hero{padding:76px 0;background:radial-gradient(ellipse at 85% 25%,#658bff20,transparent 34%),radial-gradient(ellipse at 10% 80%,#8164eb12,transparent 33%)}
-.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:50px}
-.hero h1{font-size:clamp(42px,5.5vw,67px);line-height:1.08;letter-spacing:-2.7px;margin:0 0 22px}
-.hero-description{max-width:560px;color:var(--muted);font-size:15px;margin-bottom:26px}
-.hero-buttons{display:flex;flex-wrap:wrap;gap:10px}
-.hero-note{display:flex;align-items:center;gap:12px;margin-top:25px;color:var(--muted);font-size:11px}
-.hero-image{position:relative;min-height:410px;overflow:hidden;border:1px solid #fff;border-radius:28px;background:linear-gradient(140deg,#dce8ff,#f2efff 65%,#d9f0ff);box-shadow:0 28px 75px #23418221}
-.hero-image>img{position:absolute;width:100%;height:100%;object-fit:cover;inset:0;mix-blend-mode:multiply;opacity:.87}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,#12285788,transparent 65%)}
-.hero-caption{position:absolute;left:22px;right:22px;bottom:20px;color:white}
-.hero-caption span{font-size:10px;font-weight:800}
-.hero-caption h3{margin:8px 0;font-size:23px}
-.hero-caption p{margin:0;font-size:12px}
-.float-card{position:absolute;display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #fff;border-radius:15px;background:#fffffff0;box-shadow:var(--shadow)}
-.float-card.top{top:22px;left:-18px}
-.float-card.bottom{right:-12px;bottom:70px}
-.float-card strong,.float-card small{display:block}
-.float-card strong{font-size:11px}
-.float-card small{margin-top:4px;color:var(--muted);font-size:10px}
-.trust{padding:24px 0;border-block:1px solid var(--border);background:#fff}
-.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.trust-item{display:flex;align-items:center;gap:10px}
-.trust-item strong,.trust-item small{display:block}
-.trust-item strong{font-size:11px}
-.trust-item small{margin-top:4px;color:var(--muted);font-size:10px}
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.card{display:flex;flex-direction:column;min-width:0;padding:23px;border:1px solid var(--border);border-radius:var(--radius);background:#fff;transition:.25s}
-.card:hover,.product:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#cbd9f4}
-.card .icon{margin-bottom:18px}
-.card h3{font-size:17px;margin:0 0 9px}
-.card p{flex:1;color:var(--muted);font-size:12px;margin:0 0 17px}
-.text-link{color:var(--blue);font-size:12px;font-weight:800}
-.catalog{background:#fff}
-.catalog-top{display:flex;align-items:end;justify-content:space-between;gap:20px}
-.search{width:270px;min-height:45px;padding:0 13px;border:1px solid var(--border);border-radius:12px;outline:none;background:#fafbfd}
-.search:focus,.field:focus{border-color:#91b0fa;box-shadow:0 0 0 3px #2463eb13}
-.categories{display:flex;gap:8px;overflow:auto;padding:3px 0 9px;margin:15px 0 22px}
-.category{flex-shrink:0;padding:11px 14px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--muted);font-size:11px;font-weight:800}
-.category.active,.category:hover{background:var(--blue);color:white;border-color:var(--blue)}
-.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.product{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:white;transition:.25s}
-.product-img{height:190px;background:#edf2fa;position:relative;overflow:hidden}
-.product-img img{width:100%;height:100%;object-fit:cover}
-.product-tag{position:absolute;top:10px;left:10px;padding:7px 9px;border-radius:7px;background:#fffffff0;font-size:10px;font-weight:800;color:#254a89}
-.product-body{display:flex;flex:1;flex-direction:column;padding:17px}
-.product-cat{font-size:10px;font-weight:800;color:var(--blue);text-transform:uppercase}
-.product-body h3{font-size:16px;margin:8px 0}
-.product-body p{flex:1;color:var(--muted);font-size:12px}
-.product-actions{display:flex;gap:8px;flex-wrap:wrap}
-.product-actions .btn{flex:1}
-.note{margin-top:22px;padding:14px;border-radius:12px;background:#f7f9fc;color:var(--muted);font-size:11px}
-.empty{display:none;padding:30px;text-align:center;color:var(--muted)}
-.about-grid{display:grid;grid-template-columns:.95fr 1.05fr;align-items:center;gap:50px}
-.about-image{position:relative;min-height:350px;border-radius:25px;overflow:hidden;background:#e5edff}
-.about-image img{width:100%;height:350px;object-fit:cover}
-.about-caption{position:absolute;bottom:15px;left:15px;right:15px;padding:14px;border-radius:12px;color:white;background:#102349c7}
-.about-copy>p{color:var(--muted);font-size:13px}
-.points{display:grid;gap:14px;margin:22px 0}
-.point{display:flex;gap:11px}
-.point b{font-size:12px}
-.point p{margin:4px 0;color:var(--muted);font-size:11px}
-.check{display:grid;place-items:center;width:25px;height:25px;flex-shrink:0;border-radius:8px;color:#158457;background:#e5f8ee}
-.community{background:#f0f4fb}
-.contact-panel{display:grid;grid-template-columns:1fr .9fr;gap:35px;padding:35px;border:1px solid #dce6fa;border-radius:25px;background:#fff;box-shadow:var(--shadow)}
-.contact-panel>div>p{color:var(--muted);font-size:13px}
-.contact-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
-.contact-list{display:grid;gap:12px;align-content:center}
-.contact-row{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--border);border-radius:14px;background:white;cursor:pointer}
-.contact-row strong,.contact-row span{display:block}
-.contact-row strong{font-size:12px;margin-bottom:4px}
-.contact-row span{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
-.contact-row .contact-value{color:var(--blue);font-weight:700}
-.footer{margin-top:65px;padding:32px 0 20px;border-top:1px solid var(--border);background:#fff}
-.footer-top,.footer-bottom{display:flex;justify-content:space-between;gap:20px}
-.footer-brand{max-width:330px}
-.footer-brand p{color:var(--muted);font-size:11px}
-.footer-links{display:flex;flex-wrap:wrap;gap:15px}
-.footer-links a,.footer-bottom{font-size:11px;color:#758093}
-.footer-bottom{margin-top:22px;padding-top:17px;border-top:1px solid var(--border)}
-.whatsapp-float{position:fixed;z-index:90;right:18px;bottom:18px;display:grid;place-items:center;width:55px;height:55px;border:3px solid white;border-radius:50%;color:#fff;background:var(--green);box-shadow:0 8px 24px #159c6845;font-size:23px}
-.reveal{opacity:0;transform:translateY(15px);transition:opacity .6s,transform .6s}
-.reveal.visible{opacity:1;transform:none}
+  <style>
+    :root {
+      --ink: #14213d;
+      --muted: #64718a;
+      --blue: #315be8;
+      --line: rgba(46, 76, 145, .12);
+      --surface: rgba(255,255,255,.78);
+    }
 
-/* Üyelik formu */
-.member-section{background:linear-gradient(145deg,#f0f5ff,#fafaff 70%)}
-.member-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:30px;align-items:start}
-.member-intro,.member-form{border:1px solid var(--border);border-radius:22px;background:#fff;box-shadow:var(--shadow)}
-.member-intro{padding:28px}
-.member-logo{width:85px;height:85px;object-fit:contain;margin-bottom:20px}
-.member-intro h3{font-size:23px}
-.member-intro p,.member-intro li{font-size:12px;color:var(--muted);line-height:1.8}
-.member-intro ul{padding-left:18px}
-.member-form{display:grid;gap:8px;padding:25px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-field{display:grid;gap:7px;margin-bottom:7px}
-.form-field label,.form-label{font-size:12px;font-weight:800}
-.field{width:100%;min-height:45px;padding:11px 12px;border:1px solid #dfe5ee;border-radius:10px;outline:none;background:#fff;color:var(--text)}
-textarea.field{min-height:85px;resize:vertical}
-.field::placeholder{color:#a0a8b5}
-.referral-box{display:none;margin:8px 0;padding:16px;border:1px solid #dce6fa;border-radius:14px;background:#f7f9ff}
-.referral-box.visible{display:block}
-.referral-box h3{font-size:16px;margin:0 0 12px}
-.consent{display:flex;align-items:flex-start;gap:10px;margin:10px 0;color:var(--muted);font-size:11px;line-height:1.7}
-.consent input{margin-top:3px;flex-shrink:0}
-.form-message{display:none;padding:12px;border-radius:10px;background:#e7f8ef;color:#126b47;font-size:12px;line-height:1.7}
-.form-help{font-size:10px;color:var(--muted);line-height:1.7}
-#refSourceOther{display:none}
-@media(max-width:1050px){.nav-links{gap:10px}.nav-links a{font-size:10px}.hero-grid{gap:28px}.cards,.products{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:780px){
-.container{width:calc(100% - 32px)}.section{padding:60px 0}
-.nav{min-height:66px}.nav-actions>.btn{display:none}.menu-toggle{display:block}
-.nav-links{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;padding:10px 20px;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 15px 25px #192b4d12}
-.nav-links.open{display:flex}.nav-links a{padding:13px 0;border-bottom:1px solid #f0f2f6;font-size:13px}
-.hero{padding:52px 0}.hero-grid{grid-template-columns:1fr;gap:35px}.hero h1{font-size:clamp(40px,9vw,57px)}
-.hero-image{min-height:330px}.float-card.top{left:10px}.float-card.bottom{right:10px}
-.trust-grid{grid-template-columns:repeat(2,1fr);gap:20px 12px}
-.catalog-top{align-items:stretch;flex-direction:column}.search{width:100%}
-.about-grid{grid-template-columns:1fr;gap:28px}.about-image,.about-image img{height:290px;min-height:290px}
-.contact-panel{grid-template-columns:1fr;padding:25px}
-.member-layout{grid-template-columns:1fr}.footer-top{flex-direction:column}
-}
-@media(max-width:520px){
-.section{padding:52px 0}.hero h1{font-size:41px}.hero-buttons .btn{flex:1;padding:0 10px}
-.cards,.products{grid-template-columns:1fr}.product-img{height:220px}
-.form-grid{grid-template-columns:1fr;gap:0}.member-form,.member-intro{padding:19px}
-.footer-bottom{flex-direction:column}.whatsapp-float{width:51px;height:51px;right:13px;bottom:13px}
-}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
-</style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background:
+        radial-gradient(
+          ellipse at 12% 15%,
+          rgba(93,139,255,.13),
+          transparent 34%
+        ),
+        radial-gradient(
+          ellipse at 86% 20%,
+          rgba(163,117,255,.12),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #fbfcff 0%,
+          #f4f7ff 52%,
+          #fcfbff 100%
+        );
+      overflow-x: hidden;
+    }
+
+    .ambient {
+      position: fixed;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      border: 1px solid rgba(76,111,235,.10);
+      pointer-events: none;
+      z-index: 0;
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+
+    .ambient.one {
+      top: 14%;
+      right: -170px;
+    }
+
+    .ambient.two {
+      bottom: -210px;
+      left: -120px;
+      width: 430px;
+      height: 430px;
+      animation-delay: -5s;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate3d(0,-10px,0) scale(.98);
+      }
+      to {
+        transform: translate3d(-24px,18px,0) scale(1.05);
+      }
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      min-height: 94px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 43px;
+      height: 43px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      font-size: 14px;
+      letter-spacing: .16em;
+      font-weight: 800;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 4px;
+      letter-spacing: .04em;
+    }
+
+    .top-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: #52617c;
+      font-size: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.6);
+      border-radius: 999px;
+      padding: 10px 14px;
+      white-space: nowrap;
+    }
+
+    .top-label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #5276f2;
+      box-shadow: 0 0 0 4px rgba(82,118,242,.12);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 66px 0 54px;
+    }
+
+    .hero {
+      max-width: 790px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      margin-bottom: 23px;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: #9baef8;
+    }
+
+    h1 {
+      font-size: clamp(40px, 6.8vw, 72px);
+      line-height: 1.04;
+      letter-spacing: -.065em;
+      margin: 0;
+      font-weight: 760;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .lead {
+      max-width: 670px;
+      margin: 24px auto 0;
+      color: #5c6981;
+      font-size: clamp(15px, 1.8vw, 18px);
+      line-height: 1.8;
+    }
+
+    .status {
+      margin: 28px auto 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(49,91,232,.17);
+      color: #3452b5;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .status span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5276f2;
+    }
+
+    .soon {
+      font-size: 14px;
+      font-weight: 700;
+      margin: 17px 0 0;
+      color: #263b70;
+    }
+
+    .info-wrap {
+      margin: 52px auto 0;
+      width: 100%;
+      max-width: 930px;
+    }
+
+    .info-heading {
+      text-align: center;
+      margin: 0 0 19px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: #75819a;
+      font-weight: 800;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+    }
+
+    .info-card {
+      text-align: left;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      padding: 21px 21px 20px;
+      background: var(--surface);
+      box-shadow: 0 12px 38px rgba(35,58,120,.035);
+      backdrop-filter: blur(10px);
+    }
+
+    .card-number {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      color: var(--blue);
+    }
+
+    .info-card h2 {
+      font-size: 15px;
+      letter-spacing: -.02em;
+      margin: 13px 0 8px;
+    }
+
+    .info-card p {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .bottom-note {
+      max-width: 930px;
+      margin: 16px auto 0;
+      border-radius: 15px;
+      padding: 17px 20px;
+      border: 1px solid rgba(49,91,232,.12);
+      background: rgba(235,241,255,.58);
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .note-mark {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--blue);
+      background: #e2e9ff;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .bottom-note strong {
+      display: block;
+      font-size: 12px;
+      margin: 1px 0 5px;
+    }
+
+    .bottom-note p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    footer {
+      min-height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      border-top: 1px solid var(--line);
+      color: #7b879d;
+      font-size: 11px;
+    }
+
+    footer strong {
+      color: #53617b;
+      font-weight: 750;
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        width: min(100% - 28px, 540px);
+      }
+
+      header {
+        min-height: 78px;
+      }
+
+      .brand img {
+        width: 37px;
+        height: 37px;
+      }
+
+      .brand-name {
+        font-size: 12px;
+      }
+
+      .brand-sub {
+        font-size: 10px;
+      }
+
+      .top-label {
+        font-size: 10px;
+        padding: 8px 10px;
+      }
+
+      main {
+        padding: 48px 0 35px;
+      }
+
+      .eyebrow {
+        margin-bottom: 19px;
+        font-size: 10px;
+      }
+
+      .lead {
+        line-height: 1.75;
+        margin-top: 20px;
+      }
+
+      .info-wrap {
+        margin-top: 40px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .info-card {
+        padding: 18px;
+      }
+
+      .info-card h2 {
+        margin-top: 9px;
+      }
+
+      .bottom-note {
+        padding: 15px;
+      }
+
+      footer {
+        padding: 17px 0;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<div class="intro" id="intro" aria-label="Gündeşli Media açılıyor">
-  <img class="intro-logo" src="gundesli_logo.png" alt="Gündeşli Media logosu">
-</div>
+  <div class="ambient one" aria-hidden="true"></div>
+  <div class="ambient two" aria-hidden="true"></div>
 
-<header class="header">
-  <div class="container nav">
-    <a class="brand" href="#anasayfa">
-      <img src="gundesli_logo.png" alt="Gündeşli Media logosu">
-      <span class="brand-name">Gündeşli <span>Media</span></span>
-    </a>
-    <nav class="nav-links" id="navLinks">
-      <a href="#anasayfa">Ana Sayfa</a>
-      <a href="#projeler">Projeler</a>
-      <a href="#urunler">Ürünler</a>
-      <a href="#hakkimizda">Hakkımızda</a>
-      <a href="#topluluklar">Topluluklar</a>
-      <a href="#uye-kaydi">Üye Kaydı</a>
-      <a href="#iletisim">İletişim</a>
-    </nav>
-    <div class="nav-actions">
-      <a class="btn primary small" href="#uye-kaydi">Üye Kaydı ↗</a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false">☰</button>
-    </div>
-  </div>
-</header>
-
-<main>
-<section class="hero" id="anasayfa">
-  <div class="container hero-grid">
-    <div class="reveal">
-      <div class="eyebrow">B2B C2C Ticari Çözümler</div>
-      <h1>Fikirleri, insanları ve fırsatları <span class="gradient">bir araya getiriyoruz.</span></h1>
-      <p class="hero-description">Gündeşli Media; dijital toplulukları, ticari projeleri ve teknoloji çözümlerini bir araya getirmeyi hedefleyen bir dijital platform yapılanmasıdır.</p>
-      <div class="hero-buttons">
-        <a class="btn primary" href="#projeler">Projelerimizi Keşfet ↗</a>
-        <a class="btn secondary" href="#uye-kaydi">Üye Ol</a>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <img
+          src="gundesli_logo.png"
+          alt="Gündeşli Soft logosu"
+          onerror="this.style.display='none'"
+        >
+        <div>
+          <div class="brand-name">GÜNDEŞLİ SOFT</div>
+          <div class="brand-sub">İş yazılımları ve dijital çözümler</div>
+        </div>
       </div>
-      <div class="hero-note"><span>●</span> Dijital projeler, ticaret ve teknoloji odaklı yaklaşım.</div>
-    </div>
-    <div class="hero-image reveal">
-      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1100&q=85" alt="Elektronik devre ve teknoloji" fetchpriority="high">
-      <div class="hero-overlay"></div>
-      <div class="hero-caption"><span>GÜNDEŞLİ MEDIA</span><h3>Dijitalden gerçeğe.</h3><p>İş birliği, teknoloji ve ticari çözümler.</p></div>
-      <div class="float-card top"><div class="icon">⌘</div><div><strong>Teknoloji Ürünleri</strong><small>Bilgisayar ve güvenlik</small></div></div>
-      <div class="float-card bottom"><div class="icon">✓</div><div><strong>Çözüm Odaklı</strong><small>İhtiyacınıza uygun seçenekler</small></div></div>
-    </div>
-  </div>
-</section>
 
-<div class="trust">
-  <div class="container trust-grid">
-    <div class="trust-item"><div class="icon">▣</div><div><strong>Bilgisayar Sistemleri</strong><small>Donanım ve aksesuarlar</small></div></div>
-    <div class="trust-item"><div class="icon">⌁</div><div><strong>Ağ ve Bağlantı</strong><small>Bağlantı çözümleri</small></div></div>
-    <div class="trust-item"><div class="icon">♢</div><div><strong>Güvenlik Sistemleri</strong><small>Kamera ve alarm</small></div></div>
-    <div class="trust-item"><div class="icon">◎</div><div><strong>Dijital Topluluklar</strong><small>Yerel ve dijital projeler</small></div></div>
-  </div>
-</div>
+      <div class="top-label">Yeni platform hazırlanıyor</div>
+    </header>
 
-<section class="section" id="projeler">
-  <div class="container">
-    <div class="heading reveal">
-      <div class="eyebrow">Projelerimiz</div>
-      <h2>Dijital dünyada <span class="gradient">bağlantı kuruyoruz.</span></h2>
-      <p>İnsanları, fırsatları ve bilgiyi bir araya getirmeyi amaçlayan proje ve fikirlerimizi keşfedin.</p>
-    </div>
-    <div class="cards">
-      <article class="card reveal"><div class="icon">▤</div><h3>Ticari Çözümler</h3><p>İşletmelerin ve bireylerin ticari ihtiyaçlarını dijital kanallarla buluşturmaya yönelik çalışmalar.</p><a class="text-link" href="#iletisim">Bilgi al →</a></article>
-      <article class="card reveal"><div class="icon">◇</div><h3>Maraş Durum & Trafik</h3><p>Kahramanmaraş gündemi, trafik durumu ve yerel bilgilendirmeler için dijital paylaşım alanı.</p><a class="text-link" href="https://www.instagram.com/melihgundsli/" target="_blank" rel="noopener noreferrer">Instagram'da incele ↗</a></article>
-      <article class="card reveal"><div class="icon">▣</div><h3>İş & Staj</h3><p>İş arayanları, staj fırsatlarını ve kariyer olanaklarını buluşturmayı hedefleyen proje fikri.</p><a class="text-link" href="#iletisim">Proje hakkında →</a></article>
-      <article class="card reveal"><div class="icon">✉</div><h3>Teklifim Gelsin</h3><p>İhtiyaçları ve teklifleri bir araya getirmeye yönelik dijital fikir ve proje çalışması.</p><a class="text-link" href="#iletisim">Proje hakkında →</a></article>
-      <article class="card reveal"><div class="icon">◷</div><h3>Dijital Yolculuk</h3><p>Dijital dünyaya dair bilgi, keşif ve yeni deneyimleri buluşturmayı amaçlayan platform fikri.</p><a class="text-link" href="#iletisim">Proje hakkında →</a></article>
-      <article class="card reveal"><div class="icon">⌂</div><h3>Usta Bul</h3><p>İhtiyaca uygun usta ve hizmet taleplerinin daha kolay iletilmesine yönelik hizmet projesi.</p><a class="text-link" href="#iletisim">Bilgi al →</a></article>
-    </div>
-  </div>
-</section>
+    <main>
+      <section class="hero" aria-labelledby="main-title">
+        <div class="eyebrow">Yeni nesil işletme yönetimi</div>
 
-<section class="section catalog" id="urunler">
-  <div class="container">
-    <div class="catalog-top">
-      <div class="heading reveal"><div class="eyebrow">Ürün kataloğu</div><h2>Doğru teknoloji, <span class="gradient">doğru çözüm.</span></h2><p>Ürünleri kategorilere göre inceleyin. Güncel fiyat ve stok bilgisi için WhatsApp üzerinden bilgi alın.</p></div>
-      <input class="search" type="search" id="productSearch" placeholder="Ürün ara..." aria-label="Ürün ara">
-    </div>
-    <div class="categories" id="categories">
-      <button class="category active" data-category="all">Tüm Ürünler</button>
-      <button class="category" data-category="kamera">Güvenlik Kameraları</button>
-      <button class="category" data-category="bilgisayar">Bilgisayarlar</button>
-      <button class="category" data-category="alarm">Alarm Sistemleri</button>
-      <button class="category" data-category="ag">Ağ ve Aksesuarlar</button>
-    </div>
-    <div class="products" id="products"></div>
-    <div class="empty" id="emptyProducts">Aramanızla eşleşen ürün bulunamadı.</div>
-    <div class="note"><strong>Fiyatlandırma:</strong> Teyit edilmemiş fiyat gösterilmez. Belirli bir modelin fiyatı, stok durumu ve teknik özellikleri satış öncesinde doğrulanır.</div>
-  </div>
-</section>
+        <h1 id="main-title">
+          İşletmen için <span>360° kontrol.</span>
+        </h1>
 
-<section class="section" id="hakkimizda">
-  <div class="container about-grid">
-    <div class="about-image reveal">
-      <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85" alt="Modern çalışma alanı" loading="lazy">
-      <div class="about-caption">Gündeşli Media · Dijital projeler ve teknoloji</div>
-    </div>
-    <div class="about-copy reveal">
-      <div class="eyebrow">Hakkımızda</div>
-      <h2>Bugünün ihtiyaçlarına, <span class="gradient">yarının bakışıyla.</span></h2>
-      <p>Gündeşli Media; dijital toplulukları, ticari projeleri ve teknoloji çözümlerini bir araya getirmeyi hedefleyen dijital bir yapılanmadır. Amacımız, insanların bilgiye ve çözümlere daha kolay ulaşmasına katkı sağlamaktır.</p>
-      <div class="points">
-        <div class="point"><span class="check">✓</span><div><b>İhtiyaç odaklı yaklaşım</b><p>İhtiyaçları anlamaya ve uygun seçenekleri değerlendirmeye önem veriyoruz.</p></div></div>
-        <div class="point"><span class="check">✓</span><div><b>Farklı alanları bir araya getirme</b><p>Dijital topluluklar, ticari projeler ve teknoloji alanlarında çalışmalar yürütüyoruz.</p></div></div>
-        <div class="point"><span class="check">✓</span><div><b>Açık iletişim</b><p>Ürün ve projeler hakkında doğrudan bilgi alabileceğiniz kanallar sunuyoruz.</p></div></div>
-      </div>
-      <a class="btn primary" href="#iletisim">İletişime Geç ↗</a>
-    </div>
-  </div>
-</section>
+        <p class="lead">
+          Gündeşli Soft tarafından geliştirilen Ofis360; işletme
+          sahiplerinin işlerini daha kolay, düzenli ve kişiselleştirilmiş
+          şekilde yönetebilmesi için hazırlanan yeni nesil bir işletme
+          yönetim platformudur.
+        </p>
 
-<section class="section community" id="topluluklar">
-  <div class="container">
-    <div class="heading reveal"><div class="eyebrow">Topluluklarımız</div><h2>Birlikte daha <span class="gradient">güçlüyüz.</span></h2><p>Projelerimizi takip edin, duyuruları keşfedin ve topluluklara katılın.</p></div>
-    <div class="cards">
-      <article class="card reveal"><div class="icon">◉</div><h3>WhatsApp Topluluğu</h3><p>Topluluk bağlantımız üzerinden paylaşımları ve duyuruları takip edin.</p><a class="btn secondary small" href="https://chat.whatsapp.com/DBNYcyDrr5oCDfoKRzMrsF" target="_blank" rel="noopener noreferrer">Topluluğa Katıl ↗</a></article>
-      <article class="card reveal"><div class="icon">◎</div><h3>Instagram</h3><p>Projelerimizden ve paylaşımlarımızdan haberdar olmak için hesabımızı ziyaret edin.</p><a class="btn secondary small" href="https://www.instagram.com/melihgundsli/" target="_blank" rel="noopener noreferrer">Instagram'ı Aç ↗</a></article>
-      <article class="card reveal"><div class="icon">✉</div><h3>Doğrudan İletişim</h3><p>Ürün, iş birliği ve proje sorularınız için WhatsApp üzerinden yazın.</p><a class="btn secondary small" href="https://wa.me/905064676635" target="_blank" rel="noopener noreferrer">Mesaj Gönder ↗</a></article>
-    </div>
-  </div>
-</section>
+        <div class="status">
+          <span></span>
+          Geliştirme aşamasında
+        </div>
 
-<!-- ÜYE KAYDI -->
-<section class="section member-section" id="uye-kaydi">
-  <div class="container">
-    <div class="heading reveal">
-      <div class="eyebrow">Üyelik başvurusu</div>
-      <h2>Gündeşli Media'ya <span class="gradient">katıl.</span></h2>
-      <p>Üyelik bilgilerini eksiksiz doldur. Bir üyenin referansıyla katılıyorsan referans bilgilerini de gir.</p>
-    </div>
+        <p class="soon">Ofis360 çok yakında sizlerle.</p>
+      </section>
 
-    <div class="member-layout">
-      <aside class="member-intro reveal">
-        <img class="member-logo" src="gundesli_logo.png" alt="Gündeşli Media logosu">
-        <h3>Üye kayıt formu</h3>
-        <p>Üyelik başvurularında kimlik ve iletişim bilgilerinin doğru girilmesi önemlidir.</p>
-        <ul>
-          <li>Başvuru sahibinin iletişim bilgileri alınır.</li>
-          <li>Üyeye kimin referans olduğu sorulur.</li>
-          <li>Referans bilgileri, referansla katılım seçildiğinde zorunlu olur.</li>
-          <li>Başvuru mesajı WhatsApp üzerinden gönderilir.</li>
-        </ul>
-        <p><strong>Bilgilendirme:</strong> Bu form kendi başına üyelik hesabı oluşturmaz. Başvuruların kalıcı olarak kaydedilmesi ve onay durumunun takip edilmesi için sunucu/veritabanı gerekir.</p>
-      </aside>
+      <section class="info-wrap" aria-label="Ofis360 hakkında">
+        <p class="info-heading">Ofis360 neler sunmayı hedefliyor?</p>
 
-      <form class="member-form reveal" id="memberForm">
-        <div class="form-grid">
-          <div class="form-field">
-            <label for="firstName">Adın *</label>
-            <input class="field" id="firstName" name="firstName" autocomplete="given-name" required maxlength="60" placeholder="Adın">
-          </div>
-          <div class="form-field">
-            <label for="lastName">Soyadın *</label>
-            <input class="field" id="lastName" name="lastName" autocomplete="family-name" required maxlength="60" placeholder="Soyadın">
+        <div class="info-grid">
+          <article class="info-card">
+            <div class="card-number">01 / TEK MERKEZ</div>
+            <h2>İş süreçlerini bir arada yönetin</h2>
+            <p>
+              Müşteri, ürün ve stok, sipariş, teknik servis ve günlük
+              operasyon gibi iş süreçlerini; işletmenizin ihtiyaçlarına
+              göre tek bir merkezde takip edebilmeniz hedefleniyor.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="card-number">02 / İŞLETMEYE ÖZEL</div>
+            <h2>Kendi çalışma düzeninize uyarlayın</h2>
+            <p>
+              Her işletmenin çalışma şekli aynı değildir. Ofis360'ın
+              farklı iş alanlarına ve kullanıcı rollerine uyarlanabilen
+              esnek bir yapı sunması planlanıyor.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="card-number">03 / AKILLI DESTEK</div>
+            <h2>Veriden anlamlı önerilere</h2>
+            <p>
+              Gelecek sürümlerde yapay zekâ destekli analizlerle iş
+              akışlarını anlamaya, dikkat edilmesi gereken noktaları
+              belirlemeye ve gelişim fırsatlarını görmeye yardımcı
+              olması hedefleniyor.
+            </p>
+          </article>
+        </div>
+
+        <div class="bottom-note">
+          <div class="note-mark">i</div>
+
+          <div>
+            <strong>Geliştirme süreci hakkında</strong>
+            <p>
+              Ofis360 şu anda geliştirme aşamasındadır; burada anlatılan
+              özellikler hedeflenen ürün kapsamını ifade eder ve henüz
+              kullanıma sunulmuş özellikler olarak değerlendirilmemelidir.
+              Özellikler, arayüz ve yayın takvimi geliştirme sürecinde
+              değişebilir. Resmî duyurular bu sayfada paylaşılacaktır.
+            </p>
           </div>
         </div>
+      </section>
+    </main>
 
-        <div class="form-field">
-          <label for="memberPhone">Telefon numaran *</label>
-          <input class="field" id="memberPhone" name="phone" type="tel" autocomplete="tel" required maxlength="20" placeholder="05XX XXX XX XX">
-        </div>
-
-        <div class="form-field">
-          <label for="whatsappName">WhatsApp'ta kullandığın isim *</label>
-          <input class="field" id="whatsappName" name="whatsappName" required maxlength="80" placeholder="WhatsApp profil adın">
-        </div>
-
-        <div class="form-field">
-          <label for="memberSource">Gündeşli Media'ya nasıl katılıyorsun? *</label>
-          <select class="field" id="memberSource" name="source" required>
-            <option value="">Seçim yap</option>
-            <option value="Kendi başvurum">Kendi başvurumla</option>
-            <option value="Referans aracılığıyla">Birinin referansıyla</option>
-          </select>
-        </div>
-
-        <div class="referral-box" id="referralFields">
-          <h3>Referans bilgileri</h3>
-          <div class="form-field">
-            <label for="refName">Referansın adı soyadı *</label>
-            <input class="field" id="refName" name="refName" maxlength="120" placeholder="Ad soyad">
-          </div>
-          <div class="form-field">
-            <label for="refPhone">Referansın telefon numarası *</label>
-            <input class="field" id="refPhone" name="refPhone" type="tel" maxlength="20" placeholder="05XX XXX XX XX">
-          </div>
-          <div class="form-field">
-            <label for="refWhatsapp">Referansın WhatsApp'ta kullandığı isim *</label>
-            <input class="field" id="refWhatsapp" name="refWhatsapp" maxlength="80" placeholder="WhatsApp profil adı">
-          </div>
-        </div>
-
-        <div class="form-field">
-          <label for="memberNote">Ek bilgi (isteğe bağlı)</label>
-          <textarea class="field" id="memberNote" name="note" maxlength="500" placeholder="Eklemek istediğin bir bilgi varsa yazabilirsin."></textarea>
-        </div>
-
-        <label class="consent">
-          <input type="checkbox" id="memberConsent" name="consent" required>
-          <span>Başvuru bilgilerimin üyelik başvurusunun değerlendirilmesi amacıyla WhatsApp üzerinden iletilmesini kabul ediyorum. Başkasına ait referans bilgilerini paylaşmaya yetkim olduğunu beyan ediyorum. *</span>
-        </label>
-
-        <div class="form-message" id="memberMessage" role="status"></div>
-
-        <button class="btn whatsapp-btn" type="submit">Başvuruyu WhatsApp'tan Gönder ↗</button>
-        <p class="form-help">Gönder düğmesi WhatsApp'ı açar. Mesajı kontrol edip WhatsApp içinde ayrıca göndermen gerekir. Bu sayfa başvuruyu kendi sunucusunda saklamaz.</p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="iletisim">
-  <div class="container">
-    <div class="contact-panel reveal">
+    <footer>
       <div>
-        <div class="eyebrow">İletişim</div>
-        <h2>Bir sorunuz mu var? <span class="gradient">Konuşalım.</span></h2>
-        <p>Ürünler, fiyat teklifleri, güvenlik sistemleri, iş birlikleri veya projelerimiz hakkında bizimle iletişime geçebilirsiniz.</p>
-        <div class="contact-actions">
-          <a class="btn whatsapp-btn" href="https://wa.me/905064676635" target="_blank" rel="noopener noreferrer">WhatsApp'tan Yaz ↗</a>
-          <a class="btn secondary" href="https://www.instagram.com/melihgundsli/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-        </div>
+        <strong>GÜNDEŞLİ SOFT</strong>
+        · Ofis360 ürün geliştirme projesi
       </div>
-      <div class="contact-list">
-        <a class="contact-row" href="https://wa.me/905064676635" target="_blank" rel="noopener noreferrer" data-contact="whatsapp">
-          <div class="icon">◉</div><div><strong>WhatsApp</strong><span class="contact-value">Görüntülemek için dokun</span></div>
-        </a>
-        <a class="contact-row" href="https://www.instagram.com/melihgundsli/" target="_blank" rel="noopener noreferrer" data-contact="instagram">
-          <div class="icon">◎</div><div><strong>Instagram</strong><span class="contact-value">Görüntülemek için dokun</span></div>
-        </a>
+
+      <div>
+        © <span id="year">2026</span> Gündeşli Soft. Tüm hakları saklıdır.
       </div>
-    </div>
+    </footer>
   </div>
-</section>
-</main>
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a class="brand" href="#anasayfa"><img src="gundesli_logo.png" alt="Gündeşli Media logosu"><span class="brand-name">Gündeşli <span>Media</span></span></a>
-        <p>B2B C2C ticari çözümler, dijital projeler ve teknoloji ürünleri.</p>
-      </div>
-      <nav class="footer-links">
-        <a href="#anasayfa">Ana Sayfa</a><a href="#projeler">Projeler</a><a href="#urunler">Ürünler</a><a href="#uye-kaydi">Üye Kaydı</a><a href="#iletisim">İletişim</a>
-      </nav>
-    </div>
-    <div class="footer-bottom"><span>© <span id="year"></span> Gündeşli Media. Tüm hakları saklıdır.</span><span>Ürün fiyatı ve stok bilgileri satış öncesinde teyit edilir.</span></div>
-  </div>
-</footer>
-
-<a class="whatsapp-float" href="https://wa.me/905064676635" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile iletişim">◉</a>
-
-<script>
-"use strict";
-
-const WHATSAPP_NUMBER = "905064676635";
-
-const PRODUCTS = [
- {name:"IP Güvenlik Kameraları",category:"kamera",label:"Güvenlik Kamerası",tag:"Kamera Sistemleri",description:"Ağ üzerinden görüntü aktarımı sağlayan kamera seçenekleri. Kayıt cihazı ve altyapı uyumluluğunu teyit edin.",image:"https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80"},
- {name:"AHD Kamera Sistemleri",category:"kamera",label:"Güvenlik Kamerası",tag:"Kablolu Sistemler",description:"Mevcut kablolu kamera altyapıları ve yeni kurulumlar için değerlendirilebilecek seçenekler.",image:"https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=800&q=80"},
- {name:"DVR / NVR Kayıt Cihazları",category:"kamera",label:"Kayıt Cihazı",tag:"Kayıt ve İzleme",description:"Kamera sayısı, çözünürlük ve depolama ihtiyacınıza uygun kayıt cihazları hakkında bilgi alın.",image:"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"},
- {name:"Masaüstü Bilgisayarlar",category:"bilgisayar",label:"Bilgisayar",tag:"Masaüstü",description:"Ofis, günlük kullanım ve farklı iş yükleri için bilgisayar seçenekleri.",image:"https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=800&q=80"},
- {name:"Dizüstü Bilgisayarlar",category:"bilgisayar",label:"Bilgisayar",tag:"Dizüstü",description:"Taşınabilirlik, performans ve bütçenize göre dizüstü bilgisayar seçenekleri.",image:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80"},
- {name:"Bilgisayar Donanımları",category:"bilgisayar",label:"Bilgisayar Donanımı",tag:"Donanım",description:"İşlemci, bellek, depolama ve diğer bileşenler için bilgi alın.",image:"https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=800&q=80"},
- {name:"Hırsız Alarm Sistemleri",category:"alarm",label:"Alarm Sistemi",tag:"Güvenlik",description:"Ev ve iş yeri için alarm paneli, algılayıcı ve siren seçenekleri.",image:"https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80"},
- {name:"Hareket ve Kapı Sensörleri",category:"alarm",label:"Alarm Aksesuarı",tag:"Sensörler",description:"Kurulacak sistemle uyumlu hareket, kapı ve pencere sensörleri hakkında bilgi alın.",image:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80"},
- {name:"Router ve Ağ Ürünleri",category:"ag",label:"Ağ Teknolojileri",tag:"Ağ Sistemleri",description:"İnternet erişimi, kablosuz bağlantı ve yerel ağ ihtiyaçlarına yönelik ürünler.",image:"https://images.unsplash.com/photo-1606904825846-647eb07f5be2?auto=format&fit=crop&w=800&q=80"},
- {name:"Kablolama ve Bağlantı Aksesuarları",category:"ag",label:"Aksesuar",tag:"Kurulum",description:"Kamera, bilgisayar ve ağ kurulumlarında kullanılabilecek bağlantı ekipmanları.",image:"https://images.unsplash.com/photo-1558618047-f4b511d8e8b3?auto=format&fit=crop&w=800&q=80"}
-];
-
-const grid = document.getElementById("products");
-const search = document.getElementById("productSearch");
-const empty = document.getElementById("emptyProducts");
-let currentCategory = "all";
-
-function esc(value){
- return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
-function wa(text){
- return "https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text);
-}
-function renderProducts(){
- const term = search.value.trim().toLocaleLowerCase("tr-TR");
- const filtered = PRODUCTS.filter(p=>
-  (currentCategory==="all"||p.category===currentCategory) &&
-  (p.name+" "+p.label+" "+p.description+" "+p.tag).toLocaleLowerCase("tr-TR").includes(term)
- );
- grid.innerHTML=filtered.map(p=>`
- <article class="product">
-  <div class="product-img">
-   <img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x500/eaf1ff/2463eb?text=Gundesli+Media'">
-   <span class="product-tag">${esc(p.tag)}</span>
-  </div>
-  <div class="product-body">
-   <div class="product-cat">${esc(p.label)}</div>
-   <h3>${esc(p.name)}</h3>
-   <p>${esc(p.description)}</p>
-   <div class="product-actions">
-    <a class="btn whatsapp-btn small" href="${wa("Merhaba Gündeşli Media, "+p.name+" hakkında fiyat, stok ve teknik özellik bilgisi almak istiyorum.")}" target="_blank" rel="noopener noreferrer">Satın Al ↗</a>
-    <a class="btn secondary small" href="${wa("Merhaba Gündeşli Media, "+p.name+" hakkında bilgi rica ediyorum.")}" target="_blank" rel="noopener noreferrer">Bilgi Al</a>
-   </div>
-  </div>
- </article>`).join("");
- empty.style.display=filtered.length?"none":"block";
-}
-document.querySelectorAll(".category").forEach(button=>{
- button.addEventListener("click",()=>{
-  currentCategory=button.dataset.category;
-  document.querySelectorAll(".category").forEach(b=>b.classList.toggle("active",b===button));
-  renderProducts();
- });
-});
-search.addEventListener("input",renderProducts);
-
-/* Mobil menü */
-const menuToggle=document.getElementById("menuToggle");
-const navLinks=document.getElementById("navLinks");
-menuToggle.addEventListener("click",()=>{
- const open=navLinks.classList.toggle("open");
- menuToggle.setAttribute("aria-expanded",String(open));
- menuToggle.textContent=open?"×":"☰";
-});
-navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
- navLinks.classList.remove("open");
- menuToggle.setAttribute("aria-expanded","false");
- menuToggle.textContent="☰";
-}));
-
-/* Animasyonlar */
-const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-if("IntersectionObserver" in window&&!reduceMotion){
- const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-   if(entry.isIntersecting){entry.target.classList.add("visible");observer.unobserve(entry.target);}
-  });
- },{threshold:.1});
- document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
-}else{
- document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
-}
-document.getElementById("year").textContent=new Date().getFullYear();
-
-function finishIntro(){
- document.getElementById("intro").classList.add("done");
- document.body.classList.remove("locked");
-}
-document.body.classList.add("locked");
-if(reduceMotion)finishIntro();
-else window.setTimeout(finishIntro,2200);
-
-/* İletişim bilgisi: ilk dokunuş gösterir, ikinci dokunuş bağlantıyı açar */
-document.querySelectorAll("[data-contact]").forEach(row=>{
- const value=row.querySelector(".contact-value");
- const original=row.dataset.contact==="whatsapp"?"0506 467 66 35":"@melihgundsli";
- row.addEventListener("click",event=>{
-  if(row.dataset.revealed!=="true"){
-   event.preventDefault();
-   value.textContent=original;
-   row.dataset.revealed="true";
-   row.setAttribute("aria-label",original+". Bağlantıyı açmak için tekrar dokunun.");
-  }
- });
-});
-
-/* Referans alanlarını seçime göre göster ve zorunlu yap */
-const sourceSelect=document.getElementById("memberSource");
-const referralFields=document.getElementById("referralFields");
-const refInputs=[
- document.getElementById("refName"),
- document.getElementById("refPhone"),
- document.getElementById("refWhatsapp")
-];
-
-function updateReferralFields(){
- const required=sourceSelect.value==="Referans aracılığıyla";
- referralFields.classList.toggle("visible",required);
- refInputs.forEach(input=>{
-  input.required=required;
-  if(!required)input.value="";
- });
-}
-sourceSelect.addEventListener("change",updateReferralFields);
-updateReferralFields();
-
-/* Üyelik başvurusu: form verilerini WhatsApp mesajına dönüştürür */
-document.getElementById("memberForm").addEventListener("submit",event=>{
- event.preventDefault();
- const form=event.currentTarget;
- if(!form.reportValidity())return;
-
- const data=new FormData(form);
- const source=data.get("source");
- const lines=[
-  "GÜNDEŞLİ MEDIA — ÜYELİK BAŞVURUSU",
-  "",
-  "Ad Soyad: "+data.get("firstName")+" "+data.get("lastName"),
-  "Telefon: "+data.get("phone"),
-  "WhatsApp'ta kullandığı isim: "+data.get("whatsappName"),
-  "Başvuru kaynağı: "+source
- ];
-
- if(source==="Referans aracılığıyla"){
-  lines.push(
-   "",
-   "REFERANS BİLGİLERİ",
-   "Ad Soyad: "+data.get("refName"),
-   "Telefon: "+data.get("refPhone"),
-   "WhatsApp'ta kullandığı isim: "+data.get("refWhatsapp")
-  );
- }
-
- const note=String(data.get("note")||"").trim();
- if(note)lines.push("","Ek bilgi: "+note);
-
- lines.push("","Başvuru durumu: İncelenmeyi bekliyor");
- const message=lines.join("\n");
- const messageBox=document.getElementById("memberMessage");
- messageBox.textContent="WhatsApp açılıyor. Bilgileri kontrol edip mesajı WhatsApp içinde göndererek başvurunu iletebilirsin.";
- messageBox.style.display="block";
-
- const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message);
- window.open(url,"_blank","noopener,noreferrer");
-});
-</script>
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
 </body>
 </html>
