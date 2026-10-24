@@ -3,536 +3,2315 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f7f9ff">
-  <meta name="description" content="Gündeşli Soft tarafından geliştirilen Ofis360; işletme süreçlerini tek merkezden yönetmeyi hedefleyen yeni nesil işletme yönetim platformudur. Çok yakında.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171714">
+  <meta name="description" content="Gündeşli Soft Ofis360. İşletme yönetimi, teknik servis, stok ve operasyon süreçleri için geliştirilen yeni nesil yönetim platformunu keşfedin.">
+  <meta property="og:title" content="Ofis360 — İşletmen için 360° kontrol">
+  <meta property="og:description" content="Gündeşli Soft tarafından geliştirilen Ofis360 ürününü keşfedin.">
   <title>Ofis360 — İşletmen için 360° kontrol | Gündeşli Soft</title>
 
   <style>
     :root {
-      --ink: #14213d;
-      --muted: #64718a;
-      --blue: #315be8;
-      --line: rgba(46, 76, 145, .12);
-      --surface: rgba(255,255,255,.78);
+      --ink: #171714;
+      --ink-soft: #22221e;
+      --ink-light: #2d2c26;
+      --paper: #f4f1e9;
+      --paper-light: #fffdf8;
+      --gold: #d5bb87;
+      --gold-light: #eddbb2;
+      --gold-dark: #9d8250;
+      --muted: #77746b;
+      --line: rgba(36,34,28,.13);
+      --white: #fffdf8;
+      --green: #6d8b70;
+      --radius: 22px;
+      --page-width: 1180px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html {
-      min-height: 100%;
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
     }
 
     body {
       margin: 0;
-      min-height: 100vh;
+      background: var(--paper);
       color: var(--ink);
       font-family: Inter, -apple-system, BlinkMacSystemFont,
         "Segoe UI", sans-serif;
-      background:
-        radial-gradient(
-          ellipse at 12% 15%,
-          rgba(93,139,255,.13),
-          transparent 34%
-        ),
-        radial-gradient(
-          ellipse at 86% 20%,
-          rgba(163,117,255,.12),
-          transparent 30%
-        ),
-        linear-gradient(
-          135deg,
-          #fbfcff 0%,
-          #f4f7ff 52%,
-          #fcfbff 100%
-        );
-      overflow-x: hidden;
+      letter-spacing: -.02em;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .ambient {
+    body.intro-active { overflow: hidden; }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+
+    a:focus-visible, button:focus-visible,
+    input:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--gold-dark);
+      outline-offset: 4px;
+    }
+
+    ::selection {
+      color: var(--ink);
+      background: var(--gold-light);
+    }
+
+    .container {
+      width: min(var(--page-width), calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .section { padding: 100px 0; }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold-dark);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .17em;
+    }
+
+    .section-kicker::before {
+      content: "";
+      width: 25px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin: 17px 0;
+      font-size: clamp(32px, 5vw, 55px);
+      line-height: 1.08;
+      letter-spacing: -.06em;
+      font-weight: 650;
+    }
+
+    .section-description {
+      max-width: 690px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .25s, background .25s, border-color .25s;
+    }
+
+    .button:hover { transform: translateY(-2px); }
+
+    .button-gold {
+      color: var(--ink);
+      background: var(--gold);
+    }
+
+    .button-gold:hover { background: var(--gold-light); }
+
+    .button-outline {
+      color: var(--white);
+      border-color: rgba(255,255,255,.22);
+      background: rgba(255,255,255,.04);
+    }
+
+    .button-outline:hover {
+      border-color: var(--gold);
+      background: rgba(213,187,135,.08);
+    }
+
+    .button-dark {
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    .button-dark:hover { background: #34332c; }
+
+    .arrow { font-size: 17px; line-height: 1; }
+
+    /* Sinematik açılış */
+
+    .intro {
       position: fixed;
-      width: 340px;
-      height: 340px;
-      border-radius: 50%;
-      border: 1px solid rgba(76,111,235,.10);
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        radial-gradient(ellipse at 50% 48%, rgba(213,187,135,.12), transparent 36%),
+        #11110f;
+      transition: opacity .8s ease, visibility .8s ease;
+    }
+
+    .intro.finished {
+      opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      z-index: 0;
-      animation: drift 14s ease-in-out infinite alternate;
     }
 
-    .ambient.one {
-      top: 14%;
-      right: -170px;
+    .intro::before, .intro::after {
+      content: "";
+      position: absolute;
+      width: min(80vw, 760px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(213,187,135,.09);
+      border-radius: 50%;
+      animation: orbit 9s linear infinite;
     }
 
-    .ambient.two {
-      bottom: -210px;
-      left: -120px;
-      width: 430px;
-      height: 430px;
-      animation-delay: -5s;
+    .intro::after {
+      width: min(62vw, 560px);
+      animation-direction: reverse;
+      animation-duration: 13s;
     }
 
-    @keyframes drift {
-      from {
-        transform: translate3d(0,-10px,0) scale(.98);
-      }
-      to {
-        transform: translate3d(-24px,18px,0) scale(1.05);
-      }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+
+    .intro-skip {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      z-index: 5;
+      padding: 10px 14px;
+      color: rgba(255,255,255,.72);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 7px;
+      background: transparent;
+      font-size: 11px;
+      letter-spacing: .08em;
     }
 
-    .page {
+    .intro-center {
       position: relative;
-      z-index: 1;
-      width: min(1080px, calc(100% - 40px));
-      margin: 0 auto;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      z-index: 2;
+      width: min(900px, 94vw);
+      min-height: 350px;
+      display: grid;
+      place-items: center;
+      text-align: center;
     }
 
-    header {
-      min-height: 94px;
+    .intro-brand {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      animation: brand-appear 1s .25s forwards;
+    }
+
+    .intro-brand img {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      margin-bottom: 17px;
+      filter: drop-shadow(0 0 18px rgba(213,187,135,.2));
+    }
+
+    .intro-brand-line {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      font-size: clamp(23px, 5vw, 45px);
+      font-weight: 650;
+      letter-spacing: -.06em;
+    }
+
+    .intro-media {
+      color: var(--gold);
+      display: inline-block;
+      animation: media-slide 1.05s 1.2s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    @keyframes brand-appear {
+      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(12px); }
+    }
+
+    @keyframes media-slide {
+      0% { transform: translateX(0) scale(1); opacity: 1; }
+      65% { transform: translateX(-90px) scale(.8); opacity: .9; }
+      100% { transform: translateX(-180px) scale(.2); opacity: 0; }
+    }
+
+    .intro-flash {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      animation: flash .85s 2.25s ease-out forwards;
+    }
+
+    @keyframes flash {
+      0% { opacity: 0; transform: scale(.2); }
+      15% { opacity: .95; transform: scale(4); }
+      35% { opacity: .6; transform: scale(18); }
+      100% { opacity: 0; transform: scale(42); }
+    }
+
+    .intro-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--gold-light);
+      box-shadow: 0 0 12px var(--gold);
+      opacity: 0;
+      animation: particle-fly 1.2s 2.3s ease-out forwards;
+      --dx: 120px;
+      --dy: -100px;
+    }
+
+    @keyframes particle-fly {
+      0% { opacity: 0; transform: translate(0,0) scale(.2); }
+      20% { opacity: 1; }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx),var(--dy)) scale(0);
+      }
+    }
+
+    .repair-scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: repair-show .6s 3.1s forwards;
+    }
+
+    @keyframes repair-show { to { opacity: 1; } }
+
+    .repair-logo {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      position: absolute;
+      left: calc(50% - 210px);
+      opacity: .95;
+    }
+
+    .repair-word {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      font-size: clamp(27px, 6vw, 55px);
+      font-weight: 700;
+      letter-spacing: -.065em;
+      white-space: nowrap;
+    }
+
+    .repair-letter {
+      display: inline-block;
+      opacity: 0;
+      transform: translate(var(--from-x), var(--from-y)) rotate(var(--rotate));
+      animation: letter-repair .7s var(--delay) cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    @keyframes letter-repair {
+      60% { transform: translate(0,-7px) rotate(0); }
+      100% { opacity: 1; transform: translate(0,0) rotate(0); }
+    }
+
+    .repair-soft {
+      display: inline-block;
+      color: var(--gold);
+      margin-left: 12px;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: soft-appear .65s 4.5s forwards;
+    }
+
+    @keyframes soft-appear {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .workers {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .worker {
+      position: absolute;
+      left: 50%;
+      top: calc(50% + 48px);
+      width: 27px;
+      height: 38px;
+      opacity: 0;
+      transform: translate(-50%, 24px);
+      animation: worker-arrive .6s var(--arrive) forwards,
+                 worker-work .45s 3.8s ease-in-out infinite alternate;
+    }
+
+    .worker:nth-child(1) { --arrive: 3.3s; margin-left: -82px; }
+    .worker:nth-child(2) { --arrive: 3.45s; margin-left: 0; }
+    .worker:nth-child(3) { --arrive: 3.6s; margin-left: 82px; }
+
+    @keyframes worker-arrive {
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    @keyframes worker-work {
+      from { translate: 0 0; }
+      to { translate: 0 -5px; }
+    }
+
+    .worker-head {
+      position: absolute;
+      left: 5px;
+      top: 0;
+      width: 17px;
+      height: 16px;
+      border: 1px solid var(--gold-light);
+      border-radius: 6px 6px 4px 4px;
+      background: #3a382f;
+    }
+
+    .worker-head::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 6px;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 5px 0 var(--gold);
+    }
+
+    .worker-body {
+      position: absolute;
+      left: 3px;
+      top: 18px;
+      width: 21px;
+      height: 15px;
+      border: 1px solid var(--gold);
+      border-radius: 5px 5px 3px 3px;
+      background: linear-gradient(135deg, #d5bb87, #7e6843);
+    }
+
+    .worker-body::after {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 7px;
+      left: 7px;
+      top: 3px;
+      border: 1px solid #26251f;
+      border-radius: 2px;
+    }
+
+    .worker-tool {
+      position: absolute;
+      right: -7px;
+      top: 17px;
+      width: 10px;
+      height: 2px;
+      background: var(--gold-light);
+      transform: rotate(-40deg);
+      transform-origin: left center;
+    }
+
+    .intro-final {
+      position: absolute;
+      opacity: 0;
+      transform: scale(.94);
+      animation: final-title .8s 5s forwards;
+    }
+
+    .intro-final img {
+      display: block;
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      margin: 0 auto 14px;
+    }
+
+    .intro-final strong {
+      display: block;
+      font-size: clamp(26px, 6vw, 55px);
+      letter-spacing: -.065em;
+    }
+
+    .intro-final span { color: var(--gold); }
+
+    .intro-final small {
+      display: block;
+      margin-top: 13px;
+      color: #a9a69d;
+      font-size: 10px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    @keyframes final-title {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .intro-progress {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 2px;
+      background: rgba(255,255,255,.12);
+      overflow: hidden;
+    }
+
+    .intro-progress::after {
+      content: "";
+      display: block;
+      height: 100%;
+      background: var(--gold);
+      transform-origin: left;
+      animation: progress 6.3s linear forwards;
+    }
+
+    @keyframes progress { to { transform: scaleX(1); } }
+
+    /* Üst menü */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      color: var(--white);
+      background: rgba(23,23,20,.96);
+      border-bottom: 1px solid rgba(213,187,135,.13);
+      backdrop-filter: blur(18px);
+    }
+
+    .header-inner {
+      min-height: 82px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--line);
-      gap: 18px;
+      gap: 24px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 13px;
+      gap: 12px;
       min-width: 0;
     }
 
     .brand img {
-      width: 43px;
-      height: 43px;
+      width: 42px;
+      height: 42px;
       object-fit: contain;
     }
 
     .brand-name {
-      font-size: 14px;
-      letter-spacing: .16em;
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .13em;
     }
 
     .brand-sub {
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 4px;
+      color: #aaa69b;
+      font-size: 10px;
+      margin-top: 5px;
       letter-spacing: .04em;
     }
 
-    .top-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: #52617c;
-      font-size: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.6);
-      border-radius: 999px;
-      padding: 10px 14px;
-      white-space: nowrap;
-    }
-
-    .top-label::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #5276f2;
-      box-shadow: 0 0 0 4px rgba(82,118,242,.12);
-    }
-
-    main {
-      flex: 1;
+    .nav {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 66px 0 54px;
-    }
-
-    .hero {
-      max-width: 790px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
       align-items: center;
-      gap: 8px;
-      color: var(--blue);
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      margin-bottom: 23px;
+      gap: 27px;
     }
 
-    .eyebrow::before,
-    .eyebrow::after {
-      content: "";
-      width: 22px;
-      height: 1px;
-      background: #9baef8;
-    }
-
-    h1 {
-      font-size: clamp(40px, 6.8vw, 72px);
-      line-height: 1.04;
-      letter-spacing: -.065em;
-      margin: 0;
-      font-weight: 760;
-    }
-
-    h1 span {
-      color: var(--blue);
-    }
-
-    .lead {
-      max-width: 670px;
-      margin: 24px auto 0;
-      color: #5c6981;
-      font-size: clamp(15px, 1.8vw, 18px);
-      line-height: 1.8;
-    }
-
-    .status {
-      margin: 28px auto 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 10px 14px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(49,91,232,.17);
-      color: #3452b5;
-      border-radius: 10px;
+    .nav a {
+      color: #c4c0b5;
       font-size: 12px;
-      font-weight: 700;
+      transition: color .2s;
     }
 
-    .status span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #5276f2;
-    }
+    .nav a:hover { color: var(--gold); }
 
-    .soon {
-      font-size: 14px;
-      font-weight: 700;
-      margin: 17px 0 0;
-      color: #263b70;
-    }
-
-    .info-wrap {
-      margin: 52px auto 0;
-      width: 100%;
-      max-width: 930px;
-    }
-
-    .info-heading {
-      text-align: center;
-      margin: 0 0 19px;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .15em;
-      color: #75819a;
-      font-weight: 800;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 13px;
-    }
-
-    .info-card {
-      text-align: left;
-      border: 1px solid var(--line);
-      border-radius: 17px;
-      padding: 21px 21px 20px;
-      background: var(--surface);
-      box-shadow: 0 12px 38px rgba(35,58,120,.035);
-      backdrop-filter: blur(10px);
-    }
-
-    .card-number {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      color: var(--blue);
-    }
-
-    .info-card h2 {
-      font-size: 15px;
-      letter-spacing: -.02em;
-      margin: 13px 0 8px;
-    }
-
-    .info-card p {
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.75;
-      margin: 0;
-    }
-
-    .bottom-note {
-      max-width: 930px;
-      margin: 16px auto 0;
-      border-radius: 15px;
-      padding: 17px 20px;
-      border: 1px solid rgba(49,91,232,.12);
-      background: rgba(235,241,255,.58);
-      display: flex;
-      gap: 15px;
-      align-items: flex-start;
-    }
-
-    .note-mark {
-      width: 28px;
-      height: 28px;
-      flex: 0 0 28px;
-      display: grid;
-      place-items: center;
-      border-radius: 9px;
-      color: var(--blue);
-      background: #e2e9ff;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .bottom-note strong {
-      display: block;
-      font-size: 12px;
-      margin: 1px 0 5px;
-    }
-
-    .bottom-note p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    footer {
-      min-height: 70px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      border-top: 1px solid var(--line);
-      color: #7b879d;
-      font-size: 11px;
-    }
-
-    footer strong {
-      color: #53617b;
+    .nav .nav-cta {
+      padding: 12px 15px;
+      color: var(--ink);
+      border-radius: 7px;
+      background: var(--gold);
       font-weight: 750;
     }
 
-    @media (max-width: 700px) {
-      .page {
-        width: min(100% - 28px, 540px);
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 8px;
+      color: var(--white);
+      background: transparent;
+      font-size: 20px;
+    }
+
+    /* Ana giriş alanı */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        radial-gradient(ellipse at 82% 38%, rgba(213,187,135,.13), transparent 32%),
+        linear-gradient(120deg, #171714 0%, #22211c 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      right: -220px;
+      top: -240px;
+      border: 1px solid rgba(213,187,135,.12);
+      border-radius: 50%;
+      box-shadow: 0 0 0 65px rgba(213,187,135,.025),
+                  0 0 0 130px rgba(213,187,135,.02);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 55px;
+      padding-top: 94px;
+      padding-bottom: 105px;
+    }
+
+    .hero-copy { position: relative; z-index: 2; }
+
+    .hero .section-kicker { color: var(--gold); }
+
+    .hero h1 {
+      max-width: 690px;
+      margin: 24px 0;
+      font-size: clamp(46px, 6.3vw, 78px);
+      line-height: .99;
+      letter-spacing: -.075em;
+      font-weight: 620;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--gold);
+    }
+
+    .hero-copy > p {
+      max-width: 580px;
+      color: #bdb9af;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-caption {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+      color: #a7a398;
+      font-size: 11px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(213,187,135,.1);
+    }
+
+    /* Ofis360 arayüz maketi */
+
+    .product-visual {
+      position: relative;
+      min-width: 0;
+      perspective: 1200px;
+    }
+
+    .dashboard {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(213,187,135,.27);
+      border-radius: 15px;
+      background: #f4f1e9;
+      color: #26251f;
+      box-shadow: 0 40px 100px rgba(0,0,0,.32);
+      transform: rotateY(-5deg) rotateX(2deg);
+      transition: transform .5s;
+    }
+
+    .dashboard:hover { transform: rotateY(0) rotateX(0); }
+
+    .dash-top {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      border-bottom: 1px solid #e4dfd3;
+      background: #fffdf8;
+    }
+
+    .dash-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .07em;
+    }
+
+    .dash-mark {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #c7ad78;
+      border-radius: 6px;
+      color: #8d7448;
+      font-size: 10px;
+    }
+
+    .dash-window { display: flex; gap: 5px; }
+    .dash-window i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #d5d0c4;
+    }
+
+    .dash-body {
+      min-height: 365px;
+      display: grid;
+      grid-template-columns: 112px 1fr;
+    }
+
+    .dash-side {
+      padding: 18px 9px;
+      border-right: 1px solid #e4dfd3;
+      background: #eae6dc;
+    }
+
+    .dash-side-label {
+      margin: 0 0 10px 5px;
+      color: #898477;
+      font-size: 7px;
+      font-weight: 800;
+      letter-spacing: .1em;
+    }
+
+    .dash-nav {
+      padding: 9px 7px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      color: #716d62;
+      font-size: 8px;
+    }
+
+    .dash-nav.active {
+      color: #8d7448;
+      background: rgba(189,161,107,.18);
+      font-weight: 800;
+    }
+
+    .dash-main { padding: 19px 15px; min-width: 0; }
+
+    .dash-greeting {
+      font-size: 15px;
+      font-weight: 750;
+      letter-spacing: -.04em;
+    }
+
+    .dash-sub {
+      margin-top: 5px;
+      color: #898477;
+      font-size: 8px;
+    }
+
+    .dash-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      margin-top: 17px;
+    }
+
+    .dash-stat {
+      min-width: 0;
+      padding: 11px 9px;
+      border: 1px solid #e3ded2;
+      border-radius: 7px;
+      background: #fffdf8;
+    }
+
+    .dash-stat small {
+      display: block;
+      color: #898477;
+      font-size: 7px;
+      line-height: 1.5;
+    }
+
+    .dash-stat strong {
+      display: block;
+      margin-top: 7px;
+      font-size: clamp(14px, 1.8vw, 21px);
+      font-weight: 700;
+    }
+
+    .dash-stat span {
+      display: block;
+      margin-top: 4px;
+      color: #7b8a6b;
+      font-size: 7px;
+    }
+
+    .dash-panel {
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid #e3ded2;
+      border-radius: 7px;
+      background: #fffdf8;
+    }
+
+    .dash-panel-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 9px;
+      font-weight: 750;
+    }
+
+    .dash-panel-title span {
+      color: #8d7448;
+      font-size: 8px;
+    }
+
+    .dash-chart {
+      height: 78px;
+      display: flex;
+      align-items: end;
+      gap: 7px;
+      padding-top: 12px;
+    }
+
+    .dash-bar {
+      flex: 1;
+      min-width: 0;
+      border-radius: 3px 3px 0 0;
+      background: linear-gradient(180deg, #d5bb87, #bda16b);
+      animation: bar-rise 1s ease-out both;
+      transform-origin: bottom;
+    }
+
+    .dash-bar:nth-child(1) { height: 32%; }
+    .dash-bar:nth-child(2) { height: 53%; animation-delay: .08s; }
+    .dash-bar:nth-child(3) { height: 44%; animation-delay: .16s; }
+    .dash-bar:nth-child(4) { height: 76%; animation-delay: .24s; }
+    .dash-bar:nth-child(5) { height: 60%; animation-delay: .32s; }
+    .dash-bar:nth-child(6) { height: 90%; animation-delay: .4s; }
+    .dash-bar:nth-child(7) { height: 69%; animation-delay: .48s; }
+
+    @keyframes bar-rise {
+      from { transform: scaleY(.05); }
+      to { transform: scaleY(1); }
+    }
+
+    .dash-tasks {
+      display: grid;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .dash-task {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 8px;
+    }
+
+    .task-check {
+      width: 12px;
+      height: 12px;
+      flex: 0 0 12px;
+      border: 1px solid #c6b58e;
+      border-radius: 4px;
+      background: #f8f1df;
+    }
+
+    .dash-task small {
+      margin-left: auto;
+      color: #8d7448;
+      font-size: 7px;
+    }
+
+    .visual-note {
+      position: absolute;
+      right: -18px;
+      bottom: -18px;
+      max-width: 205px;
+      padding: 15px 17px;
+      border: 1px solid rgba(213,187,135,.35);
+      border-radius: 10px;
+      color: var(--white);
+      background: #292820;
+      box-shadow: 0 14px 38px rgba(0,0,0,.2);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .visual-note strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--gold);
+      font-size: 11px;
+    }
+
+    /* Güven ve değerler */
+
+    .value-strip {
+      background: #eae6dc;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .value-item {
+      padding: 25px 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .value-item:first-child { border-left: 1px solid var(--line); }
+
+    .value-item strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .value-item span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* Ürün anlatımı */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 75px;
+      align-items: start;
+    }
+
+    .about-aside {
+      position: sticky;
+      top: 120px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,253,248,.65);
+    }
+
+    .about-aside strong {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 17px;
+    }
+
+    .about-aside p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    .about-content > p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .principles {
+      display: grid;
+      gap: 0;
+      margin-top: 30px;
+      border-top: 1px solid var(--line);
+    }
+
+    .principle {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 15px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .principle-number {
+      color: var(--gold-dark);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .principle h3 {
+      margin: 0 0 7px;
+      font-size: 15px;
+    }
+
+    .principle p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    /* Modül kartları */
+
+    .modules {
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    .modules .section-kicker { color: var(--gold); }
+    .modules .section-title { color: var(--white); }
+    .modules .section-description { color: #aaa69b; }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 43px;
+    }
+
+    .module-card {
+      min-height: 225px;
+      padding: 26px;
+      border: 1px solid rgba(213,187,135,.17);
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.012));
+      transition: transform .25s, border-color .25s, background .25s;
+    }
+
+    .module-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(213,187,135,.5);
+      background: rgba(213,187,135,.05);
+    }
+
+    .module-index {
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+    }
+
+    .module-card h3 {
+      margin: 25px 0 10px;
+      font-size: 18px;
+      letter-spacing: -.035em;
+    }
+
+    .module-card p {
+      margin: 0;
+      color: #aaa69b;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .module-disclaimer {
+      margin-top: 22px;
+      padding: 16px 18px;
+      border: 1px solid rgba(213,187,135,.16);
+      border-radius: 10px;
+      color: #aaa69b;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .module-disclaimer strong { color: var(--gold); }
+
+    /* Sektörler */
+
+    .sector-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 17px;
+      margin-top: 42px;
+    }
+
+    .sector-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 295px;
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--paper-light);
+    }
+
+    .sector-card::after {
+      content: "";
+      position: absolute;
+      right: -55px;
+      bottom: -75px;
+      width: 220px;
+      height: 220px;
+      border: 1px solid rgba(157,130,80,.18);
+      border-radius: 50%;
+      box-shadow: 0 0 0 30px rgba(157,130,80,.035),
+                  0 0 0 60px rgba(157,130,80,.025);
+    }
+
+    .sector-label {
+      color: var(--gold-dark);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .sector-card h3 {
+      max-width: 390px;
+      margin: 19px 0 12px;
+      font-size: 26px;
+      line-height: 1.15;
+      letter-spacing: -.05em;
+    }
+
+    .sector-card p {
+      position: relative;
+      z-index: 1;
+      max-width: 430px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    .sector-tags {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 23px;
+    }
+
+    .sector-tags span {
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: #716d62;
+      background: #f8f5ed;
+      font-size: 10px;
+    }
+
+    /* Yaklaşım */
+
+    .approach {
+      background: #eae6dc;
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .approach-card {
+      padding: 24px;
+      border: 1px solid rgba(36,34,28,.1);
+      border-radius: 12px;
+      background: rgba(255,253,248,.72);
+    }
+
+    .approach-card h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
+    .approach-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* SSS */
+
+    .faq-list {
+      max-width: 850px;
+      margin-top: 36px;
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-item { border-bottom: 1px solid var(--line); }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      width: 100%;
+      padding: 23px 0;
+      border: 0;
+      color: var(--ink);
+      background: transparent;
+      text-align: left;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .faq-plus {
+      flex: 0 0 auto;
+      color: var(--gold-dark);
+      font-size: 23px;
+      font-weight: 400;
+      transition: transform .2s;
+    }
+
+    .faq-answer {
+      display: none;
+      max-width: 750px;
+      padding: 0 35px 22px 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-plus { transform: rotate(45deg); }
+
+    /* İletişim */
+
+    .contact {
+      color: var(--white);
+      background:
+        radial-gradient(ellipse at 100% 100%, rgba(213,187,135,.1), transparent 35%),
+        var(--ink);
+    }
+
+    .contact .section-kicker { color: var(--gold); }
+    .contact .section-title { color: var(--white); }
+    .contact .section-description { color: #aaa69b; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 60px;
+      margin-top: 42px;
+      align-items: start;
+    }
+
+    .contact-points {
+      display: grid;
+      gap: 13px;
+      margin-top: 28px;
+    }
+
+    .contact-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding: 17px;
+      border: 1px solid rgba(213,187,135,.16);
+      border-radius: 10px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .contact-symbol {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(213,187,135,.3);
+      border-radius: 8px;
+      color: var(--gold);
+      font-size: 14px;
+    }
+
+    .contact-point strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .contact-point span {
+      display: block;
+      margin-top: 5px;
+      color: #aaa69b;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .contact-form {
+      padding: 28px;
+      border: 1px solid rgba(213,187,135,.2);
+      border-radius: 15px;
+      background: #22221e;
+    }
+
+    .contact-form h3 {
+      margin: 0 0 8px;
+      font-size: 21px;
+      letter-spacing: -.04em;
+    }
+
+    .contact-form > p {
+      margin: 0 0 23px;
+      color: #aaa69b;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .field { margin-bottom: 15px; }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: #d5d0c4;
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .field input, .field textarea, .field select {
+      display: block;
+      width: 100%;
+      min-height: 46px;
+      padding: 12px 13px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 7px;
+      color: var(--white);
+      background: #191916;
+      font-size: 13px;
+    }
+
+    .field textarea {
+      min-height: 115px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+
+    .field select option { color: var(--ink); }
+
+    .form-note {
+      margin-top: 13px;
+      color: #8e8a80;
+      font-size: 10px;
+      line-height: 1.8;
+    }
+
+    .contact-form .button { width: 100%; }
+
+    /* Alt bilgi */
+
+    footer {
+      color: #aaa69b;
+      background: #11110f;
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 40px;
+      padding-top: 48px;
+      padding-bottom: 38px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .footer-brand img {
+      width: 39px;
+      height: 39px;
+      object-fit: contain;
+    }
+
+    .footer-brand strong {
+      color: var(--white);
+      font-size: 12px;
+      letter-spacing: .13em;
+    }
+
+    .footer-about {
+      max-width: 340px;
+      margin: 0;
+      color: #8e8a80;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .footer-col h3 {
+      margin: 5px 0 17px;
+      color: var(--white);
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      width: fit-content;
+      color: #aaa69b;
+      font-size: 12px;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,.09);
+      color: #77746b;
+      font-size: 10px;
+    }
+
+    .footer-bottom strong { color: #aaa69b; }
+
+    /* Görünürlük animasyonları */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .intro.finished ~ .site-header,
+    .intro.finished ~ main,
+    .intro.finished ~ footer {
+      /* İçerik açılış bitince normal şekilde kullanılabilir. */
+    }
+
+    @media (max-width: 980px) {
+      .nav { gap: 15px; }
+      .nav a { font-size: 11px; }
+      .hero-grid { gap: 30px; }
+      .dash-body { grid-template-columns: 95px 1fr; }
+      .dash-main { padding: 15px 11px; }
+      .about-grid { gap: 35px; }
+      .contact-grid { gap: 30px; }
+      .visual-note { right: -7px; }
+    }
+
+    @media (max-width: 760px) {
+      .container { width: min(100% - 32px, 560px); }
+      .section { padding: 70px 0; }
+      .header-inner { min-height: 72px; }
+      .brand img { width: 36px; height: 36px; }
+      .brand-name { font-size: 11px; }
+      .brand-sub { font-size: 9px; }
+
+      .menu-toggle {
+        display: grid;
+        place-items: center;
       }
 
-      header {
-        min-height: 78px;
+      .nav {
+        position: absolute;
+        top: 71px;
+        left: 0;
+        right: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 16px 18px;
+        border-bottom: 1px solid rgba(213,187,135,.15);
+        background: #171714;
       }
 
-      .brand img {
-        width: 37px;
-        height: 37px;
-      }
+      .nav.open { display: grid; }
+      .nav a { padding: 13px 8px; font-size: 13px; }
+      .nav .nav-cta { text-align: center; margin-top: 7px; }
 
-      .brand-name {
-        font-size: 12px;
-      }
-
-      .brand-sub {
-        font-size: 10px;
-      }
-
-      .top-label {
-        font-size: 10px;
-        padding: 8px 10px;
-      }
-
-      main {
-        padding: 48px 0 35px;
-      }
-
-      .eyebrow {
-        margin-bottom: 19px;
-        font-size: 10px;
-      }
-
-      .lead {
-        line-height: 1.75;
-        margin-top: 20px;
-      }
-
-      .info-wrap {
-        margin-top: 40px;
-      }
-
-      .info-grid {
+      .hero-grid {
         grid-template-columns: 1fr;
-        gap: 10px;
+        padding-top: 68px;
+        padding-bottom: 80px;
+        gap: 48px;
       }
 
-      .info-card {
-        padding: 18px;
-      }
+      .hero h1 { font-size: clamp(46px, 12vw, 68px); }
+      .hero-copy > p { font-size: 14px; }
+      .product-visual { width: 100%; }
+      .dashboard { transform: none; }
+      .dash-body { grid-template-columns: 94px 1fr; }
+      .dash-stats { gap: 5px; }
+      .dash-stat { padding: 9px 7px; }
+      .visual-note { right: 7px; bottom: -25px; }
 
-      .info-card h2 {
-        margin-top: 9px;
-      }
+      .value-grid { grid-template-columns: repeat(2, 1fr); }
+      .value-item { border-bottom: 1px solid var(--line); padding: 19px 13px; }
+      .value-item:nth-child(odd) { border-left: 1px solid var(--line); }
+      .value-item:nth-child(even) { border-right: 1px solid var(--line); }
 
-      .bottom-note {
-        padding: 15px;
-      }
+      .about-grid { grid-template-columns: 1fr; gap: 27px; }
+      .about-aside { position: static; }
+      .module-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .module-card { min-height: 205px; padding: 19px; }
+      .module-card h3 { font-size: 16px; margin-top: 20px; }
+      .module-card p { font-size: 12px; }
 
-      footer {
-        padding: 17px 0;
-        align-items: flex-start;
-        flex-direction: column;
-        justify-content: center;
-        gap: 6px;
-      }
+      .sector-grid, .approach-grid { grid-template-columns: 1fr; }
+      .sector-card { min-height: 260px; padding: 25px; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 27px; }
+      .contact-form { padding: 21px; }
+
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 30px 20px; }
+      .footer-main > :first-child { grid-column: 1 / -1; }
+      .footer-bottom { align-items: flex-start; justify-content: center; flex-direction: column; padding: 17px 0; gap: 7px; }
+
+      .intro-center { min-height: 300px; }
+      .repair-logo { width: 35px; height: 35px; left: calc(50% - 150px); }
+      .repair-word { font-size: clamp(22px, 5.5vw, 39px); }
+      .repair-soft { margin-left: 7px; }
+      .worker { top: calc(50% + 43px); transform: translate(-50%, 24px) scale(.85); }
+      .intro-final img { width: 49px; height: 49px; }
+    }
+
+    @media (max-width: 420px) {
+      .container { width: calc(100% - 26px); }
+      .hero-actions { display: grid; grid-template-columns: 1fr; }
+      .hero-actions .button { width: 100%; }
+      .dash-body { grid-template-columns: 78px 1fr; }
+      .dash-side { padding: 15px 5px; }
+      .dash-nav { padding: 8px 5px; font-size: 7px; }
+      .dash-stats { grid-template-columns: 1fr; }
+      .dash-stat strong { font-size: 18px; }
+      .dash-stat span { display: none; }
+      .dash-chart { height: 62px; }
+      .module-grid { grid-template-columns: 1fr; }
+      .module-card { min-height: auto; }
+      .intro-brand-line { gap: 6px; }
+      .repair-word { font-size: 22px; }
+      .repair-logo { left: calc(50% - 128px); width: 29px; height: 29px; }
+      .repair-soft { margin-left: 5px; }
+      .intro-final strong { font-size: 30px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        scroll-behavior: auto !important;
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
       }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 
-<body>
-  <div class="ambient one" aria-hidden="true"></div>
-  <div class="ambient two" aria-hidden="true"></div>
+<body class="intro-active">
 
-  <div class="page">
-    <header>
-      <div class="brand">
-        <img
-          src="gundesli_logo.png"
-          alt="Gündeşli Soft logosu"
-          onerror="this.style.display='none'"
-        >
+  <!-- Sinematik marka açılışı -->
+  <div class="intro" id="intro" aria-label="Gündeşli Soft açılış animasyonu">
+    <button class="intro-skip" id="skipIntro" type="button">ATLA</button>
+
+    <div class="intro-center">
+      <div class="intro-brand">
+        <img src="gundesli_logo.png" alt="" onerror="this.style.display='none'">
+        <div class="intro-brand-line">
+          <span>Gündeşli</span>
+          <span class="intro-media">Media</span>
+        </div>
+      </div>
+
+      <div class="intro-flash"></div>
+      <div class="intro-particles" id="particles"></div>
+
+      <div class="repair-scene">
+        <img class="repair-logo" src="gundesli_logo.png" alt="" onerror="this.style.display='none'">
+        <div class="repair-word" aria-label="Gündeşli Soft">
+          <span class="repair-letter" style="--from-x:-80px;--from-y:-40px;--rotate:-20deg;--delay:3.2s">G</span>
+          <span class="repair-letter" style="--from-x:40px;--from-y:-65px;--rotate:18deg;--delay:3.28s">ü</span>
+          <span class="repair-letter" style="--from-x:90px;--from-y:30px;--rotate:22deg;--delay:3.36s">n</span>
+          <span class="repair-letter" style="--from-x:-70px;--from-y:50px;--rotate:-15deg;--delay:3.44s">d</span>
+          <span class="repair-letter" style="--from-x:55px;--from-y:-45px;--rotate:10deg;--delay:3.52s">e</span>
+          <span class="repair-letter" style="--from-x:-45px;--from-y:-70px;--rotate:-10deg;--delay:3.60s">ş</span>
+          <span class="repair-letter" style="--from-x:85px;--from-y:50px;--rotate:20deg;--delay:3.68s">l</span>
+          <span class="repair-letter" style="--from-x:-80px;--from-y:35px;--rotate:-18deg;--delay:3.76s">i</span>
+          <span class="repair-soft">Soft</span>
+        </div>
+      </div>
+
+      <div class="workers" aria-hidden="true">
+        <div class="worker">
+          <div class="worker-head"></div><div class="worker-body"></div><div class="worker-tool"></div>
+        </div>
+        <div class="worker">
+          <div class="worker-head"></div><div class="worker-body"></div><div class="worker-tool"></div>
+        </div>
+        <div class="worker">
+          <div class="worker-head"></div><div class="worker-body"></div><div class="worker-tool"></div>
+        </div>
+      </div>
+
+      <div class="intro-final">
+        <img src="gundesli_logo.png" alt="" onerror="this.style.display='none'">
+        <strong>Gündeşli <span>Soft</span></strong>
+        <small>İşletme yönetiminde yeni bir yaklaşım</small>
+      </div>
+    </div>
+
+    <div class="intro-progress"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#anasayfa" aria-label="Gündeşli Soft ana sayfa">
+        <img src="gundesli_logo.png" alt="Gündeşli Soft logosu" onerror="this.style.display='none'">
         <div>
           <div class="brand-name">GÜNDEŞLİ SOFT</div>
           <div class="brand-sub">İş yazılımları ve dijital çözümler</div>
         </div>
-      </div>
+      </a>
 
-      <div class="top-label">Yeni platform hazırlanıyor</div>
-    </header>
+      <button class="menu-toggle" id="menuToggle" type="button"
+        aria-label="Menüyü aç" aria-expanded="false">☰</button>
 
-    <main>
-      <section class="hero" aria-labelledby="main-title">
-        <div class="eyebrow">Yeni nesil işletme yönetimi</div>
+      <nav class="nav" id="mainNav" aria-label="Ana menü">
+        <a href="#ofis360">Ofis360</a>
+        <a href="#ozellikler">Özellikler</a>
+        <a href="#sektorler">Sektörler</a>
+        <a href="#sss">Sık sorulanlar</a>
+        <a class="nav-cta" href="#iletisim">Bilgi ve teklif al <span class="arrow">↗</span></a>
+      </nav>
+    </div>
+  </header>
 
-        <h1 id="main-title">
-          İşletmen için <span>360° kontrol.</span>
-        </h1>
-
-        <p class="lead">
-          Gündeşli Soft tarafından geliştirilen Ofis360; işletme
-          sahiplerinin işlerini daha kolay, düzenli ve kişiselleştirilmiş
-          şekilde yönetebilmesi için hazırlanan yeni nesil bir işletme
-          yönetim platformudur.
-        </p>
-
-        <div class="status">
-          <span></span>
-          Geliştirme aşamasında
-        </div>
-
-        <p class="soon">Ofis360 çok yakında sizlerle.</p>
-      </section>
-
-      <section class="info-wrap" aria-label="Ofis360 hakkında">
-        <p class="info-heading">Ofis360 neler sunmayı hedefliyor?</p>
-
-        <div class="info-grid">
-          <article class="info-card">
-            <div class="card-number">01 / TEK MERKEZ</div>
-            <h2>İş süreçlerini bir arada yönetin</h2>
-            <p>
-              Müşteri, ürün ve stok, sipariş, teknik servis ve günlük
-              operasyon gibi iş süreçlerini; işletmenizin ihtiyaçlarına
-              göre tek bir merkezde takip edebilmeniz hedefleniyor.
-            </p>
-          </article>
-
-          <article class="info-card">
-            <div class="card-number">02 / İŞLETMEYE ÖZEL</div>
-            <h2>Kendi çalışma düzeninize uyarlayın</h2>
-            <p>
-              Her işletmenin çalışma şekli aynı değildir. Ofis360'ın
-              farklı iş alanlarına ve kullanıcı rollerine uyarlanabilen
-              esnek bir yapı sunması planlanıyor.
-            </p>
-          </article>
-
-          <article class="info-card">
-            <div class="card-number">03 / AKILLI DESTEK</div>
-            <h2>Veriden anlamlı önerilere</h2>
-            <p>
-              Gelecek sürümlerde yapay zekâ destekli analizlerle iş
-              akışlarını anlamaya, dikkat edilmesi gereken noktaları
-              belirlemeye ve gelişim fırsatlarını görmeye yardımcı
-              olması hedefleniyor.
-            </p>
-          </article>
-        </div>
-
-        <div class="bottom-note">
-          <div class="note-mark">i</div>
-
-          <div>
-            <strong>Geliştirme süreci hakkında</strong>
-            <p>
-              Ofis360 şu anda geliştirme aşamasındadır; burada anlatılan
-              özellikler hedeflenen ürün kapsamını ifade eder ve henüz
-              kullanıma sunulmuş özellikler olarak değerlendirilmemelidir.
-              Özellikler, arayüz ve yayın takvimi geliştirme sürecinde
-              değişebilir. Resmî duyurular bu sayfada paylaşılacaktır.
-            </p>
+  <main>
+    <!-- Ana giriş -->
+    <section class="hero" id="anasayfa">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="section-kicker">Gündeşli Soft · Yeni nesil işletme yönetimi</div>
+          <h1>İşletmen için <span>360° kontrol.</span></h1>
+          <p>
+            İş süreçlerini daha düzenli yönetmek için tasarlanan Ofis360'ı
+            keşfedin. Gündeşli Soft'un işletme yönetimi projesi; günlük
+            operasyonları, iş takibini ve farklı çalışma alanlarını ortak
+            bir yönetim yaklaşımında buluşturmayı hedefliyor.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-gold" href="#ofis360">Ofis360'ı keşfet <span class="arrow">↗</span></a>
+            <a class="button button-outline" href="#iletisim">Soru veya teklif ilet</a>
+          </div>
+          <div class="hero-caption">
+            <span class="status-dot"></span>
+            <span>Geliştirme aşamasındaki ürün hakkında bilgi alın.</span>
           </div>
         </div>
-      </section>
-    </main>
 
-    <footer>
+        <!-- Bu panel tanıtım amaçlı arayüz maketidir. -->
+        <div class="product-visual reveal" aria-label="Ofis360 arayüz tanıtım maketi">
+          <div class="dashboard">
+            <div class="dash-top">
+              <div class="dash-brand">
+                <span class="dash-mark">G</span>
+                <span>OFİS360</span>
+              </div>
+              <div class="dash-window"><i></i><i></i><i></i></div>
+            </div>
+
+            <div class="dash-body">
+              <aside class="dash-side">
+                <p class="dash-side-label">ÇALIŞMA ALANI</p>
+                <div class="dash-nav active">Genel Bakış</div>
+                <div class="dash-nav">İş Takibi</div>
+                <div class="dash-nav">Müşteriler</div>
+                <div class="dash-nav">Ürün ve Stok</div>
+                <div class="dash-nav">Teknik Servis</div>
+                <div class="dash-nav">Raporlar</div>
+                <div class="dash-nav">Ayarlar</div>
+              </aside>
+
+              <div class="dash-main">
+                <div class="dash-greeting">İşletme özeti</div>
+                <div class="dash-sub">İş süreçlerinizi tek bir görünümde değerlendirin.</div>
+
+                <div class="dash-stats">
+                  <div class="dash-stat">
+                    <small>İş takibi</small>
+                    <strong>360°</strong>
+                    <span>Merkezi görünüm</span>
+                  </div>
+                  <div class="dash-stat">
+                    <small>Operasyon</small>
+                    <strong>01</strong>
+                    <span>Ortak çalışma alanı</span>
+                  </div>
+                  <div class="dash-stat">
+                    <small>Planlama</small>
+                    <strong>+</strong>
+                    <span>İş akışı yaklaşımı</span>
+                  </div>
+                </div>
+
+                <div class="dash-panel">
+                  <div class="dash-panel-title">
+                    <span>İş süreçleri görünümü</span>
+                    <span>Tanıtım maketi</span>
+                  </div>
+                  <div class="dash-chart" aria-hidden="true">
+                    <div class="dash-bar"></div>
+                    <div class="dash-bar"></div>
+                    <div class="dash-bar"></div>
+                    <div class="dash-bar"></div>
+                    <div class="dash-bar"></div>
+                    <div class="dash-bar"></div>
+                    <div class="dash-bar"></div>
+                  </div>
+                </div>
+
+                <div class="dash-panel">
+                  <div class="dash-panel-title">
+                    <span>Örnek çalışma alanları</span>
+                    <span>Ofis360</span>
+                  </div>
+                  <div class="dash-tasks">
+                    <div class="dash-task"><span class="task-check"></span> Operasyon takibi <small>Planlanan</small></div>
+                    <div class="dash-task"><span class="task-check"></span> İş akışı yönetimi <small>Planlanan</small></div>
+                    <div class="dash-task"><span class="task-check"></span> Raporlama yaklaşımı <small>Hedeflenen</small></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="visual-note">
+            <strong>Ofis360 ürün ön izlemesi</strong>
+            Bu alan, ürünün hedeflenen arayüz yaklaşımını göstermek için hazırlanmış bir makettir.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="value-strip" aria-label="Ürün yaklaşımı">
+      <div class="container value-grid">
+        <div class="value-item">
+          <strong>Tek merkez yaklaşımı</strong>
+          <span>İş süreçlerini bir arada değerlendirme hedefi</span>
+        </div>
+        <div class="value-item">
+          <strong>İşletmeye uyarlanabilirlik</strong>
+          <span>Farklı ihtiyaçları dikkate alan tasarım yaklaşımı</span>
+        </div>
+        <div class="value-item">
+          <strong>Kurumsal iş akışı</strong>
+          <span>Günlük operasyonlarda düzen hedefi</span>
+        </div>
+        <div class="value-item">
+          <strong>Gelişime açık yapı</strong>
+          <span>İhtiyaçlara göre genişletilmesi planlanan ürün</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ofis360 nedir -->
+    <section class="section" id="ofis360">
+      <div class="container about-grid">
+        <div class="reveal">
+          <div class="section-kicker">Ofis360 hakkında</div>
+          <h2 class="section-title">İşletme süreçlerine bütünsel bir bakış.</h2>
+          <p class="section-description">
+            İşletmelerde farklı görevlerin, müşteri bilgilerinin ve günlük
+            operasyonların birbirinden kopuk ilerlemesi takip süreçlerini
+            zorlaştırabilir. Ofis360, bu süreçlerin daha düzenli bir yapıda
+            ele alınabilmesi amacıyla geliştirilen bir yazılım projesidir.
+          </p>
+        </div>
+
+        <div class="about-content reveal">
+          <p>
+            Gündeşli Soft tarafından geliştirilen Ofis360'ın amacı, işletme
+            sahiplerinin çalışma düzenini daha anlaşılır hâle getirebileceği,
+            farklı iş alanlarını değerlendirebileceği ve ihtiyaçlarına göre
+            şekillenebilecek bir yönetim deneyimi sunmaktır.
+          </p>
+          <p>
+            Ürün geliştirme sürecinde kullanım kolaylığı, iş süreçlerinin
+            izlenebilirliği ve farklı sektörlerin ihtiyaçları dikkate alınır.
+            Nihai modüller ve kullanılabilir özellikler, geliştirme ilerledikçe
+            kesinleşecektir.
+          </p>
+
+          <div class="principles">
+            <div class="principle">
+              <div class="principle-number">01</div>
+              <div>
+                <h3>İş süreçlerini düzenleme</h3>
+                <p>Günlük işlerin, sorumlulukların ve operasyonların daha anlaşılır şekilde takip edilmesini hedefleyen bir yaklaşım.</p>
+              </div>
+            </div>
+            <div class="principle">
+              <div class="principle-number">02</div>
+              <div>
+                <h3>İşletmeye uygun çalışma yapısı</h3>
+                <p>İşletmelerin farklı çalışma biçimlerini ve ihtiyaçlarını dikkate alan bir ürün tasarımı hedefi.</p>
+              </div>
+            </div>
+            <div class="principle">
+              <div class="principle-number">03</div>
+              <div>
+                <h3>Geleceğe yönelik geliştirme</h3>
+                <p>İlerleyen sürümlerde iş süreçlerini değerlendiren raporlama ve akıllı analiz imkânlarını araştırma hedefi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Özellik alanları -->
+    <section class="section modules" id="ozellikler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-kicker">Ürün kapsamı</div>
+          <h2 class="section-title">İşletmenizin ihtiyaçlarına odaklanan modül yaklaşımı.</h2>
+          <p class="section-description">
+            Aşağıdaki alanlar Ofis360 için ele alınan ürün kapsamını ve
+            geliştirme hedeflerini gösterir. Her alanın kullanılabilirliği
+            ürünün yayın durumuna bağlı olacaktır.
+          </p>
+        </div>
+
+        <div class="module-grid">
+          <article class="module-card reveal">
+            <div class="module-index">01 / YÖNETİM</div>
+            <h3>Genel işletme görünümü</h3>
+            <p>İşletmenin temel süreçlerini ortak bir görünüm altında değerlendirmeye yönelik yönetim yaklaşımı.</p>
+          </article>
+
+          <article class="module-card reveal">
+            <div class="module-index">02 / MÜŞTERİ</div>
+            <h3>Müşteri ve kayıt süreçleri</h3>
+            <p>Müşteri bilgilerinin ve ilişkili iş kayıtlarının düzenli tutulmasına yönelik kullanım alanı.</p>
+          </article>
+
+          <article class="module-card reveal">
+            <div class="module-index">03 / STOK</div>
+            <h3>Ürün ve stok takibi</h3>
+            <p>Ürün, stok hareketleri ve ilgili kayıtların işletme operasyonlarıyla birlikte ele alınması.</p>
+          </article>
+
+          <article class="module-card reveal">
+            <div class="module-index">04 / SATIŞ</div>
+            <h3>Satış ve sipariş süreçleri</h3>
+            <p>Satış kayıtları ve sipariş akışlarının daha düzenli yönetilmesine yönelik hedeflenen alan.</p>
+          </article>
+
+          <article class="module-card reveal">
+            <div class="module-index">05 / SERVİS</div>
+            <h3>Teknik servis ve saha işleri</h3>
+            <p>Servis talepleri, keşif, montaj, garanti ve bakım süreçlerinin takip edilmesine yönelik kapsam.</p>
+          </article>
+
+          <article class="module-card reveal">
+            <div class="module-index">06 / ANALİZ</div>
+            <h3>Raporlama ve akıllı destek</h3>
+            <p>Gelecekte iş verilerinden anlamlı sonuçlar çıkarmaya ve gelişim fırsatlarını değerlendirmeye yönelik hedefler.</p>
+          </article>
+        </div>
+
+        <div class="module-disclaimer reveal">
+          <strong>Ürün durumu hakkında:</strong>
+          Bu modüller tanıtım ve ürün planlaması kapsamını anlatır.
+          Ofis360 geliştirme aşamasındadır; burada belirtilen alanların
+          tamamının şu anda çalışır durumda olduğu iddia edilmemektedir.
+        </div>
+      </div>
+    </section>
+
+    <!-- Sektörler -->
+    <section class="section" id="sektorler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-kicker">Kullanım alanları</div>
+          <h2 class="section-title">Farklı iş alanlarına göre düşünülmüş bir yapı.</h2>
+          <p class="section-description">
+            Ofis360'ın geliştirme yaklaşımında öncelikli olarak ele alınan
+            sektörler ve bu sektörlerde karşılaşılan iş süreçleri.
+          </p>
+        </div>
+
+        <div class="sector-grid">
+          <article class="sector-card reveal">
+            <div class="sector-label">Sektör 01</div>
+            <h3>Bilgisayar ve güvenlik sistemleri</h3>
+            <p>
+              Bilgisayar satışı, kamera ve alarm sistemleri, teknik servis ve
+              saha hizmetleri gibi birbiriyle ilişkili süreçlerin aynı işletme
+              yönetimi yaklaşımında ele alınması hedefleniyor.
+            </p>
+            <div class="sector-tags">
+              <span>Teknik servis</span>
+              <span>Ürün ve stok</span>
+              <span>Satış ve sipariş</span>
+              <span>Keşif ve montaj</span>
+              <span>Garanti ve bakım</span>
+            </div>
+          </article>
+
+          <article class="sector-card reveal">
+            <div class="sector-label">Sektör 02</div>
+            <h3>Gayrimenkul yönetimi</h3>
+            <p>
+              Gayrimenkul alanındaki iş kayıtlarını ve günlük operasyonları
+              daha düzenli değerlendirmeye yönelik bir kullanım yapısı
+              geliştirilmesi planlanıyor.
+            </p>
+            <div class="sector-tags">
+              <span>İş takibi</span>
+              <span>Kayıt yönetimi</span>
+              <span>Operasyon düzeni</span>
+              <span>Raporlama hedefleri</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ürün yaklaşımı -->
+    <section class="section approach">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-kicker">Geliştirme yaklaşımı</div>
+          <h2 class="section-title">Yalnızca görünüm değil, işleyiş de önemli.</h2>
+          <p class="section-description">
+            Bir işletme yazılımının değerini yalnızca tasarımı değil,
+            gerçek kullanımda sunduğu fayda ve güvenilirliği belirler.
+            Ofis360'ın geliştirme sürecinde bu konuların dikkate alınması hedefleniyor.
+          </p>
+        </div>
+
+        <div class="approach-grid">
+          <article class="approach-card reveal">
+            <h3>Kullanım kolaylığı</h3>
+            <p>Bilgilerin anlaşılır sunulması ve iş akışlarının kullanıcılar için kolay takip edilebilir olması hedeflenir.</p>
+          </article>
+          <article class="approach-card reveal">
+            <h3>Yetkilendirme ve gizlilik</h3>
+            <p>İşletme verilerine erişimin, sistemin gerçek uygulama tasarımında yetki ve güvenlik ilkelerine göre ele alınması gerekir.</p>
+          </article>
+          <article class="approach-card reveal">
+            <h3>Akıllı analiz hedefi</h3>
+            <p>Gelecek sürümlerde verileri yorumlama ve işletmelere gelişim fırsatları konusunda yardımcı olma imkânları araştırılacaktır.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sık sorulan sorular -->
+    <section class="section" id="sss">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-kicker">Merak edilenler</div>
+          <h2 class="section-title">Ofis360 hakkında sık sorulan sorular.</h2>
+          <p class="section-description">
+            Ürünün geliştirme durumu, hedeflenen kullanım alanları ve bilgi
+            alma süreci hakkında temel açıklamalar.
+          </p>
+        </div>
+
+        <div class="faq-list reveal">
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Ofis360 şu anda kullanıma açık mı?
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer">
+              Ofis360 geliştirme aşamasındadır. Bu sayfa ürünün tanıtımı ve
+              hedeflenen kapsamı hakkında bilgi vermek için hazırlanmıştır.
+              Resmî yayın ve erişim durumu duyurularla paylaşılacaktır.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Ofis360 hangi sektörlere yönelik geliştiriliyor?
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer">
+              İlk aşamada bilgisayar ve güvenlik sistemleri/teknik servis
+              işletmeleri ile gayrimenkul alanları öncelikli olarak ele alınıyor.
+              Ürünün kesin kapsamı geliştirme sürecinde netleşecektir.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Ücretlendirme ve paketler belli mi?
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer">
+              Bu sayfada kesin bir fiyat veya paket vaadi verilmemektedir.
+              Güncel ücretlendirme ve kullanım koşulları netleştiğinde
+              resmî olarak paylaşılacaktır. Bilgi almak için iletişim
+              bölümünden talep gönderebilirsiniz.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              İşletmeme özel bilgi veya teklif isteyebilir miyim?
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer">
+              Evet. Sayfanın altındaki formdan işletmenizin alanını ve
+              talebinizi yazabilirsiniz. Gönder düğmesi WhatsApp üzerinden
+              mesaj oluşturur; mesajı açılan uygulamada sizin göndermeniz gerekir.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Yapay zekâ özellikleri hazır mı?
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer">
+              Yapay zekâ destekli analiz ve öneriler ürünün geleceğe yönelik
+              geliştirme hedefleri arasındadır. Bu tanıtım sayfası, bu
+              özelliklerin şu anda kullanılabilir olduğu anlamına gelmez.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- İletişim ve teklif -->
+    <section class="section contact" id="iletisim">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-kicker">İletişim</div>
+          <h2 class="section-title">İşletmeniz için Ofis360'ı birlikte değerlendirelim.</h2>
+          <p class="section-description">
+            Ürün hakkında sorularınızı, bilgi taleplerinizi veya işletmenize
+            özel çözüm beklentilerinizi iletin. Talebinizi WhatsApp üzerinden
+            gönderebilirsiniz.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="reveal">
+            <div class="contact-points">
+              <a class="contact-point" id="whatsappContact"
+                 href="https://wa.me/905064676635?text=Merhaba%2C%20G%C3%BCnde%C5%9Fli%20Soft%20Ofis360%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum."
+                 target="_blank" rel="noopener noreferrer">
+                <span class="contact-symbol" aria-hidden="true">W</span>
+                <span>
+                  <strong>WhatsApp üzerinden iletişim</strong>
+                  <span>Soru, ürün bilgisi ve teklif talepleri için doğrudan mesaj oluşturun.</span>
+                </span>
+              </a>
+
+              <a class="contact-point" href="https://www.instagram.com/melihgundsli/"
+                 target="_blank" rel="noopener noreferrer">
+                <span class="contact-symbol" aria-hidden="true">IG</span>
+                <span>
+                  <strong>Instagram üzerinden ulaşın</strong>
+                  <span>Instagram hesabını açarak iletişime geçin.</span>
+                </span>
+              </a>
+            </div>
+
+            <p style="margin-top:20px;color:#8e8a80;font-size:11px;line-height:1.8">
+              İletişim bağlantıları, ilgili uygulamayı veya web sayfasını
+              açar. WhatsApp mesajı, kullanıcı tarafından gönderilmeden
+              karşı tarafa iletilmez.
+            </p>
+          </div>
+
+          <form class="contact-form reveal" id="contactForm">
+            <h3>Soru veya teklif talebi</h3>
+            <p>Bilgileri doldurun; talebiniz WhatsApp'ta hazır mesaj olarak açılır.</p>
+
+            <div class="field">
+              <label for="contactName">Adınız veya işletme adınız</label>
+              <input id="contactName" name="name" maxlength="100"
+                autocomplete="name" placeholder="Nasıl hitap edelim?" required>
+            </div>
+
+            <div class="field">
+              <label for="businessType">İşletme alanınız</label>
+              <select id="businessType" name="business" required>
+                <option value="">Bir alan seçin</option>
+                <option>Bilgisayar ve güvenlik sistemleri</option>
+                <option>Teknik servis</option>
+                <option>Gayrimenkul</option>
+                <option>Diğer sektör</option>
+                <option>Henüz işletmem yok</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="requestType">Talep türünüz</label>
+              <select id="requestType" name="requestType" required>
+                <option value="">Bir talep seçin</option>
+                <option>Ürün hakkında bilgi</option>
+                <option>Fiyat ve teklif talebi</option>
+                <option>İşletmeme özel çözüm</option>
+                <option>İş birliği görüşmesi</option>
+                <option>Diğer soru veya öneri</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="message">Mesajınız</label>
+              <textarea id="message" name="message" maxlength="1500"
+                placeholder="İhtiyacınızı veya sorunuzun ayrıntılarını yazın..." required></textarea>
+            </div>
+
+            <button class="button button-gold" type="submit">
+              WhatsApp ile talep gönder <span class="arrow">↗</span>
+            </button>
+
+            <div class="form-note">
+              Bu form bilgileri bir veri tabanına kaydetmez. Gönder düğmesi
+              WhatsApp'ta mesaj taslağı açar; mesajı inceleyip kendiniz gönderirsiniz.
+              Lütfen gereksiz hassas kişisel bilgi yazmayın.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-main">
       <div>
-        <strong>GÜNDEŞLİ SOFT</strong>
-        · Ofis360 ürün geliştirme projesi
+        <div class="footer-brand">
+          <img src="gundesli_logo.png" alt="Gündeşli Soft logosu"
+            onerror="this.style.display='none'">
+          <strong>GÜNDEŞLİ SOFT</strong>
+        </div>
+        <p class="footer-about">
+          Ofis360, işletme süreçlerini daha düzenli yönetmeye yönelik
+          geliştirilen bir Gündeşli Soft ürün projesidir. Ürün kapsamı,
+          özellikler ve yayın durumu geliştirme sürecinde netleşecektir.
+        </p>
       </div>
 
-      <div>
-        © <span id="year">2026</span> Gündeşli Soft. Tüm hakları saklıdır.
+      <div class="footer-col">
+        <h3>Ofis360</h3>
+        <div class="footer-links">
+          <a href="#ofis360">Ürün hakkında</a>
+          <a href="#ozellikler">Hedeflenen özellikler</a>
+          <a href="#sektorler">Kullanım alanları</a>
+          <a href="#sss">Sık sorulan sorular</a>
+        </div>
       </div>
-    </footer>
-  </div>
+
+      <div class="footer-col">
+        <h3>İletişim</h3>
+        <div class="footer-links">
+          <a href="#iletisim">Soru ve teklif gönder</a>
+          <a href="https://wa.me/905064676635?text=Merhaba%2C%20G%C3%BCnde%C5%9Fli%20Soft%20Ofis360%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum."
+             target="_blank" rel="noopener noreferrer">WhatsApp üzerinden ulaşın</a>
+          <a href="https://www.instagram.com/melihgundsli/"
+             target="_blank" rel="noopener noreferrer">Instagram üzerinden ulaşın</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div><strong>GÜNDEŞLİ SOFT</strong> · Ofis360 ürün geliştirme projesi</div>
+      <div>© <span id="year"></span> Gündeşli Soft. Tüm hakları saklıdır.</div>
+    </div>
+  </footer>
 
   <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+    (() => {
+      const intro = document.getElementById("intro");
+      const skipButton = document.getElementById("skipIntro");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Açılış efektleri için dekoratif parçacıklar.
+      const particles = document.getElementById("particles");
+
+      for (let i = 0; i < 32; i++) {
+        const particle = document.createElement("span");
+        particle.className = "particle";
+
+        const angle = (Math.PI * 2 * i) / 32;
+        const distance = 90 + Math.random() * 260;
+
+        particle.style.setProperty("--dx", `${Math.cos(angle) * distance}px`);
+        particle.style.setProperty("--dy", `${Math.sin(angle) * distance}px`);
+        particle.style.animationDelay = `${2.3 + Math.random() * 0.22}s`;
+        particle.style.width = `${1 + Math.random() * 3}px`;
+        particle.style.height = particle.style.width;
+
+        particles.appendChild(particle);
+      }
+
+      let introClosed = false;
+
+      function closeIntro() {
+        if (introClosed) return;
+        introClosed = true;
+        intro.classList.add("finished");
+        document.body.classList.remove("intro-active");
+      }
+
+      skipButton.addEventListener("click", closeIntro);
+
+      if (reducedMotion) {
+        closeIntro();
+      } else {
+        window.setTimeout(closeIntro, 6800);
+      }
+
+      // Mobil menü.
+      const menuToggle = document.getElementById("menuToggle");
+      const mainNav = document.getElementById("mainNav");
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = mainNav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.setAttribute("aria-label", isOpen ? "Menüyü kapat" : "Menüyü aç");
+        menuToggle.textContent = isOpen ? "×" : "☰";
+      });
+
+      mainNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          mainNav.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "Menüyü aç");
+          menuToggle.textContent = "☰";
+        });
+      });
+
+      // Sık sorulan sorular.
+      document.querySelectorAll(".faq-question").forEach(button => {
+        button.addEventListener("click", () => {
+          const item = button.closest(".faq-item");
+          const wasOpen = item.classList.contains("open");
+
+          document.querySelectorAll(".faq-item").forEach(other => {
+            other.classList.remove("open");
+            other.querySelector(".faq-question").setAttribute("aria-expanded", "false");
+          });
+
+          if (!wasOpen) {
+            item.classList.add("open");
+            button.setAttribute("aria-expanded", "true");
+          }
+        });
+      });
+
+      // Kaydırma sırasında içeriklerin yumuşak görünmesi.
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window && !reducedMotion) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        revealElements.forEach(element => observer.observe(element));
+      } else {
+        revealElements.forEach(element => element.classList.add("visible"));
+      }
+
+      // İletişim formu WhatsApp mesaj taslağı açar.
+      // Numara ekranda metin olarak gösterilmez.
+      const whatsappNumber = "905064676635";
+      const contactForm = document.getElementById("contactForm");
+
+      contactForm.addEventListener("submit", event => {
+        event.preventDefault();
+
+        if (!contactForm.reportValidity()) return;
+
+        const name = document.getElementById("contactName").value.trim();
+        const business = document.getElementById("businessType").value;
+        const requestType = document.getElementById("requestType").value;
+        const message = document.getElementById("message").value.trim();
+
+        const text = [
+          "Merhaba, Gündeşli Soft Ofis360 hakkında iletişime geçiyorum.",
+          "",
+          "Ad / İşletme: " + name,
+          "İşletme alanı: " + business,
+          "Talep türü: " + requestType,
+          "",
+          "Mesajım:",
+          message
+        ].join("\n");
+
+        const url = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(text);
+        window.open(url, "_blank", "noopener,noreferrer");
+      });
+
+      // Güncel telif yılı.
+      document.getElementById("year").textContent = new Date().getFullYear();
+    })();
   </script>
 </body>
 </html>
