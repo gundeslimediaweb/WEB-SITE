@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -8,641 +7,1279 @@
 <meta name="description" content="Gündeşli Soft Ofis360 işletme yönetim sistemi">
 <title>Gündeşli Soft — Ofis360</title>
 <style>
-:root{--blue:#1769e0;--blue2:#1053b5;--bg:#f5f7fb;--card:#fff;--ink:#172338;--muted:#718096;--line:#e5eaf2;--green:#14845b;--red:#c34343;--amber:#a66a0b;--radius:15px;--shadow:0 8px 28px rgba(25,45,80,.045)}
+:root {
+  --blue:#1769e0;
+  --blue-dark:#1053b5;
+  --blue-light:#edf4ff;
+  --bg:#f5f7fb;
+  --card:#fff;
+  --ink:#172338;
+  --muted:#748197;
+  --line:#e5eaf2;
+  --green:#16845b;
+  --red:#c34343;
+  --amber:#a66a0b;
+  --radius:15px;
+  --shadow:0 8px 28px rgba(25,45,80,.045);
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-button:disabled{opacity:.5;cursor:not-allowed}
+button:disabled{opacity:.55;cursor:not-allowed}
 [hidden]{display:none!important}
-.app{min-height:100vh}.app.locked{display:none}
+button,input,select,textarea{max-width:100%}
+.gate{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 10% 10%,#deebff 0,transparent 38%),radial-gradient(ellipse at 90% 90%,#e9eaff 0,transparent 35%),#f7f9fd;display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}
+.gate-card{width:min(510px,100%);background:#fff;border:1px solid #dfe6f2;border-radius:24px;padding:clamp(22px,5vw,38px);box-shadow:0 24px 70px #1c37651a;animation:appear .3s ease}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.gate-mark,.brand-mark{width:44px;height:44px;border-radius:13px;background:linear-gradient(145deg,#2583ff,#1253bb);color:white;display:grid;place-items:center;font-size:26px;font-weight:650;box-shadow:0 5px 14px #1769e025}
+.gate-mark{margin-bottom:18px}
+.eyebrow{color:var(--blue);font-size:10px;font-weight:750;letter-spacing:2.4px;margin:-7px 0 12px}
+.gate h1{font-size:27px;line-height:1.2;letter-spacing:-.7px;font-weight:650;margin:0 0 9px}
+.gate p{color:var(--muted);margin:0 0 20px;line-height:1.7}
+.gate-form{display:grid;gap:10px}
+.field{display:grid;gap:6px;margin-bottom:12px;min-width:0}
+.field label{font-size:12px;color:#526078;font-weight:600}
+input,select,textarea{width:100%;border:1px solid #dfe5ef;border-radius:10px;background:#fff;padding:10px 12px;color:var(--ink);min-width:0}
+textarea{min-height:85px;resize:vertical}
+input::placeholder,textarea::placeholder{color:#a5afbd}
+input:focus,select:focus,textarea:focus{border-color:#4388ed;box-shadow:0 0 0 3px #2370e014;outline:none}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}
+.full{grid-column:1/-1}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;padding:10px 14px;min-height:39px;font-weight:550;transition:.15s}
+.btn:hover{border-color:#b9cbe7;background:#f8faff}
+.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn.primary:hover{background:var(--blue-dark)}
+.btn.danger{color:var(--red)}
+.auth-submit{min-height:46px;font-weight:650;margin-top:4px}
+.auth-note{font-size:11px;color:var(--muted);line-height:1.7;margin-top:16px;padding-top:13px;border-top:1px solid var(--line)}
+.gate-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.gate-actions .btn{flex:1}
+.app.locked{display:none}
 .sidebar{position:fixed;inset:0 auto 0 0;width:245px;background:#fff;border-right:1px solid var(--line);padding:20px 14px;display:flex;flex-direction:column;z-index:8;overflow:auto}
-.brand{display:flex;align-items:center;gap:11px;padding:0 8px 23px}
-.brand-mark,.gate-mark{width:43px;height:43px;border-radius:13px;background:linear-gradient(145deg,#2583ff,#1253bb);color:white;display:grid;place-items:center;font-size:26px;font-weight:650;box-shadow:0 5px 14px #1769e025}
-.brand-name{font-size:16px;font-weight:650;letter-spacing:-.4px}.brand-sub{font-size:11px;color:var(--muted);margin-top:2px}
-.nav-label{font-size:10px;letter-spacing:1.3px;color:#9aa5b5;font-weight:700;padding:12px}
-.nav{display:grid;gap:4px}.nav button{border:0;background:transparent;color:#637087;text-align:left;padding:11px 12px;border-radius:10px;display:flex;align-items:center;gap:11px;width:100%}
-.nav button:hover{background:#f4f7fc;color:var(--blue)}.nav button.active{background:#eaf2ff;color:var(--blue);font-weight:600}
-.nav-symbol{width:20px;text-align:center;font-size:16px}
-.sidebar-bottom{margin-top:auto;padding:16px 9px 0;color:var(--muted);font-size:11px}
-.main{margin-left:245px;min-width:0}.topbar{height:68px;background:#ffffffeb;backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 27px;gap:12px;position:sticky;top:0;z-index:6}
-.top-title{font-size:16px;font-weight:620}.top-sub{font-size:11px;color:var(--muted);margin-top:2px}
-.top-actions{display:flex;align-items:center;gap:8px}.top-actions select{width:auto;max-width:190px}
-.content{padding:25px 27px 45px;max-width:1600px;margin:auto}
-.page{display:none}.page.active{display:block}
-.page-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:22px;flex-wrap:wrap}
-h1{font-size:25px;letter-spacing:-.8px;font-weight:620;margin:0 0 5px}h2{font-size:16px;font-weight:620;margin:0}h3{font-size:13px;font-weight:620;margin:0}
-.muted{color:var(--muted)}.small{font-size:12px}.tiny{font-size:11px}
-.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:9px 13px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-weight:550}
-.btn:hover{border-color:#b8c8df;background:#f9fbff}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.primary:hover{background:var(--blue2)}
-.btn.danger{color:var(--red);border-color:#f0d3d3}.btn.small-btn{padding:6px 9px;font-size:12px}
-.grid{display:grid;gap:15px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);min-width:0}
-.stat-label{color:var(--muted);font-size:12px}.stat-value{font-size:27px;font-weight:650;letter-spacing:-1px;margin:8px 0 4px}.stat-foot{font-size:11px;color:var(--muted)}
-.two-col{grid-template-columns:minmax(0,1.4fr) minmax(260px,1fr)}.three-col{grid-template-columns:repeat(3,minmax(0,1fr))}
-.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.card-head p{margin:4px 0 0}
-.table-wrap{overflow:auto;width:100%;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;white-space:nowrap}
-th{text-align:left;font-size:11px;color:#8490a2;font-weight:600;padding:11px 10px;border-bottom:1px solid var(--line)}
-td{padding:12px 10px;border-bottom:1px solid #eef1f6;font-size:12px;vertical-align:middle}
-tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:#fafcff}
-.empty{text-align:center;padding:27px 12px;color:var(--muted);font-size:12px}
-.field{display:grid;gap:6px;margin-bottom:13px}.field label{font-size:12px;color:#5e6c81;font-weight:550}
-input,select,textarea{width:100%;border:1px solid #dfe5ef;border-radius:9px;background:#fff;padding:10px 11px;color:var(--ink);min-width:0}
-textarea{min-height:85px;resize:vertical}input::placeholder,textarea::placeholder{color:#a5afbd}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 13px}.full{grid-column:1/-1}
-.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:15px}.toolbar input{max-width:290px}.toolbar select{width:auto;min-width:140px}
-.pill{display:inline-flex;border-radius:20px;padding:4px 8px;font-size:10px;background:#edf2f8;color:#637087}
-.pill.green{background:#e5f6ee;color:#13784f}.pill.red{background:#fff0f0;color:#b43b3b}.pill.amber{background:#fff4dd;color:#93600b}.pill.blue{background:#eaf2ff;color:#1769e0}
+.brand{display:flex;align-items:center;gap:11px;padding:0 8px 24px}
+.brand-name{font-size:14px;font-weight:700;letter-spacing:-.2px}
+.brand-sub{font-size:11px;color:var(--muted)}
+.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:#9aa5b6;padding:10px 11px}
+.nav{display:grid;gap:4px}
+.nav button{display:flex;align-items:center;gap:11px;width:100%;border:0;background:transparent;text-align:left;color:#627087;border-radius:10px;padding:10px 11px;font-size:13px}
+.nav button:hover{background:#f6f8fc;color:var(--ink)}
+.nav button.active{background:var(--blue-light);color:var(--blue);font-weight:650}
+.nav-icon{width:22px;text-align:center;font-size:15px}
+.sidebar-bottom{margin-top:auto;padding:15px 7px 0;border-top:1px solid var(--line)}
+.user-line{display:flex;align-items:center;gap:10px;min-width:0}
+.avatar{width:36px;height:36px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:#e8f0ff;color:var(--blue);font-weight:700}
+.user-info{min-width:0;flex:1}
+.user-info strong{display:block;overflow-wrap:anywhere;font-size:12px}
+.user-info small{color:var(--muted);font-size:10px}
+.main{margin-left:245px;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:6;min-height:72px;padding:12px 26px;background:#ffffffed;backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:15px}
+.top-title{font-weight:700;font-size:15px}
+.top-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.top-actions{display:flex;align-items:center;gap:9px}
+.top-actions select{width:auto;max-width:230px;font-size:12px}
+.mobile-menu{display:none}
+.content{padding:26px;max-width:1600px;margin:auto}
+.page{display:none}
+.page.active{display:block;animation:appear .18s ease}
+.page-heading{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:20px}
+.page-heading h1{font-size:24px;letter-spacing:-.7px;font-weight:650;margin:0 0 5px}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.tiny{font-size:10px}
+.grid{display:grid;gap:15px}
+.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}
+.two-col{grid-template-columns:repeat(2,minmax(0,1fr))}
+.three-col{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.card h2{font-size:14px;margin:0;font-weight:650}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.stat-label{font-size:12px;color:var(--muted)}
+.stat-value{font-size:30px;line-height:1.3;font-weight:700;letter-spacing:-1px;margin:6px 0}
+.stat-foot{font-size:11px;color:var(--muted)}
+.clickable-stat{cursor:pointer;text-align:left;width:100%;color:inherit}
+.clickable-stat:hover{border-color:#c6d8f6;transform:translateY(-1px)}
+.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.quick{padding:14px;border:1px solid var(--line);border-radius:11px;background:#fff;text-align:left}
+.quick:hover{background:#f8fbff;border-color:#c7d9f5}
+.quick strong{display:block;font-size:12px}
+.quick span{display:block;font-size:11px;color:var(--muted);margin-top:4px}
+.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:15px}
+.toolbar input{max-width:300px}
+.toolbar select{width:auto;min-width:145px}
+.table-wrap{overflow:auto;width:100%;border:1px solid var(--line);border-radius:11px}
+table{width:100%;border-collapse:collapse;min-width:650px;font-size:12px}
+th,td{text-align:left;padding:12px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#7e8ba0;background:#f8faff;font-weight:700}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fbfcff}
+.empty{text-align:center;padding:32px 15px;color:var(--muted)}
+.pill{display:inline-flex;border-radius:20px;padding:4px 8px;font-size:10px;background:#edf2f8;color:#637087;white-space:nowrap}
+.pill.green{background:#e5f6ee;color:#13784f}
+.pill.red{background:#fff0f0;color:#b43b3b}
+.pill.amber{background:#fff4dd;color:#93600b}
+.pill.blue{background:#eaf2ff;color:#1769e0}
 .row-actions{display:flex;gap:6px;flex-wrap:wrap}
-.notice{border:1px solid #dbe8fb;background:#f2f7ff;border-radius:11px;padding:13px 15px;color:#425e86;font-size:12px;margin-bottom:16px}.notice.warn{background:#fff8e9;border-color:#f3e2b7;color:#87621e}
-.kpi-list{display:grid;gap:13px}.kpi-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px}
-.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.quick{padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;text-align:left;width:100%;color:var(--ink)}
-.quick:hover{border-color:#9bbcf0;background:#f8fbff}.quick strong{display:block;font-size:12px;margin-bottom:4px}.quick span{font-size:11px;color:var(--muted)}
-.activity{display:grid;gap:13px}.activity-item{display:flex;gap:10px;font-size:12px}.activity-dot{width:8px;height:8px;background:#6fa5f5;border-radius:50%;margin-top:5px;flex-shrink:0}
-.progress{height:6px;background:#edf1f7;border-radius:8px;overflow:hidden;margin-top:7px}.progress span{display:block;height:100%;background:var(--blue);border-radius:8px}
-.section-divider{height:1px;background:var(--line);margin:17px 0}
-.modal-backdrop{position:fixed;inset:0;background:#101a2b66;display:none;align-items:center;justify-content:center;padding:14px;z-index:30}
-.modal-backdrop.open{display:flex}.modal{background:white;width:min(700px,100%);max-height:92dvh;overflow:auto;border-radius:17px;box-shadow:0 25px 80px #101a2b30}
-.modal-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;background:#fff;z-index:2}
-.modal-body{padding:19px 20px}.modal-foot{padding:14px 20px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:9px;position:sticky;bottom:0;background:#fff}
-.close{border:0;background:#f1f4f8;border-radius:8px;width:32px;height:32px;font-size:18px;color:#68778c}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#17243a;color:white;padding:12px 17px;border-radius:10px;box-shadow:0 8px 30px #0002;z-index:70;display:none;max-width:calc(100% - 30px);font-size:12px}
-.toast.show{display:block}.guide-answer{background:#f5f8fd;border:1px solid var(--line);border-radius:11px;padding:15px;min-height:90px;white-space:pre-wrap;font-size:13px}
-.mobile-menu{display:none}.clickable-stat{cursor:pointer}.clickable-stat:hover{border-color:#a9c6f5}
-.gate{position:fixed;inset:0;z-index:100;background:#f5f7fb;display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}.gate.hidden{display:none}
-.gate-card{width:min(510px,100%);background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(20px,5vw,34px);box-shadow:0 24px 70px #1c37651a}
-.gate-mark{margin-bottom:17px}.gate h1{font-size:25px;margin-bottom:7px}.gate p{color:var(--muted);margin:0 0 19px}.gate-form{display:grid;gap:12px}
-.profile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.profile-choice{border:1px solid var(--line);background:#fff;border-radius:14px;padding:15px 7px;text-align:center;min-width:0;color:var(--ink)}
-.profile-choice:hover{border-color:#9bbcf0;background:#f8fbff}.profile-letter{width:45px;height:45px;border-radius:50%;background:#eaf2ff;color:var(--blue);display:grid;place-items:center;font-size:20px;font-weight:650;margin:0 auto 8px}
-.profile-choice strong{display:block;font-size:12px;overflow-wrap:anywhere}.profile-choice small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
-.gate-actions{display:flex;gap:8px;flex-wrap:wrap}.gate-actions .btn{flex:1}
-.auth-note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:16px;padding-top:13px;border-top:1px solid var(--line)}
-.profile-admin-row{display:grid;grid-template-columns:36px minmax(0,1fr) minmax(110px,.7fr);gap:8px;align-items:center;margin:9px 0}
-.profile-admin-row input,.profile-admin-row select{padding:8px;font-size:12px}.profile-admin-letter{width:32px;height:32px;display:grid;place-items:center;background:#eaf2ff;color:var(--blue);border-radius:10px;font-weight:700}
-@media(max-width:1100px){.sidebar{width:220px}.main{margin-left:220px}.content{padding:22px 19px}.topbar{padding:0 18px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.two-col{grid-template-columns:1fr}}
-@media(max-width:760px){.sidebar{transform:translateX(-105%);transition:transform .22s;width:265px;box-shadow:none}.sidebar.open{transform:translateX(0);box-shadow:15px 0 40px #17243a18}.main{margin-left:0}.topbar{height:61px;padding:0 12px}.content{padding:17px 12px 32px}.mobile-menu{display:inline-flex;padding:8px 10px}.top-sub{display:none}.top-title{font-size:14px}.top-actions{gap:5px}.top-actions select{max-width:145px;font-size:11px;padding:8px 5px}.top-actions #quickAdd{font-size:11px;padding:8px}.stats{gap:9px}.stat-value{font-size:23px}.card{padding:14px}.three-col{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.page-heading h1{font-size:22px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.toolbar input{max-width:none;flex:1;min-width:135px}.toolbar select{flex:1}.modal-body{padding:15px}.modal-head,.modal-foot{padding:13px 15px}.profile-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.gate-card{padding:20px}.profile-admin-row{grid-template-columns:32px minmax(0,1fr)}.profile-admin-row select{grid-column:2}.row-actions .btn{font-size:11px;padding:6px}}
-@media(max-width:390px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.top-actions select{max-width:115px}.top-actions #quickAdd{font-size:0}.top-actions #quickAdd:after{content:"＋";font-size:16px}.profile-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media print{.sidebar,.topbar,.no-print,.modal-backdrop,.toast{display:none!important}.main{margin:0}.content{padding:0}.page{display:none!important}#printPage{display:block!important}.card{box-shadow:none;border:1px solid #ddd}body{background:#fff}}
+.btn.sm{padding:5px 8px;min-height:29px;font-size:11px}
+.section-divider{border-top:1px solid var(--line);margin:18px 0}
+.activity-list{display:grid;gap:12px}
+.activity-item{display:flex;gap:10px;align-items:flex-start;font-size:12px}
+.activity-dot{width:8px;height:8px;border-radius:50%;background:#7da8f0;margin-top:5px;flex-shrink:0}
+.activity-item time{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.notice{border:1px solid #d9e7ff;background:#f5f9ff;border-radius:11px;padding:12px 14px;font-size:12px;color:#375477;line-height:1.7}
+.notice.warning{border-color:#f0dfb6;background:#fffaf0;color:#7b5a18}
+.notice.error{border-color:#f1caca;background:#fff6f6;color:#9b3838}
+.modal-backdrop{position:fixed;inset:0;background:#12213d66;z-index:50;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{background:#fff;border-radius:18px;width:min(650px,100%);max-height:92vh;overflow:auto;padding:22px;box-shadow:0 25px 80px #13274b33}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+.modal-head h2{font-size:18px;margin:0}
+.modal-close{border:0;background:#f1f4f9;border-radius:9px;width:34px;height:34px;font-size:18px}
+.modal-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}
+.modal-form .field.full{grid-column:1/-1}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:15px}
+.toast{position:fixed;bottom:22px;right:22px;z-index:200;background:#172338;color:#fff;border-radius:11px;padding:12px 16px;max-width:min(380px,calc(100vw - 32px));box-shadow:0 10px 35px #0002;font-size:12px}
+.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.staff-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,.7fr);gap:8px;margin:8px 0;align-items:center}
+.footer-note{font-size:10px;color:var(--muted);line-height:1.7;margin-top:16px}
+@media(max-width:1100px){.sidebar{width:215px}.main{margin-left:215px}.content{padding:20px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.three-col{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+ .sidebar{transform:translateX(-100%);transition:transform .2s;width:260px;box-shadow:none}
+ .sidebar.open{transform:translateX(0);box-shadow:10px 0 35px #17233822}
+ .main{margin-left:0}
+ .topbar{padding:11px 14px;min-height:65px}
+ .mobile-menu{display:inline-flex;padding:8px 10px}
+ .top-actions select{max-width:145px}
+ .top-actions .desktop-label{display:none}
+ .content{padding:16px}
+ .page-heading{align-items:flex-start}
+ .page-heading h1{font-size:21px}
+ .two-col,.settings-grid{grid-template-columns:1fr}
+ .three-col{grid-template-columns:1fr}
+ .card{padding:15px}
+ .top-sub{max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
+@media(max-width:480px){
+ .stats{gap:9px}
+ .stat-value{font-size:25px}
+ .stat-label{font-size:11px}
+ .top-actions{gap:5px}
+ .top-actions select{max-width:120px;padding:8px 5px}
+ .top-title{font-size:13px}
+ .content{padding:12px}
+ .quick-grid{gap:7px}
+ .quick{padding:11px}
+ .form-grid,.modal-form{grid-template-columns:1fr}
+ .form-grid .full,.modal-form .field.full{grid-column:auto}
+ .gate{padding:10px}
+ .gate-card{padding:23px 18px}
+}
+@media print{
+ .sidebar,.topbar,.no-print,.toast,.modal-backdrop{display:none!important}
+ .main{margin:0}.content{padding:0}
+ .page{display:none!important}
+ #page-reports{display:block!important}
+ .card{box-shadow:none}
+}
 </style>
 </head>
 <body>
+
+<!-- GİRİŞ / KAYIT -->
 <div id="authGate" class="gate">
- <div class="gate-card">
-  <div class="gate-mark">G</div><h1 id="authTitle">Ofis360 ilk kurulum</h1>
-  <p id="authSubtitle">İşletme hesabını oluştur veya mevcut hesabına giriş yap.</p>
-  <div id="authLoginPane" hidden>
-   <form id="businessLoginForm" class="gate-form">
-    <div class="field"><label for="loginUsername">İşletme kullanıcı adı</label><input id="loginUsername" autocomplete="username" required maxlength="80"></div>
-    <div class="field"><label for="loginPassword">İşletme şifresi</label><input id="loginPassword" type="password" autocomplete="current-password" required></div>
-    <button class="btn primary" type="submit">İşletme hesabına giriş yap</button>
-    <button class="btn" type="button" id="showRegister">Yeni işletme hesabı oluştur</button>
-   </form>
+  <div class="gate-card">
+    <div class="gate-mark">G</div>
+    <div class="eyebrow">GÜNDEŞLİ SOFT</div>
+    <h1 id="authTitle">Ofis360'a hoş geldin</h1>
+    <p id="authSubtitle">İşletmeni tek merkezden yönetmeye başla.</p>
+
+    <div id="authLoginPane" hidden>
+      <form id="businessLoginForm" class="gate-form">
+        <div class="field">
+          <label for="loginUsername">Kullanıcı adı</label>
+          <input id="loginUsername" autocomplete="username" required maxlength="80" placeholder="Kullanıcı adın">
+        </div>
+        <div class="field">
+          <label for="loginPassword">Şifre</label>
+          <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Şifren">
+        </div>
+        <button class="btn primary auth-submit" type="submit">Giriş yap</button>
+        <button class="btn" type="button" id="showRegister">Yeni işletme hesabı oluştur</button>
+      </form>
+    </div>
+
+    <div id="authRegisterPane">
+      <form id="businessRegisterForm" class="gate-form">
+        <div class="form-grid">
+          <div class="field">
+            <label for="registerFirstName">Ad</label>
+            <input id="registerFirstName" autocomplete="given-name" maxlength="60" required placeholder="Adın">
+          </div>
+          <div class="field">
+            <label for="registerLastName">Soyad</label>
+            <input id="registerLastName" autocomplete="family-name" maxlength="60" required placeholder="Soyadın">
+          </div>
+          <div class="field full">
+            <label for="registerBusiness">İşletme adı</label>
+            <input id="registerBusiness" maxlength="120" required placeholder="İşletmenin adı">
+          </div>
+          <div class="field full">
+            <label for="registerSector">İşletme türü</label>
+            <select id="registerSector" required>
+              <option value="computer">Bilgisayar sistemleri ve teknik servis</option>
+              <option value="security">Güvenlik sistemleri ve teknik servis</option>
+              <option value="phone">Telefon mağazası ve teknik servis</option>
+              <option value="realestate">Gayrimenkul / emlak</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="registerUsername">Kullanıcı adı</label>
+            <input id="registerUsername" autocomplete="username" minlength="3" maxlength="80" required placeholder="En az 3 karakter">
+          </div>
+          <div class="field full">
+            <label for="registerPassword">Şifre</label>
+            <input id="registerPassword" type="password" autocomplete="new-password" minlength="8" required placeholder="En az 8 karakter">
+          </div>
+        </div>
+        <button class="btn primary auth-submit" type="submit">İşletme hesabı oluştur</button>
+        <button class="btn" type="button" id="showLogin">Zaten hesabım var</button>
+      </form>
+    </div>
+
+    <div class="auth-note">
+      Bu sürüm yerel prototiptir. Veriler bu tarayıcıda saklanır.
+      Gerçek hesap doğrulaması, güvenli sunucu ve farklı cihazlar arasında
+      senkronizasyon henüz bağlı değildir.
+    </div>
   </div>
-  <div id="authRegisterPane">
-   <form id="businessRegisterForm" class="gate-form">
-    <div class="field"><label for="registerBusiness">İşletme adı</label><input id="registerBusiness" required maxlength="120" placeholder="İşletmenizin adı"></div>
-    <div class="field"><label for="registerUsername">İşletme kullanıcı adı</label><input id="registerUsername" required minlength="3" maxlength="80" autocomplete="username" placeholder="En az 3 karakter"></div>
-    <div class="field"><label for="registerPassword">İşletme şifresi</label><input id="registerPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="En az 8 karakter"></div>
-    <button class="btn primary" type="submit">İşletme hesabı oluştur</button>
-    <button class="btn" type="button" id="showLogin">Giriş ekranına dön</button>
-   </form>
-  </div>
-  <div class="auth-note">Bu sürüm yerel prototiptir. Hesaplar ve kayıtlar bu tarayıcıda saklanır; gerçek kullanım için sunucu tabanlı kimlik doğrulaması ve yedekleme gerekir.</div>
- </div>
 </div>
-<div id="profileGate" class="gate hidden">
- <div class="gate-card"><div class="gate-mark">G</div><h1>Kim kullanıyor?</h1><p id="profileGateSubtitle">Çalışacak personel profilini seç.</p><div id="profileChoices" class="profile-grid"></div>
-  <div class="gate-actions" style="margin-top:16px"><button class="btn" id="profileLogout">İşletme hesabından çıkış</button></div>
- </div>
-</div>
-<div id="pinGate" class="gate hidden">
- <div class="gate-card"><div class="gate-mark">G</div><h1 id="pinTitle">Personel PIN girişi</h1><p id="pinSubtitle">4 haneli PIN kodunu gir.</p>
-  <form id="pinForm" class="gate-form"><div class="field"><label for="profilePin">4 haneli PIN</label><input id="profilePin" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off" required placeholder="••••"></div>
-   <div class="gate-actions"><button class="btn primary" type="submit" id="pinSubmit">Devam et</button><button class="btn" type="button" id="pinBack">Profil seçimine dön</button></div>
-  </form><div class="auth-note">Hareketsizlik kilidi varsayılan 10 dakikadır. Bu PIN kilidi tek başına sunucu düzeyinde güvenlik sağlamaz.</div>
- </div>
-</div>
+
+<!-- ANA UYGULAMA -->
 <div class="app locked" id="app">
-<aside class="sidebar" id="sidebar">
- <div class="brand"><div class="brand-mark">G</div><div><div class="brand-name">Gündeşli Soft</div><div class="brand-sub">Ofis360 İşletme Yönetimi</div></div></div>
- <div class="nav-label">ÇALIŞMA ALANI</div>
- <nav class="nav" id="mainNav">
-  <button class="active" data-page="dashboard"><span class="nav-symbol">⌂</span> Genel Bakış</button>
-  <button data-page="customers"><span class="nav-symbol">◎</span> Müşteriler</button>
-  <button data-page="stock"><span class="nav-symbol">▤</span> Stok Yönetimi</button>
-  <button data-page="orders"><span class="nav-symbol">⇄</span> Satış ve Siparişler</button>
-  <button data-page="service"><span class="nav-symbol">⌁</span> Teknik Servis</button>
-  <button data-page="tasks"><span class="nav-symbol">✓</span> Görevler</button>
-  <button data-page="reports"><span class="nav-symbol">▥</span> Raporlar</button>
-  <button data-page="guide"><span class="nav-symbol">✳</span> Akıllı İş Rehberi</button>
-  <button data-page="settings"><span class="nav-symbol">⚙</span> Ayarlar ve Yedekleme</button>
- </nav>
- <div class="sidebar-bottom">Gündeşli Soft · Ofis360<br><span id="sideProfile">Yerel prototip</span></div>
-</aside>
-<main class="main">
- <header class="topbar">
-  <div style="display:flex;align-items:center;gap:10px"><button class="btn mobile-menu" id="mobileMenu" aria-label="Menüyü aç">☰</button><div><div class="top-title" id="topTitle">Genel Bakış</div><div class="top-sub" id="businessSubtitle">İşletme yönetim merkezi</div></div></div>
-  <div class="top-actions"><select id="sectorSwitcher" aria-label="Çalışma alanı"><option value="computer">Bilgisayar Sistemleri</option><option value="security">Güvenlik Sistemleri</option></select><button class="btn primary" id="quickAdd">＋ Yeni Kayıt</button></div>
- </header>
- <div class="content">
-  <section class="page active" id="page-dashboard">
-   <div class="page-heading"><div><h1>İşletmen için 360° kontrol.</h1><div class="muted">İşletme kayıtlarını, görevleri ve kritik durumları tek yerden takip et.</div></div><button class="btn" id="dashExport">Yedek Al</button></div>
-   <div class="grid stats">
-    <button class="card clickable-stat" data-jump="customers" style="text-align:left"><div class="stat-label">Toplam Müşteri</div><div class="stat-value" id="statCustomers">0</div><div class="stat-foot">Kayıtlı müşteri</div></button>
-    <button class="card clickable-stat" data-jump="stock" style="text-align:left"><div class="stat-label">Stok Kalemi</div><div class="stat-value" id="statStock">0</div><div class="stat-foot">Ürün ve parça</div></button>
-    <button class="card clickable-stat" data-jump="service" style="text-align:left"><div class="stat-label">Açık Servis</div><div class="stat-value" id="statServices">0</div><div class="stat-foot">Tamamlanmamış servis</div></button>
-    <button class="card clickable-stat" data-jump="tasks" style="text-align:left"><div class="stat-label">Bekleyen Görev</div><div class="stat-value" id="statTasks">0</div><div class="stat-foot">Tamamlanmamış görev</div></button>
-   </div>
-   <div class="grid two-col">
-    <div class="card"><div class="card-head"><div><h2>Hızlı işlemler</h2><p class="muted small">Sık kullanılan kayıt ekranları</p></div></div><div class="quick-grid">
-     <button class="quick" data-create="customer"><strong>Yeni müşteri</strong><span>Müşteri kartı oluştur</span></button>
-     <button class="quick" data-create="stock"><strong>Stok ekle</strong><span>Ürün veya parça kaydı</span></button>
-     <button class="quick" data-create="order"><strong>Satış / sipariş</strong><span>İşlem kaydı oluştur</span></button>
-     <button class="quick" data-create="service"><strong>Cihaz kabul</strong><span>Teknik servis kaydı</span></button>
-     <button class="quick" data-create="task"><strong>Yeni görev</strong><span>Hatırlatma oluştur</span></button>
-     <button class="quick" data-jump="reports"><strong>İşletme raporları</strong><span>Mevcut kayıtları analiz et</span></button>
-    </div></div>
-    <div class="card"><div class="card-head"><div><h2>İşletmenin Radar Sistemi</h2><p class="muted small">Kayıtlarına göre takip gerektiren durumlar</p></div></div><div class="kpi-list" id="alertsList"></div></div>
-   </div>
-   <div class="grid two-col" style="margin-top:15px">
-    <div class="card"><div class="card-head"><div><h2>Son hareketler</h2><p class="muted small">Son kaydedilen işlemler</p></div></div><div class="activity" id="recentActivity"></div></div>
-    <div class="card"><div class="card-head"><div><h2>Kritik stok</h2><p class="muted small">Minimum seviyeye inen ürünler</p></div><button class="btn small-btn" data-jump="stock">Stokları aç</button></div><div id="criticalStock"></div></div>
-   </div>
-  </section>
-  <section class="page" id="page-customers">
-   <div class="page-heading"><div><h1>Müşteriler</h1><div class="muted">Bireysel müşteri ve kurum kayıtları.</div></div><button class="btn primary" data-create="customer">＋ Müşteri ekle</button></div>
-   <div class="card"><div class="toolbar"><input id="customerSearch" placeholder="Ad, kurum adı veya telefon ara"><select id="customerFilter"><option value="">Tüm müşteriler</option><option value="marketing">İletişim izni olanlar</option></select><button class="btn" id="exportCustomers">CSV dışa aktar</button></div>
-    <div class="table-wrap"><table><thead><tr><th>Müşteri / kurum</th><th>Telefon</th><th>E-posta</th><th>Kayıt tarihi</th><th>İletişim izni</th><th>İşlem</th></tr></thead><tbody id="customersTable"></tbody></table></div>
-   </div>
-  </section>
-  <section class="page" id="page-stock">
-   <div class="page-heading"><div><h1>Stok Yönetimi</h1><div class="muted">Ürün, cihaz, parça, maliyet ve kritik stok takibi.</div></div><button class="btn primary" data-create="stock">＋ Stok ekle</button></div>
-   <div class="grid stats"><div class="card"><div class="stat-label">Ürün çeşidi</div><div class="stat-value" id="stockKinds">0</div></div><div class="card"><div class="stat-label">Toplam adet</div><div class="stat-value" id="stockUnits">0</div></div><div class="card"><div class="stat-label">Kritik stok</div><div class="stat-value" id="stockCritical">0</div></div><div class="card"><div class="stat-label">Stok maliyeti</div><div class="stat-value" id="stockCost">₺0</div></div></div>
-   <div class="card"><div class="toolbar"><input id="stockSearch" placeholder="Ürün, kod veya kategori ara"><button class="btn" id="exportStock">CSV dışa aktar</button></div><div class="table-wrap"><table><thead><tr><th>Ürün</th><th>Kod</th><th>Kategori</th><th>Adet</th><th>Min.</th><th>Maliyet</th><th>Satış fiyatı</th><th>Durum</th><th>İşlem</th></tr></thead><tbody id="stockTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-orders">
-   <div class="page-heading"><div><h1>Satış ve Siparişler</h1><div class="muted">Satış tutarı, tahsilat ve sipariş durumunu takip et.</div></div><button class="btn primary" data-create="order">＋ Yeni işlem</button></div>
-   <div class="grid stats"><div class="card"><div class="stat-label">İşlem sayısı</div><div class="stat-value" id="orderCount">0</div></div><div class="card"><div class="stat-label">Toplam tutar</div><div class="stat-value" id="orderTotal">₺0</div></div><div class="card"><div class="stat-label">Tahsil edilen</div><div class="stat-value" id="orderPaid">₺0</div></div><div class="card"><div class="stat-label">Kalan tutar</div><div class="stat-value" id="orderDue">₺0</div></div></div>
-   <div class="card"><div class="toolbar"><input id="orderSearch" placeholder="İşlem kodu veya müşteri ara"><select id="orderStatusFilter"><option value="">Tüm durumlar</option><option>Bekliyor</option><option>Hazırlanıyor</option><option>Tamamlandı</option><option>İptal</option></select><button class="btn" id="exportOrders">CSV dışa aktar</button></div><div class="table-wrap"><table><thead><tr><th>Tarih</th><th>İşlem kodu</th><th>Müşteri</th><th>Tür</th><th>Tutar</th><th>Ödenen</th><th>Durum</th><th>İşlem</th></tr></thead><tbody id="ordersTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-service">
-   <div class="page-heading"><div><h1>Teknik Servis</h1><div class="muted">Cihaz kabulünden işleme, ödemeye ve teslimata kadar.</div></div><button class="btn primary" data-create="service">＋ Cihaz kabul</button></div>
-   <div class="notice">Servis kodu sistem tarafından üretilir. İşlem tamamlanması ve cihazın müşteriye teslim edilmesi ayrı aşamalardır.</div>
-   <div class="card"><div class="toolbar"><input id="serviceSearch" placeholder="Servis kodu, müşteri, cihaz veya seri no ara"><select id="serviceStatusFilter"><option value="">Tüm servisler</option><option>Kabul edildi</option><option>İncelemede</option><option>Parça bekliyor</option><option>Onarımda</option><option>Tamamlandı</option><option>Teslim edildi</option></select></div>
-    <div class="table-wrap"><table><thead><tr><th>Servis no</th><th>Müşteri</th><th>Cihaz</th><th>Arıza</th><th>Kabul</th><th>Durum</th><th>Ücret</th><th>İşlem</th></tr></thead><tbody id="servicesTable"></tbody></table></div>
-   </div>
-  </section>
-  <section class="page" id="page-tasks">
-   <div class="page-heading"><div><h1>Görevler ve Hatırlatmalar</h1><div class="muted">Günlük işleri ve takip tarihlerini unutma.</div></div><button class="btn primary" data-create="task">＋ Görev ekle</button></div>
-   <div class="card"><div class="toolbar"><input id="taskSearch" placeholder="Görev veya sorumlu ara"><select id="taskStatusFilter"><option value="">Tüm görevler</option><option value="open">Bekleyenler</option><option value="done">Tamamlananlar</option></select></div><div class="table-wrap"><table><thead><tr><th>Görev</th><th>Sorumlu</th><th>Son tarih</th><th>Öncelik</th><th>Durum</th><th>İşlem</th></tr></thead><tbody id="tasksTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-reports">
-   <div class="page-heading"><div><h1>Raporlar ve İşletme Analizi</h1><div class="muted">Mevcut kayıtlardan hesaplanan göstergeler.</div></div><button class="btn" id="reportBackup">Yedek indir</button></div>
-   <div class="grid stats"><div class="card"><div class="stat-label">Müşteri</div><div class="stat-value" id="reportCustomers">0</div></div><div class="card"><div class="stat-label">Satış toplamı</div><div class="stat-value" id="reportSales">₺0</div></div><div class="card"><div class="stat-label">Stok maliyeti</div><div class="stat-value" id="reportStock">₺0</div></div><div class="card"><div class="stat-label">Bekleyen görev</div><div class="stat-value" id="reportTasks">0</div></div></div>
-   <div class="grid two-col"><div class="card"><div class="card-head"><h2>Stok Hafızası</h2></div><div id="stockAnalysis"></div></div><div class="card"><div class="card-head"><h2>Veri özeti</h2></div><div id="dataSummary"></div><div class="section-divider"></div><p class="muted tiny">Gerçek kârlılık için işçilik, parça maliyeti ve tahsilat bilgilerinin eksiksiz girilmesi gerekir. Eksik maliyetler kâr olarak varsayılmaz.</p></div></div>
-  </section>
-  <section class="page" id="page-guide">
-   <div class="page-heading"><div><h1>Akıllı İş Rehberi</h1><div class="muted">Kayıt akışlarına göre yerel, kural tabanlı yardım.</div></div></div>
-   <div class="card"><div class="notice">Bu rehber haricî bir yapay zekâ servisine bağlı değildir. Yazdığın bilgiler bu prototipte yerel kurallarla yanıtlanır.</div><div class="field"><label for="guideQuestion">Ne yapmak istiyorsun?</label><textarea id="guideQuestion" placeholder="Örneğin: Yeni teknik servis kaydı nasıl oluştururum?"></textarea></div><button class="btn primary" id="askGuide">Yanıtı göster</button><div class="section-divider"></div><div class="guide-answer" id="guideAnswer">Bir soru yazıp Yanıtı göster düğmesine bas.</div><div class="section-divider"></div><div class="quick-grid"><button class="quick" data-guide="service"><strong>Servis kaydı</strong><span>Cihaz kabul adımları</span></button><button class="quick" data-guide="customer"><strong>Müşteri ekleme</strong><span>Müşteri kartı oluşturma</span></button><button class="quick" data-guide="stock"><strong>Stok takibi</strong><span>Kritik stok açıklaması</span></button><button class="quick" data-guide="backup"><strong>Yedekleme</strong><span>Yedek indir ve geri yükle</span></button></div></div>
-  </section>
-  <section class="page" id="page-settings">
-   <div class="page-heading"><div><h1>Ayarlar ve Yedekleme</h1><div class="muted">İşletme bilgileri, personel profilleri ve yerel veriler.</div></div></div>
-   <div class="grid two-col">
-    <div class="card"><div class="card-head"><h2>İşletme bilgileri</h2></div><form id="settingsForm"><div class="field"><label for="businessName">İşletme adı</label><input id="businessName" name="businessName" maxlength="120" required></div><div class="field"><label for="ownerName">İşletme yetkilisi</label><input id="ownerName" name="ownerName" maxlength="120"></div><div class="field"><label for="businessPhone">Telefon</label><input id="businessPhone" name="businessPhone" inputmode="tel" maxlength="40"></div><div class="field"><label for="businessAddress">Adres</label><textarea id="businessAddress" name="businessAddress" maxlength="500"></textarea></div><button class="btn primary" type="submit">İşletme bilgilerini kaydet</button></form><div class="section-divider"></div><div class="field"><label for="settingsSector">Çalışma alanı</label><select id="settingsSector"><option value="computer">Bilgisayar Sistemleri</option><option value="security">Güvenlik Sistemleri</option></select></div><button class="btn" id="saveSector">Çalışma alanına geç</button></div>
-    <div class="card" id="profileSettingsCard"><div class="card-head"><h2>Personel ve güvenlik</h2></div><p class="muted small">A–E profillerini düzenle. Kurucu rolü bu prototipte işletme ayarlarına erişim sağlar.</p><div id="profileSettingsRows"></div><button class="btn primary" id="saveProfiles" type="button">Personel ayarlarını kaydet</button><div class="section-divider"></div><div class="field"><label for="lockMinutes">Hareketsizlik kilidi (dakika)</label><input id="lockMinutes" type="number" min="1" max="60" step="1" value="10"></div><button class="btn" id="saveLockSettings" type="button">Kilit süresini kaydet</button><p class="muted tiny">Varsayılan 10 dakika. Kurucu 1–60 dakika arasında ayarlayabilir.</p><div class="section-divider"></div><button class="btn" id="switchProfile">Personel profili değiştir</button><button class="btn" id="logoutButton" style="margin-top:8px">İşletme hesabından çıkış</button></div>
-   </div>
-   <div class="card" style="margin-top:15px"><div class="card-head"><h2>Yedekleme ve veri yönetimi</h2></div><p class="muted small">JSON yedeği tüm aktif çalışma alanı kayıtlarını ve ayarları içerir. Dosyayı güvenli bir yerde sakla.</p><div class="toolbar"><button class="btn primary" id="backupBtn">JSON yedeği indir</button><button class="btn" id="exportAllCsv">Müşteri CSV dışa aktar</button><label class="btn" for="restoreFile">Yedek geri yükle</label><input id="restoreFile" type="file" accept=".json,application/json" hidden></div><div class="notice warn">Geri yükleme mevcut aktif çalışma alanındaki verilerin üzerine yazabilir. Önce ayrı bir yedek indir.</div><div id="systemStatus" class="muted small"></div><div class="section-divider"></div><button class="btn danger" id="clearDataBtn">Aktif çalışma alanı kayıtlarını sil</button></div>
-  </section>
- </div>
-</main>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">G</div>
+      <div>
+        <div class="brand-name">Gündeşli Soft</div>
+        <div class="brand-sub">Ofis360 İşletme Yönetimi</div>
+      </div>
+    </div>
+
+    <div class="nav-label">Çalışma alanı</div>
+    <nav class="nav" id="mainNav">
+      <button class="active" data-page="dashboard"><span class="nav-icon">▦</span>Genel Bakış</button>
+      <button data-page="customers"><span class="nav-icon">♙</span>Müşteriler</button>
+      <button data-page="stock"><span class="nav-icon">▤</span>Ürün ve Stok</button>
+      <button data-page="orders"><span class="nav-icon">⇄</span>Satış ve Siparişler</button>
+      <button data-page="service"><span class="nav-icon">⚙</span>Teknik Servis</button>
+      <button data-page="tasks"><span class="nav-icon">✓</span>Görev ve Hatırlatmalar</button>
+      <button data-page="properties" data-sector-only="realestate"><span class="nav-icon">⌂</span>Portföy Yönetimi</button>
+      <button data-page="reports"><span class="nav-icon">▥</span>Raporlar</button>
+      <button data-page="guide"><span class="nav-icon">✧</span>Akıllı İş Rehberi</button>
+    </nav>
+
+    <div class="nav-label">Yönetim</div>
+    <nav class="nav">
+      <button data-page="settings"><span class="nav-icon">⚙</span>Ayarlar ve Yedekleme</button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="user-line">
+        <div class="avatar" id="userAvatar">K</div>
+        <div class="user-info">
+          <strong id="sideProfile">Kullanıcı</strong>
+          <small id="sideBusiness">İşletme hesabı</small>
+        </div>
+      </div>
+      <button class="btn" id="logoutButton" style="width:100%;margin-top:12px">Hesaptan çıkış yap</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:10px;min-width:0">
+        <button class="btn mobile-menu" id="mobileMenu" aria-label="Menüyü aç">☰</button>
+        <div style="min-width:0">
+          <div class="top-title" id="topTitle">Genel Bakış</div>
+          <div class="top-sub" id="businessSubtitle">İşletme yönetim merkezi</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <select id="sectorSwitcher" aria-label="İşletme faaliyet alanı">
+          <option value="computer">Bilgisayar ve teknik servis</option>
+          <option value="security">Güvenlik sistemleri</option>
+          <option value="phone">Telefon mağazası</option>
+          <option value="realestate">Gayrimenkul / emlak</option>
+        </select>
+        <button class="btn primary" id="quickAdd">+ Yeni kayıt</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="page active" id="page-dashboard">
+        <div class="page-heading">
+          <div>
+            <h1 id="welcomeTitle">İşletmen için 360° kontrol.</h1>
+            <div class="muted">Kayıtlarını, görevlerini ve önemli durumları tek merkezden takip et.</div>
+          </div>
+          <button class="btn no-print" id="dashExport">Yedek al</button>
+        </div>
+
+        <div class="grid stats">
+          <button class="card clickable-stat" data-jump="customers">
+            <div class="stat-label">Toplam müşteri</div><div class="stat-value" id="statCustomers">0</div><div class="stat-foot">Kayıtlı müşteri</div>
+          </button>
+          <button class="card clickable-stat" data-jump="stock">
+            <div class="stat-label">Stok kalemi</div><div class="stat-value" id="statStock">0</div><div class="stat-foot">Ürün ve parça</div>
+          </button>
+          <button class="card clickable-stat" data-jump="service">
+            <div class="stat-label">Açık servis</div><div class="stat-value" id="statServices">0</div><div class="stat-foot">Tamamlanmamış kayıt</div>
+          </button>
+          <button class="card clickable-stat" data-jump="tasks">
+            <div class="stat-label">Bekleyen görev</div><div class="stat-value" id="statTasks">0</div><div class="stat-foot">Tamamlanmamış iş</div>
+          </button>
+        </div>
+
+        <div class="grid two-col">
+          <div class="card">
+            <div class="card-head"><div><h2>Hızlı işlemler</h2><div class="muted small">Sık kullanılan kayıt ekranları</div></div></div>
+            <div class="quick-grid">
+              <button class="quick" data-create="customer"><strong>Yeni müşteri</strong><span>Müşteri kartı oluştur</span></button>
+              <button class="quick" data-create="stock"><strong>Stok ekle</strong><span>Ürün veya parça kaydı</span></button>
+              <button class="quick" data-create="order"><strong>Satış / sipariş</strong><span>İşlem kaydı oluştur</span></button>
+              <button class="quick" data-create="service"><strong>Cihaz kabul</strong><span>Teknik servis kaydı aç</span></button>
+              <button class="quick" data-create="task"><strong>Görev oluştur</strong><span>Hatırlatma ekle</span></button>
+              <button class="quick" data-create="property" data-sector-only="realestate"><strong>Portföy ekle</strong><span>Yeni emlak kaydı</span></button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Son hareketler</h2><span class="muted tiny">Bu tarayıcıdaki kayıtlar</span></div>
+            <div id="activityList" class="activity-list"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:15px">
+          <div class="card-head"><h2>Dikkat gerektiren durumlar</h2></div>
+          <div id="alertsList" class="grid"></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-customers">
+        <div class="page-heading"><div><h1>Müşteriler</h1><div class="muted">Müşteri bilgilerini ve iletişim notlarını yönet.</div></div><button class="btn primary" data-create="customer">+ Müşteri ekle</button></div>
+        <div class="card">
+          <div class="toolbar"><input id="customerSearch" placeholder="Müşteri adı veya telefon ara"><select id="customerFilter"><option value="">Tüm müşteriler</option></select><button class="btn" id="exportCustomers">Excel uyumlu CSV</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Müşteri</th><th>Telefon</th><th>E-posta</th><th>Not</th><th>Kayıt</th><th>İşlemler</th></tr></thead><tbody id="customersRows"></tbody></table></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-stock">
+        <div class="page-heading"><div><h1>Ürün ve Stok</h1><div class="muted">Ürünleri, maliyetleri ve stok seviyelerini takip et.</div></div><button class="btn primary" data-create="stock">+ Stok ekle</button></div>
+        <div class="card">
+          <div class="toolbar"><input id="stockSearch" placeholder="Ürün adı veya kod ara"><select id="stockFilter"><option value="">Tüm stoklar</option><option value="low">Kritik stok</option><option value="out">Stokta yok</option></select><button class="btn" id="exportStock">CSV dışa aktar</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Ürün</th><th>Kod</th><th>Adet</th><th>Alış</th><th>Satış</th><th>Durum</th><th>İşlemler</th></tr></thead><tbody id="stockRows"></tbody></table></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-orders">
+        <div class="page-heading"><div><h1>Satış ve Siparişler</h1><div class="muted">Satış, sipariş durumu ve tutarları kaydet.</div></div><button class="btn primary" data-create="order">+ Yeni işlem</button></div>
+        <div class="card">
+          <div class="toolbar"><input id="orderSearch" placeholder="Müşteri veya ürün ara"><select id="orderStatusFilter"><option value="">Tüm durumlar</option><option>Bekliyor</option><option>Hazırlanıyor</option><option>Tamamlandı</option><option>İptal</option></select><button class="btn" id="exportOrders">CSV dışa aktar</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Tarih</th><th>Müşteri</th><th>İşlem</th><th>Tutar</th><th>Durum</th><th>İşlemler</th></tr></thead><tbody id="ordersRows"></tbody></table></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-service">
+        <div class="page-heading"><div><h1>Teknik Servis</h1><div class="muted">Cihaz kabulünden teslimata kadar servis kayıtları.</div></div><button class="btn primary" data-create="service">+ Cihaz kabul</button></div>
+        <div class="card">
+          <div class="toolbar"><input id="serviceSearch" placeholder="Müşteri, cihaz veya seri no ara"><select id="serviceStatusFilter"><option value="">Tüm servisler</option><option>Kabul edildi</option><option>İnceleniyor</option><option>Parça bekliyor</option><option>Onarım tamamlandı</option><option>Teslim edildi</option></select></div>
+          <div class="table-wrap"><table><thead><tr><th>Servis no</th><th>Müşteri</th><th>Cihaz</th><th>Arıza / not</th><th>Durum</th><th>Tarih</th><th>İşlemler</th></tr></thead><tbody id="serviceRows"></tbody></table></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-tasks">
+        <div class="page-heading"><div><h1>Görev ve Hatırlatmalar</h1><div class="muted">İşlerini ve takip tarihlerini düzenli tut.</div></div><button class="btn primary" data-create="task">+ Görev ekle</button></div>
+        <div class="card">
+          <div class="toolbar"><input id="taskSearch" placeholder="Görev ara"><select id="taskStatusFilter"><option value="">Tüm görevler</option><option>Bekliyor</option><option>Devam ediyor</option><option>Tamamlandı</option></select></div>
+          <div class="table-wrap"><table><thead><tr><th>Görev</th><th>Sorumlu</th><th>Son tarih</th><th>Öncelik</th><th>Durum</th><th>İşlemler</th></tr></thead><tbody id="tasksRows"></tbody></table></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-properties">
+        <div class="page-heading"><div><h1>Gayrimenkul Portföyü</h1><div class="muted">Satılık ve kiralık portföy kayıtlarını takip et.</div></div><button class="btn primary" data-create="property">+ Portföy ekle</button></div>
+        <div class="card">
+          <div class="toolbar"><input id="propertySearch" placeholder="İlan, adres veya müşteri ara"><select id="propertyFilter"><option value="">Tüm portföy</option><option>Satılık</option><option>Kiralık</option></select></div>
+          <div class="table-wrap"><table><thead><tr><th>Portföy</th><th>İşlem</th><th>Tür</th><th>Konum</th><th>Fiyat</th><th>Durum</th><th>İşlemler</th></tr></thead><tbody id="propertiesRows"></tbody></table></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-reports">
+        <div class="page-heading"><div><h1>Raporlar</h1><div class="muted">İşletmenin kayıt ve işlem özetleri.</div></div><button class="btn" onclick="window.print()">Raporu yazdır / PDF</button></div>
+        <div class="grid stats">
+          <div class="card"><div class="stat-label">Satış ve sipariş toplamı</div><div class="stat-value" id="reportRevenue">₺0</div><div class="stat-foot">Kayıtlı işlem tutarları</div></div>
+          <div class="card"><div class="stat-label">Stok maliyeti</div><div class="stat-value" id="reportStockCost">₺0</div><div class="stat-foot">Mevcut adet × alış fiyatı</div></div>
+          <div class="card"><div class="stat-label">Açık servis</div><div class="stat-value" id="reportOpenService">0</div><div class="stat-foot">Teslim edilmemiş servisler</div></div>
+          <div class="card"><div class="stat-label">Bekleyen görev</div><div class="stat-value" id="reportOpenTasks">0</div><div class="stat-foot">Tamamlanmamış görevler</div></div>
+        </div>
+        <div class="grid two-col">
+          <div class="card"><div class="card-head"><h2>Stok değerlendirmesi</h2></div><div id="stockAnalysis" class="activity-list"></div></div>
+          <div class="card"><div class="card-head"><h2>İşletme özeti</h2></div><div id="businessReport" class="activity-list"></div></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-guide">
+        <div class="page-heading"><div><h1>Akıllı İş Rehberi</h1><div class="muted">Kayıtlarına dayalı yerel kurallar ve pratik öneriler.</div></div></div>
+        <div class="grid two-col">
+          <div class="card">
+            <div class="card-head"><h2>İşletme analizi</h2></div>
+            <p class="muted small">Bu bölüm dış bir yapay zekâ servisine bağlı değildir. Mevcut kayıtlar üzerinde yerel kurallarla öneriler üretir.</p>
+            <button class="btn primary" id="runAnalysis">İşletmemi analiz et</button>
+            <div class="section-divider"></div>
+            <div id="guideResults" class="activity-list"><div class="muted small">Analizi başlatınca öneriler burada görünür.</div></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Hızlı soru</h2></div>
+            <div class="field"><label for="guideQuestion">Ne hakkında öneri istiyorsun?</label><textarea id="guideQuestion" placeholder="Örn. Hangi ürünleri yeniden sipariş etmeliyim?"></textarea></div>
+            <button class="btn" id="askGuide">Öneri oluştur</button>
+            <div class="section-divider"></div>
+            <div id="guideAnswer" class="notice">Öneriler yalnızca yerel kayıtlara ve tanımlı kurallara dayanır.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-settings">
+        <div class="page-heading"><div><h1>Ayarlar ve Yedekleme</h1><div class="muted">İşletme bilgileri, kullanıcı yönetimi ve verilerin.</div></div></div>
+        <div class="settings-grid">
+          <div class="card">
+            <div class="card-head"><h2>İşletme bilgileri</h2></div>
+            <form id="settingsForm">
+              <div class="field"><label for="settingBusinessName">İşletme adı</label><input id="settingBusinessName" required maxlength="120"></div>
+              <div class="field"><label for="settingOwnerName">İşletme yetkilisi</label><input id="settingOwnerName" maxlength="120"></div>
+              <div class="field"><label for="settingPhone">Telefon</label><input id="settingPhone" inputmode="tel" maxlength="40"></div>
+              <div class="field"><label for="settingAddress">Adres</label><textarea id="settingAddress" maxlength="500"></textarea></div>
+              <div class="field"><label for="settingsSector">Faaliyet alanı</label>
+                <select id="settingsSector">
+                  <option value="computer">Bilgisayar sistemleri ve teknik servis</option>
+                  <option value="security">Güvenlik sistemleri ve teknik servis</option>
+                  <option value="phone">Telefon mağazası ve teknik servis</option>
+                  <option value="realestate">Gayrimenkul / emlak</option>
+                </select>
+              </div>
+              <button class="btn primary" type="submit">Ayarları kaydet</button>
+            </form>
+          </div>
+
+          <div class="card" id="userManagementCard">
+            <div class="card-head"><h2>Kullanıcı yönetimi</h2></div>
+            <p class="muted small">İşletme hesabına personel hesabı ekle. Her kullanıcı kendi adı ve soyadıyla giriş yapar.</p>
+            <form id="staffForm">
+              <div class="field"><label for="staffFirstName">Ad</label><input id="staffFirstName" required maxlength="60"></div>
+              <div class="field"><label for="staffLastName">Soyad</label><input id="staffLastName" required maxlength="60"></div>
+              <div class="field"><label for="staffUsername">Kullanıcı adı</label><input id="staffUsername" required minlength="3" maxlength="80"></div>
+              <div class="field"><label for="staffPassword">Geçici şifre</label><input id="staffPassword" required minlength="8" type="password"></div>
+              <div class="field"><label for="staffRole">Yetki</label><select id="staffRole"><option value="staff">Standart kullanıcı</option><option value="manager">İşletme yöneticisi</option></select></div>
+              <button class="btn primary" type="submit">Kullanıcı ekle</button>
+            </form>
+            <div class="section-divider"></div>
+            <div id="staffList"></div>
+            <div class="section-divider"></div>
+            <div class="field"><label for="lockMinutes">Hareketsizlik kilidi (dakika)</label><input id="lockMinutes" type="number" min="1" max="60" value="10"></div>
+            <button class="btn" id="saveLockSettings">Kilit süresini kaydet</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:15px">
+          <div class="card-head"><h2>Yedekleme ve veri yönetimi</h2></div>
+          <p class="muted small">JSON yedeği işletme kayıtlarını içerir. Yedeğini güvenli bir yerde sakla. Yedek dosyaları parola ile şifrelenmez.</p>
+          <div class="toolbar">
+            <button class="btn primary" id="backupBtn">Yedek indir</button>
+            <label class="btn" for="restoreFile">Yedekten geri yükle</label>
+            <input id="restoreFile" type="file" accept=".json,application/json" hidden>
+            <button class="btn danger" id="clearDataBtn">İşletme kayıtlarını temizle</button>
+          </div>
+          <div class="notice warning">Bu prototip verileri yalnızca açık olan tarayıcıda tutar. Tarayıcı verileri silinirse yedek alınmamış kayıtlar kaybolabilir. Çoklu cihaz kullanımı için sunucu veritabanı gerekir.</div>
+          <div class="section-divider"></div>
+          <div class="card-head"><h2>Sistem durumu</h2></div>
+          <div id="systemStatus" class="activity-list"></div>
+        </div>
+      </section>
+    </div>
+  </main>
 </div>
-<div class="modal-backdrop" id="modalBackdrop">
- <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-head"><h2 id="modalTitle">Yeni kayıt</h2><button class="close" id="modalClose" aria-label="Kapat">×</button></div>
-  <form id="recordForm"><div class="modal-body" id="modalBody"></div><div class="modal-foot"><button class="btn" type="button" id="modalCancel">Vazgeç</button><button class="btn primary" type="submit" id="modalSave">Kaydet</button></div></form>
- </div>
+
+<!-- KAYIT MODALI -->
+<div id="modalBackdrop" class="modal-backdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head"><h2 id="modalTitle">Yeni kayıt</h2><button class="modal-close" id="modalClose" aria-label="Kapat">×</button></div>
+    <form id="recordForm">
+      <div id="modalFields" class="modal-form"></div>
+      <div class="modal-actions"><button type="button" class="btn" id="modalCancel">Vazgeç</button><button type="submit" class="btn primary">Kaydet</button></div>
+    </form>
+  </div>
 </div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="toast" class="toast" hidden></div>
+
 <script>
 "use strict";
-const DB_KEY="gundesliSoftOfis360_v3";
-const AUTH_KEY="gundesliSoftOfis360_accounts_v1";
-const SECTORS={computer:"Bilgisayar Sistemleri",security:"Güvenlik Sistemleri"};
-const LISTS=["customers","stock","orders","services","tasks"];
-const PAGE_NAMES={dashboard:"Genel Bakış",customers:"Müşteriler",stock:"Stok Yönetimi",orders:"Satış ve Siparişler",service:"Teknik Servis",tasks:"Görevler",reports:"Raporlar",guide:"Akıllı İş Rehberi",settings:"Ayarlar ve Yedekleme"};
-let data,account=null,profile=null,pendingProfile=null,editing=null,idleTimer=null,lastActivity=Date.now(),serviceDraft=null,toastTimer=null;
-const $=id=>document.getElementById(id);
+
+const $ = id => document.getElementById(id);
+const SECTORS = {
+  computer:"Bilgisayar sistemleri ve teknik servis",
+  security:"Güvenlik sistemleri ve teknik servis",
+  phone:"Telefon mağazası ve teknik servis",
+  realestate:"Gayrimenkul / emlak"
+};
+const PAGE_NAMES = {
+  dashboard:"Genel Bakış",customers:"Müşteriler",stock:"Ürün ve Stok",
+  orders:"Satış ve Siparişler",service:"Teknik Servis",tasks:"Görev ve Hatırlatmalar",
+  properties:"Portföy Yönetimi",reports:"Raporlar",guide:"Akıllı İş Rehberi",
+  settings:"Ayarlar ve Yedekleme"
+};
+const ACCOUNT_KEY = "gundesliSoftOfis360_accounts_v4";
+const DATA_PREFIX = "gundesliSoftOfis360_data_v4_";
+let accounts = readAccounts();
+let account = null;
+let user = null;
+let data = null;
+let currentType = "";
+let editingId = null;
+let toastTimer = null;
+let lastActivity = Date.now();
+let idleTimer = null;
+
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
 function today(){return new Date().toISOString().slice(0,10)}
-function uid(){return crypto?.randomUUID?crypto.randomUUID():"id-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,10)}
-function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function val(id){return $(id)?.value?.trim()||""}
-function money(v){return new Intl.NumberFormat("tr-TR",{style:"currency",currency:"TRY",maximumFractionDigits:2}).format(Number(v)||0)}
-function fmtDate(v){if(!v)return "—";const d=new Date(v+"T00:00:00");return Number.isNaN(d.getTime())?esc(v):d.toLocaleDateString("tr-TR")}
-function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2800)}
-function emptyData(){return {sector:"computer",customers:[],stock:[],orders:[],services:[],tasks:[],activity:[],settings:{businessName:"",ownerName:"",businessPhone:"",businessAddress:"",lockMinutes:10}}}
-function readData(sector){try{const x=JSON.parse(localStorage.getItem(DB_KEY+"_"+sector)||"null");if(x&&typeof x==="object"){const d=emptyData();for(const k of LISTS)d[k]=Array.isArray(x[k])?x[k]:[];d.activity=Array.isArray(x.activity)?x.activity:[];d.settings={...d.settings,...(x.settings||{})};d.sector=sector;return d}}catch{}return Object.assign(emptyData(),{sector})}
-function persist(){try{localStorage.setItem(DB_KEY+"_"+data.sector,JSON.stringify(data));return true}catch(e){toast("Tarayıcı depolaması dolu olabilir. Önce yedek al veya eski kayıtları dışa aktar.");return false}}
-function setActivity(label){data.activity.unshift({id:uid(),label,date:new Date().toISOString(),by:profile?.name||"Kullanıcı"});data.activity=data.activity.slice(0,80)}
-function readAccounts(){try{return JSON.parse(localStorage.getItem(AUTH_KEY)||"{}")}catch{return {}}}
-function saveAccounts(){try{localStorage.setItem(AUTH_KEY,JSON.stringify(accounts));return true}catch{toast("Hesap ayarları kaydedilemedi.");return false}}
-let accounts=readAccounts();
-function showGate(id){["authGate","profileGate","pinGate"].forEach(x=>$(x).classList.toggle("hidden",x!==id));$("app").classList.add("locked")}
-function getAccountKey(username){return String(username||"").toLocaleLowerCase("tr").trim()}
-function initAuth(){
- const existing=Object.keys(accounts).length>0;
- if(existing){$("authTitle").textContent="Ofis360 işletme girişi";$("authSubtitle").textContent="İşletme kullanıcı adı ve şifrenle devam et.";$("authRegisterPane").hidden=true;$("authLoginPane").hidden=false}
- $("showRegister").addEventListener("click",()=>{$("authLoginPane").hidden=true;$("authRegisterPane").hidden=false});
- $("showLogin").addEventListener("click",()=>{$("authRegisterPane").hidden=true;$("authLoginPane").hidden=false});
- $("businessRegisterForm").addEventListener("submit",e=>{
-  e.preventDefault();const businessName=val("registerBusiness"),username=getAccountKey(val("registerUsername")),password=$("registerPassword").value;
+function esc(value){
+  return String(value??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+function key(value){return String(value||"").toLocaleLowerCase("tr").trim()}
+function money(value){return new Intl.NumberFormat("tr-TR",{style:"currency",currency:"TRY",maximumFractionDigits:2}).format(Number(value)||0)}
+function formatDate(value){
+  if(!value)return "—";
+  const d=new Date(value);
+  return Number.isNaN(d.getTime())?esc(value):d.toLocaleDateString("tr-TR");
+}
+function readAccounts(){
+  try{return JSON.parse(localStorage.getItem(ACCOUNT_KEY)||"{}")}catch{return {}}
+}
+function saveAccounts(){
+  try{localStorage.setItem(ACCOUNT_KEY,JSON.stringify(accounts));return true}
+  catch{toast("Hesap bilgileri kaydedilemedi. Tarayıcı depolamasını kontrol et.");return false}
+}
+function emptyData(sector="computer"){
+  return {
+    version:4,sector,
+    settings:{businessName:"",ownerName:"",businessPhone:"",businessAddress:"",lockMinutes:10},
+    customers:[],stock:[],orders:[],services:[],tasks:[],properties:[],
+    activity:[]
+  };
+}
+function dataKey(){return DATA_PREFIX+account.id}
+function readData(sector){
+  try{
+    const saved=JSON.parse(localStorage.getItem(dataKey())||"null");
+    if(saved&&typeof saved==="object"){
+      const fresh=emptyData(saved.sector||sector);
+      return {...fresh,...saved,settings:{...fresh.settings,...(saved.settings||{})}};
+    }
+  }catch{}
+  return emptyData(sector);
+}
+function persist(){
+  try{
+    localStorage.setItem(dataKey(),JSON.stringify(data));
+    return true;
+  }catch{
+    toast("Tarayıcı depolaması dolu olabilir. Yedek al veya eski kayıtları dışa aktar.");
+    return false;
+  }
+}
+function toast(message){
+  $("toast").textContent=message;
+  $("toast").hidden=false;
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>$("toast").hidden=true,3500);
+}
+function addActivity(label){
+  data.activity.unshift({id:uid(),label,date:new Date().toISOString(),by:user?.name||"Kullanıcı"});
+  data.activity=data.activity.slice(0,80);
+}
+function isAdmin(){return user?.role==="founder"||user?.role==="manager"}
+function requireAdmin(){
+  if(!isAdmin()){toast("Bu işlem için işletme yöneticisi yetkisi gerekir.");return false}
+  return true;
+}
+function showGate(){
+  $("authGate").hidden=false;
+  $("app").classList.add("locked");
+}
+function showApp(){
+  $("authGate").hidden=true;
+  $("app").classList.remove("locked");
+}
+function showLogin(){
+  $("authLoginPane").hidden=false;
+  $("authRegisterPane").hidden=true;
+  $("authTitle").textContent="Tekrar hoş geldin";
+  $("authSubtitle").textContent="İşletme hesabına giriş yaparak devam et.";
+}
+function showRegister(){
+  $("authLoginPane").hidden=true;
+  $("authRegisterPane").hidden=false;
+  $("authTitle").textContent="Ofis360 hesabını oluştur";
+  $("authSubtitle").textContent="İşletme bilgilerini girerek başlangıç yap.";
+}
+function enterUser(a,u){
+  account=a;
+  user=u;
+  data=readData(a.sector||"computer");
+  data.sector=a.sector||data.sector;
+  data.settings.businessName=a.businessName||data.settings.businessName;
+  data.settings.ownerName=data.settings.ownerName||a.ownerName||u.name;
+  data.settings.lockMinutes=Number(a.settings?.lockMinutes)||10;
+  $("sideProfile").textContent=u.name;
+  $("sideBusiness").textContent=a.businessName;
+  $("userAvatar").textContent=(u.name||"K").trim().charAt(0).toLocaleUpperCase("tr");
+  $("businessSubtitle").textContent=a.businessName+" · "+(SECTORS[data.sector]||"İşletme");
+  $("welcomeTitle").textContent="Hoş geldin, "+u.name.split(" ")[0]+".";
+  $("sectorSwitcher").value=data.sector;
+  $("settingsSector").value=data.sector;
+  $("settingBusinessName").value=data.settings.businessName||a.businessName;
+  $("settingOwnerName").value=data.settings.ownerName||"";
+  $("settingPhone").value=data.settings.businessPhone||"";
+  $("settingAddress").value=data.settings.businessAddress||"";
+  $("lockMinutes").value=String(data.settings.lockMinutes||10);
+  showApp();
+  applyPermissions();
+  renderAll();
+  gotoPage("dashboard");
+  lastActivity=Date.now();
+  startIdleLock();
+}
+function logout(){
+  user=null;account=null;data=null;
+  if(idleTimer)clearInterval(idleTimer);
+  $("loginPassword").value="";
+  showGate();
+  showLogin();
+}
+function startIdleLock(){
+  if(idleTimer)clearInterval(idleTimer);
+  idleTimer=setInterval(()=>{
+    if(!user||!data)return;
+    const mins=Math.max(1,Math.min(60,Number(data.settings.lockMinutes)||10));
+    if(Date.now()-lastActivity>=mins*60000){
+      toast("Oturum güvenlik nedeniyle kapatıldı. Tekrar giriş yap.");
+      logout();
+    }
+  },5000);
+}
+["click","keydown","touchstart","mousemove"].forEach(eventName=>{
+  document.addEventListener(eventName,()=>{if(user)lastActivity=Date.now()},{passive:true});
+});
+
+$("showLogin").addEventListener("click",showLogin);
+$("showRegister").addEventListener("click",showRegister);
+
+$("businessRegisterForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const firstName=val("registerFirstName");
+  const lastName=val("registerLastName");
+  const businessName=val("registerBusiness");
+  const sector=val("registerSector");
+  const username=key(val("registerUsername"));
+  const password=$("registerPassword").value;
+
+  if(!firstName||!lastName||!businessName){toast("Ad, soyad ve işletme adını doldur.");return}
   if(username.length<3||password.length<8){toast("Kullanıcı adı en az 3, şifre en az 8 karakter olmalı.");return}
-  if(accounts[username]){toast("Bu kullanıcı adı daha önce alınmış.");return}
-  const a={username,businessName,password,profiles:[
-   {id:"A",name:"Melih Gündeşli",pin:"",role:"founder"},
-   {id:"B",name:"Personel B",pin:"",role:"staff"},
-   {id:"C",name:"Personel C",pin:"",role:"staff"},
-   {id:"D",name:"Personel D",pin:"",role:"staff"},
-   {id:"E",name:"Personel E",pin:"",role:"staff"}
-  ],settings:{lockMinutes:10},createdAt:new Date().toISOString()};
-  accounts[username]=a;if(!saveAccounts()){delete accounts[username];return}
-  account=a;data=readData("computer");data.settings.businessName=businessName;data.settings.ownerName="Melih Gündeşli";persist();
-  $("loginUsername").value=username;$("loginPassword").value=password;$("authRegisterPane").hidden=true;$("authLoginPane").hidden=false;
-  $("authTitle").textContent="İşletme hesabı oluşturuldu";$("authSubtitle").textContent="Şimdi kullanıcı adı ve şifrenle giriş yap.";toast("İşletme hesabı oluşturuldu.");
- });
- $("businessLoginForm").addEventListener("submit",e=>{
-  e.preventDefault();const username=getAccountKey(val("loginUsername")),password=$("loginPassword").value,a=accounts[username];
-  if(!a||a.password!==password){toast("Kullanıcı adı veya şifre hatalı.");return}
-  account=a;pendingProfile=null;$("profileGateSubtitle").textContent=a.businessName+" hesabı · Devam etmek için profil seç.";
-  renderProfileChoices();showGate("profileGate");
- });
- $("profileLogout").addEventListener("click",logout);
- $("logoutButton").addEventListener("click",logout);
- $("switchProfile").addEventListener("click",lockToProfiles);
- $("pinBack").addEventListener("click",()=>{pendingProfile=null;renderProfileChoices();showGate("profileGate")});
- $("pinForm").addEventListener("submit",e=>{
-  e.preventDefault();const pin=$("profilePin").value;
-  if(!/^\d{4}$/.test(pin)){toast("PIN tam olarak 4 rakam olmalı.");return}
-  const p=account?.profiles?.find(x=>x.id===pendingProfile);if(!p){toast("Profil bulunamadı.");return}
-  if(!p.pin){p.pin=pin;if(!saveAccounts())return;toast("Profil PIN'i oluşturuldu.")}else if(p.pin!==pin){toast("PIN hatalı. Tekrar dene.");$("profilePin").value="";return}
-  profile=p;pendingProfile=null;$("profilePin").value="";
-  data=readData(data?.sector||"computer");data.settings.businessName=account.businessName||data.settings.businessName;data.settings.lockMinutes=Number(account.settings?.lockMinutes)||10;
-  $("app").classList.remove("locked");["authGate","profileGate","pinGate"].forEach(x=>$(x).classList.add("hidden"));
-  $("businessSubtitle").textContent=account.businessName+" · "+SECTORS[data.sector];$("sideProfile").textContent=profile.name;
-  $("sectorSwitcher").value=data.sector;$("settingsSector").value=data.sector;
-  $("settingsForm").elements.businessName.value=data.settings.businessName||account.businessName;
-  $("settingsForm").elements.ownerName.value=data.settings.ownerName||"";
-  $("settingsForm").elements.businessPhone.value=data.settings.businessPhone||"";
-  $("settingsForm").elements.businessAddress.value=data.settings.businessAddress||"";
-  renderAll();renderProfileSettings();lastActivity=Date.now();startIdleLock();
- });
- if(existing){$("authTitle").textContent="Ofis360 işletme girişi";$("authSubtitle").textContent="İşletme kullanıcı adı ve şifrenle devam et.";$("authRegisterPane").hidden=true;$("authLoginPane").hidden=false}
- else{$("authTitle").textContent="Ofis360 ilk kurulum";$("authRegisterPane").hidden=false;$("authLoginPane").hidden=true}
-}
-function renderProfileChoices(){
- const root=$("profileChoices");root.innerHTML="";
- (account?.profiles||[]).forEach(p=>{
-  const b=document.createElement("button");b.type="button";b.className="profile-choice";
-  b.innerHTML='<span class="profile-letter">'+esc(p.id)+'</span><strong>'+esc(p.name||("Personel "+p.id))+'</strong><small>'+(p.role==="founder"?"Kurucu profili":"Personel")+'</small>';
-  b.addEventListener("click",()=>{pendingProfile=p.id;$("pinTitle").textContent=p.name+" profili";$("pinSubtitle").textContent=p.pin?"Devam etmek için 4 haneli PIN kodunu gir.":"İlk kullanım: Bu profil için 4 haneli PIN oluştur."; $("pinSubmit").textContent=p.pin?"Giriş yap":"PIN oluştur";$("profilePin").value="";showGate("pinGate");$("profilePin").focus()});root.appendChild(b)
- });
-}
-function isFounder(){return profile?.role==="founder"}
-function lockToProfiles(){if(!account)return;pendingProfile=null;profile=null;showGate("profileGate");renderProfileChoices()}
-function logout(){profile=null;pendingProfile=null;account=null;$("loginPassword").value="";showGate("authGate")}
-function markActivity(){if(!profile||$("app").classList.contains("locked"))return;lastActivity=Date.now()}
-function startIdleLock(){if(idleTimer)clearInterval(idleTimer);idleTimer=setInterval(()=>{if(!profile)return;const m=Math.max(1,Math.min(60,Number(data.settings.lockMinutes)||10));if(Date.now()-lastActivity>=m*60000){pendingProfile=profile.id;profile=null;$("pinTitle").textContent="Oturum kilitlendi";$("pinSubtitle").textContent="Hareketsizlik nedeniyle kilitlendi. Aynı personelin PIN kodunu gir."; $("pinSubmit").textContent="Kilidi aç";$("profilePin").value="";showGate("pinGate")}},1000)}
-function requireFounder(){if(!isFounder()){toast("Bu ayarı yalnızca kurucu profili değiştirebilir.");return false}return true}
-function renderProfileSettings(){
- const root=$("profileSettingsRows");if(!root||!account)return;
- root.innerHTML=account.profiles.map(p=>'<div class="profile-admin-row"><span class="profile-admin-letter">'+esc(p.id)+'</span><input data-profile-name="'+esc(p.id)+'" maxlength="80" aria-label="Profil adı" value="'+esc(p.name)+'"><select data-profile-role="'+esc(p.id)+'" aria-label="Profil rolü"><option value="staff" '+(p.role==="staff"?"selected":"")+'>Personel</option><option value="founder" '+(p.role==="founder"?"selected":"")+'>Kurucu / tam yetki</option></select></div>').join("");
- $("profileSettingsCard").hidden=!isFounder();
-}
-function saveProfileSettings(){
- if(!requireFounder())return;
- const founders=account.profiles.filter(p=>p.role==="founder");
- for(const p of account.profiles){const n=document.querySelector('[data-profile-name="'+p.id+'"]'),r=document.querySelector('[data-profile-role="'+p.id+'"]');if(n)p.name=n.value.trim()||("Personel "+p.id);if(r)p.role=r.value}
- if(!account.profiles.some(p=>p.role==="founder")){if(founders[0])founders[0].role="founder";toast("En az bir kurucu profili kalmalıdır.");renderProfileSettings();return}
- if(saveAccounts()){renderProfileSettings();renderProfileChoices();toast("Personel ayarları kaydedildi.")}
-}
-function saveLockSettings(){
- if(!requireFounder())return;
- const m=Number(val("lockMinutes"));if(!Number.isInteger(m)||m<1||m>60){toast("Kilit süresi 1–60 dakika arasında olmalı.");return}
- account.settings={...(account.settings||{}),lockMinutes:m};data.settings.lockMinutes=m;
- if(saveAccounts()&&persist()){lastActivity=Date.now();toast("Otomatik kilit süresi "+m+" dakika olarak kaydedildi.")}
-}
-function applySector(sector){
- if(!SECTORS[sector])return;
- if(data.sector!==sector){persist();data=readData(sector)}
- $("sectorSwitcher").value=sector;$("settingsSector").value=sector;
- $("businessSubtitle").textContent=(data.settings.businessName||account?.businessName||"İşletme")+" · "+SECTORS[sector];
- persist();renderAll();closeMobileMenu();
+  if(accounts[username]){toast("Bu kullanıcı adı zaten kullanılıyor.");return}
+
+  const fullName=firstName+" "+lastName;
+  const a={
+    id:uid(),username,businessName,ownerName:fullName,sector,
+    settings:{lockMinutes:10},
+    users:[{id:uid(),username,name:fullName,password,role:"founder",active:true}],
+    createdAt:new Date().toISOString()
+  };
+  accounts[username]=a;
+  if(!saveAccounts()){delete accounts[username];return}
+  account=a;user=a.users[0];data=emptyData(sector);
+  data.settings.businessName=businessName;
+  data.settings.ownerName=fullName;
+  data.settings.lockMinutes=10;
+  if(!persist()){delete accounts[username];saveAccounts();return}
+  $("businessRegisterForm").reset();
+  toast("İşletme hesabı oluşturuldu.");
+  enterUser(a,a.users[0]);
+});
+
+$("businessLoginForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const username=key(val("loginUsername"));
+  const password=$("loginPassword").value;
+  const a=accounts[username];
+  if(!a){toast("Kullanıcı adı veya şifre hatalı.");return}
+  const u=(a.users||[]).find(x=>x.username===username&&x.active!==false&&x.password===password);
+  if(!u){toast("Kullanıcı adı veya şifre hatalı ya da hesap devre dışı.");return}
+  enterUser(a,u);
+});
+$("logoutButton").addEventListener("click",logout);
+
+function applyPermissions(){
+  const admin=isAdmin();
+  $("userManagementCard").hidden=!admin;
+  $("sectorSwitcher").disabled=!admin;
+  $("settingsSector").disabled=!admin;
+  $("settingBusinessName").disabled=!admin;
+  $("settingOwnerName").disabled=!admin;
+  $("settingPhone").disabled=!admin;
+  $("settingAddress").disabled=!admin;
+  $("saveLockSettings").disabled=!admin;
+  $("lockMinutes").disabled=!admin;
+  document.querySelectorAll('[data-sector-only]').forEach(el=>{
+    el.hidden=el.dataset.sectorOnly!==data.sector;
+  });
+  document.querySelectorAll('[data-create="property"]').forEach(el=>{
+    el.hidden=data.sector!=="realestate";
+  });
 }
 function gotoPage(page){
- if(!PAGE_NAMES[page])return;
- document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+page));
- document.querySelectorAll("#mainNav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
- $("topTitle").textContent=PAGE_NAMES[page];closeMobileMenu();
-}
-function closeMobileMenu(){$("sidebar").classList.remove("open")}
-function statusPill(s){
- const v=String(s||"—");let c="";
- if(/ödendi|tamamlandı|teslim edildi|normal|aktif|açık değil/i.test(v))c="green";
- else if(/ödenmedi|kritik|gecik|iptal/i.test(v))c="red";
- else if(/bekliyor|parça|hazır|kısmen/i.test(v))c="amber";
- else if(/inceleme|onarım|kabul/i.test(v))c="blue";
- return '<span class="pill '+c+'">'+esc(v)+'</span>';
-}
-function customerName(id){return data.customers.find(c=>c.id===id)?.name||"Silinmiş müşteri"}
-function tableEmpty(n){return '<tr><td colspan="'+n+'" class="empty">Henüz kayıt yok.</td></tr>'}
-function actionButtons(type,id){return '<div class="row-actions"><button class="btn small-btn" data-edit="'+type+'" data-id="'+esc(id)+'">Düzenle</button><button class="btn small-btn danger" data-delete="'+type+'" data-id="'+esc(id)+'">Sil</button></div>'}
-function activeCount(list){return list.filter(s=>!["Tamamlandı","Teslim edildi","İptal"].includes(s.status)).length}
-function fieldsFor(type){
- const customerOptions=data.customers.map(c=>({value:c.id,label:c.name+" · "+(c.phone||"telefon yok")}));
- const customerSelect=()=>'<div class="field full"><label for="f_customerId">Müşteri</label><select id="f_customerId" name="customerId" required><option value="">Müşteri seç</option>'+customerOptions.map(o=>'<option value="'+esc(o.value)+'">'+esc(o.label)+'</option>').join("")+'</select><input id="serviceCustomerSearch" type="search" placeholder="Ad, kurum adı veya telefonla ara" style="margin-top:7px"><button class="btn small-btn" type="button" id="newCustomerFromService" style="margin-top:7px">＋ Yeni müşteri kaydı oluştur</button><div class="muted tiny" style="margin-top:5px">Yeni müşteri kaydı oluşturursan bu formdaki bilgiler korunur.</div></div>';
- const f=(label,name,kind="text",opts={})=>field(label,name,kind,opts);
- if(type==="customer")return f("Ad soyad / kurum adı","name","text",{required:true,maxlength:160})+f("Telefon","phone","tel",{maxlength:40})+f("E-posta","email","email",{maxlength:160})+f("Adres","address","textarea",{full:true,maxlength:500})+f("Müşteri notları","notes","textarea",{full:true,maxlength:1500})+f("Bilgilendirme / takip iletişimi için izin","marketing","select",{options:["İzin verilmedi","İzin verildi"]});
- if(type==="stock")return f("Ürün / parça adı","name","text",{required:true,maxlength:160})+f("Stok kodu","code","text",{maxlength:80})+f("Kategori","category","select",{options:["Bilgisayar","Güvenlik","Ağ ekipmanı","Yedek parça","Kablo ve aksesuar","Diğer"]})+f("Mevcut adet","quantity","number",{required:true,min:0,step:"1"})+f("Minimum stok seviyesi","minStock","number",{required:true,min:0,step:"1"})+f("Birim maliyet (₺)","buyPrice","number",{min:0,step:"0.01"})+f("Satış fiyatı (₺)","sellPrice","number",{min:0,step:"0.01"})+f("Tedarikçi","supplier","text",{maxlength:160})+f("Stok notları","notes","textarea",{full:true,maxlength:1200});
- if(type==="order")return customerSelect()+f("İşlem türü","kind","select",{options:["Satış","Sipariş","Parça satışı","Hizmet"]})+f("İşlem açıklaması","description","text",{required:true,maxlength:200})+f("Toplam tutar (₺)","total","number",{required:true,min:0,step:"0.01"})+f("Tahsil edilen (₺)","paid","number",{required:true,min:0,step:"0.01"})+f("Durum","status","select",{options:["Bekliyor","Hazırlanıyor","Tamamlandı","İptal"]})+f("Açıklama","notes","textarea",{full:true,maxlength:1200});
- if(type==="service")return customerSelect()+f("Cihaz türü","deviceType","select",{options:data.sector==="security"?["Güvenlik kamerası","NVR / DVR kayıt cihazı","Alarm paneli","Sensör","Ağ cihazı","Diğer cihaz"]:["Dizüstü bilgisayar","Masaüstü bilgisayar","Yazıcı","Monitör","Ağ cihazı","Diğer cihaz"]})+f("Marka / model","device","text",{required:true,maxlength:160})+f("Seri numarası","serial","text",{maxlength:120})+f("Aksesuarlar","accessories","text",{maxlength:300,placeholder:"Adaptör, kablo vb."})+f("Arıza / müşteri beyanı","problem","textarea",{required:true,full:true,maxlength:2000})+f("Kabul tarihi","date","date",{required:true})+f("Tahmini teslim tarihi","dueDate","date") +f("Servis durumu","status","select",{options:["Kabul edildi","İncelemede","Parça bekliyor","Onarımda","Tamamlandı"]})+f("Ön inceleme notu","notes","textarea",{full:true,maxlength:1500});
- if(type==="task")return f("Görev başlığı","title","text",{required:true,maxlength:180})+f("Sorumlu kişi","person","text",{maxlength:120})+f("Son tarih","dueDate","date") +f("Öncelik","priority","select",{options:["Düşük","Normal","Yüksek","Acil"]})+f("Durum","status","select",{options:["Bekliyor","Devam ediyor","Tamamlandı"]})+f("Açıklama","notes","textarea",{full:true,maxlength:1500});
- return "";
-}
-function field(label,name,type="text",opts={}){
- const id="f_"+name,required=opts.required?"required":"",full=opts.full?' class="field full"':' class="field"',max=opts.maxlength?` maxlength="${opts.maxlength}"`:"",min=opts.min!==undefined?` min="${opts.min}"`:"",step=opts.step?` step="${opts.step}"`:"",placeholder=opts.placeholder?` placeholder="${esc(opts.placeholder)}"`:"";
- let control="";
- if(type==="textarea")control=`<textarea id="${id}" name="${name}" ${required}${max}${placeholder}></textarea>`;
- else if(type==="select"){
-  const options=(opts.options||[]).map(o=>typeof o==="string"?{value:o,label:o}:o);
-  control=`<select id="${id}" name="${name}" ${required}><option value="">Seçiniz</option>${options.map(o=>`<option value="${esc(o.value)}">${esc(o.label)}</option>`).join("")}</select>`;
- }else control=`<input id="${id}" name="${name}" type="${type}" ${required}${max}${min}${step}${placeholder}>`;
- return `<div${full}><label for="${id}">${esc(label)}${opts.required?" *":""}</label>${control}</div>`;
-}
-function openRecord(type,id=null){
- if(!["customer","stock","order","service","task"].includes(type)){toast("Bu kayıt türü desteklenmiyor.");return}
- if(["stock","orders","service"].includes(type)&&!["computer","security"].includes(data.sector)){toast("Önce bir çalışma alanı seç.");return}
- editing=id?{type,id}:null;
- const list=data[type==="customer"?"customers":type==="stock"?"stock":type==="order"?"orders":type==="service"?"services":"tasks"];
- const old=id?list.find(x=>x.id===id):null;
- $("modalTitle").textContent=(id?"Kaydı düzenle · ":"Yeni ")+({customer:"müşteri",stock:"stok kalemi",order:"satış / sipariş",service:"cihaz kabul",task:"görev"}[type]);
- $("modalSave").textContent="Kaydet";
- $("modalBody").innerHTML=fieldsFor(type);
- if(type==="service"&&!id&&data.customers.length===0){$("modalBody").insertAdjacentHTML("afterbegin",'<div class="notice warn">Henüz müşteri kaydı yok. Formu doldurabilir, ardından yeni müşteri oluşturup bu forma geri dönebilirsin.</div>')}
- if(old){
-  for(const [k,v] of Object.entries(old)){
-   const el=$("f_"+k);if(!el)continue;
-   if(k==="marketing")el.value=v?"İzin verildi":"İzin verilmedi";
-   else el.value=v??"";
+  if(!PAGE_NAMES[page])return;
+  if(page==="properties"&&data.sector!=="realestate"){
+    toast("Portföy yönetimi gayrimenkul sektöründe gösterilir.");return;
   }
- }
- if(type==="service"&&!id&&$("f_date"))$("f_date").value=today();
- if(type==="task"&&!id&&$("f_priority"))$("f_priority").value="Normal";
- if(type==="order"&&!id&&$("f_status"))$("f_status").value="Bekliyor";
- if(type==="service"&&$("f_customerId")){
-  $("serviceCustomerSearch").addEventListener("input",filterServiceCustomers);
-  $("newCustomerFromService").addEventListener("click",beginCustomerFromService);
- }
- $("modalBackdrop").classList.add("open");
+  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+page));
+  document.querySelectorAll("#mainNav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+  $("topTitle").textContent=PAGE_NAMES[page];
+  $("sidebar").classList.remove("open");
+  if(page==="settings")renderStaff();
 }
-function filterServiceCustomers(){
- const q=val("serviceCustomerSearch").toLocaleLowerCase("tr"),sel=$("f_customerId");
- [...sel.options].forEach((o,i)=>{o.hidden=i>0&&!o.text.toLocaleLowerCase("tr").includes(q)});
- const found=data.customers.find(c=>[c.name,c.phone].some(v=>String(v||"").toLocaleLowerCase("tr")===q));
- if(found)sel.value=found.id;
+$("mainNav").addEventListener("click",e=>{
+  const b=e.target.closest("[data-page]");
+  if(b)gotoPage(b.dataset.page);
+});
+$("mobileMenu").addEventListener("click",()=>$("sidebar").classList.toggle("open"));
+document.querySelectorAll("[data-jump]").forEach(b=>b.addEventListener("click",()=>gotoPage(b.dataset.jump)));
+
+function renderAll(){
+  if(!data||!user)return;
+  applyPermissions();
+  renderCustomers();
+  renderStock();
+  renderOrders();
+  renderServices();
+  renderTasks();
+  renderProperties();
+  renderDashboard();
+  renderReports();
+  renderStaff();
+  renderActivity();
+  renderSystemStatus();
+  $("sectorSwitcher").value=data.sector;
+  $("settingsSector").value=data.sector;
+  $("businessSubtitle").textContent=(data.settings.businessName||account.businessName)+" · "+SECTORS[data.sector];
 }
-function beginCustomerFromService(){
- serviceDraft={...Object.fromEntries(new FormData($("recordForm")).entries()),customerSearch:val("serviceCustomerSearch")};
- closeModal();openRecord("customer");
- toast("Müşteri kaydından sonra cihaz kabul formuna geri dönülecek.");
+function statusPill(status){
+  const s=String(status||"");
+  let cls="";
+  if(["Tamamlandı","Teslim edildi","Onarım tamamlandı","Aktif"].includes(s))cls="green";
+  else if(["İptal","Stokta yok"].includes(s))cls="red";
+  else if(["Parça bekliyor","Kritik stok","Bekliyor"].includes(s))cls="amber";
+  else cls="blue";
+  return '<span class="pill '+cls+'">'+esc(s||"—")+'</span>';
 }
-function closeModal(){$("modalBackdrop").classList.remove("open");editing=null}
-function saveRecord(e){
- e.preventDefault();
- const type=editing?.type||$("modalTitle").textContent.includes("müşteri")?"customer":null;
- const resolved=editing?.type||({"Yeni müşteri":"customer"}[$("modalTitle").textContent]||null);
- const formType=editing?.type||document.querySelector("#modalTitle").dataset.type;
- // Kayıt türü modal açılırken saklanır; düzenleme ve yeni kayıt aynı doğrulama yolunu kullanır.
- const t=editing?.type||$("recordForm").dataset.type;
- if(!t){toast("Form türü belirlenemedi. Pencereyi kapatıp tekrar aç.");return}
- const fd=Object.fromEntries(new FormData($("recordForm")).entries());
- const map={customer:"customers",stock:"stock",order:"orders",service:"services",task:"tasks"},key=map[t];
- if(!key)return;
- if(t==="customer"){
-  fd.name=String(fd.name||"").trim();if(!fd.name){toast("Müşteri veya kurum adı zorunludur.");return}
-  const phone=String(fd.phone||"").replace(/\D/g,"");
-  const duplicate=data.customers.find(c=>c.id!==editing?.id&&phone&&String(c.phone||"").replace(/\D/g,"")===phone);
-  if(duplicate&&!confirm("Aynı telefon numarasıyla bir müşteri var: "+duplicate.name+". Yine de kaydetmek istiyor musun?"))return;
-  fd.marketing=fd.marketing==="İzin verildi";
- }
- if(t==="stock"){
-  fd.name=String(fd.name||"").trim();if(!fd.name){toast("Ürün adı zorunludur.");return}
-  for(const k of ["quantity","minStock","buyPrice","sellPrice"]){fd[k]=Number(fd[k]||0);if(!Number.isFinite(fd[k])||fd[k]<0){toast("Stok ve fiyat değerleri negatif olamaz.");return}}
- }
- if(t==="order"){
-  fd.total=Number(fd.total||0);fd.paid=Number(fd.paid||0);
-  if(fd.total<0||fd.paid<0||fd.paid>fd.total){toast("Tahsilat tutarı, toplam tutardan fazla olamaz.");return}
-  if(!fd.description.trim()){toast("İşlem açıklaması zorunludur.");return}
- }
- if(t==="service"){
-  if(!fd.customerId){toast("Müşteri seçmelisin.");return}
-  if(!fd.device.trim()||!fd.problem.trim()){toast("Cihaz ve arıza bilgileri zorunludur.");return}
-  fd.code=editing?data.services.find(x=>x.id===editing.id)?.code:makeServiceCode();
-  fd.fee=Number(fd.fee||0);
-  fd.deliveryStatus=editing?(data.services.find(x=>x.id===editing.id)?.deliveryStatus||"Teslim bekliyor"):"Teslim bekliyor";
- }
- if(t==="task"&&!String(fd.title||"").trim()){toast("Görev başlığı zorunludur.");return}
- const list=data[key],prior=editing?list.find(x=>x.id===editing.id):null;
- const record={...(prior||{}),...fd,id:prior?.id||uid(),createdAt:prior?.createdAt||today(),updatedAt:today()};
- if(t==="service"&&!prior){record.status=record.status||"Kabul edildi";record.fee=0;record.paymentStatus="Ödenmedi";record.deliveryStatus="Teslim bekliyor"}
- if(t==="order"&&!record.code)record.code="IS-"+Math.random().toString(36).slice(2,8).toUpperCase();
- const beforeCustomers=new Set(data.customers.map(c=>c.id));
- if(prior)Object.assign(prior,record);else list.unshift(record);
- setActivity((prior?"Kayıt güncellendi: ":"Yeni kayıt: ")+({customer:"müşteri",stock:"stok",order:"satış / sipariş",service:"servis",task:"görev"}[t]));
- if(!persist()){if(prior)Object.assign(prior,prior);else list.shift();return}
- closeModal();
- if(t==="customer"&&serviceDraft){
-  const newCustomer=data.customers.find(c=>!beforeCustomers.has(c.id));
-  if(newCustomer){const draft=serviceDraft;serviceDraft=null;openRecord("service");for(const [k,v] of Object.entries(draft)){const el=$("f_"+k);if(el&&k!=="customerId"&&k!=="customerSearch")el.value=v} $("f_customerId").value=newCustomer.id;$("serviceCustomerSearch").value=newCustomer.name;toast("Müşteri kaydedildi. Cihaz kabul formuna geri dönüldü.");return}
- }
- renderAll();toast(prior?"Kayıt güncellendi.":"Kayıt oluşturuldu.");
+function actionButtons(type,id){
+  return '<div class="row-actions"><button class="btn sm" data-edit="'+esc(type)+'" data-id="'+esc(id)+'">Düzenle</button><button class="btn sm danger" data-delete="'+esc(type)+'" data-id="'+esc(id)+'">Sil</button></div>';
 }
-function makeServiceCode(){
- let code;do{code=Array.from({length:6},()=> "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[Math.floor(Math.random()*32)]).join("")}while(data.services.some(s=>s.code===code));return code;
-}
-function editRecord(type,id){
- const map={customer:"customers",stock:"stock",order:"orders",service:"services",task:"tasks"},record=data[map[type]]?.find(x=>x.id===id);if(!record)return;
- openRecord(type,id);$("recordForm").dataset.type=type;
-}
-function deleteRecord(type,id){
- if(!confirm("Bu kaydı silmek istediğinden emin misin? Bu işlem geri alınamaz."))return;
- const map={customer:"customers",stock:"stock",order:"orders",service:"services",task:"tasks"},key=map[type];if(!key)return;
- const old=data[key],item=old.find(x=>x.id===id);data[key]=old.filter(x=>x.id!==id);
- setActivity("Kayıt silindi: "+type);
- if(!persist()){data[key]=old;return}
- renderAll();toast("Kayıt silindi.");
+function emptyRow(cols,msg="Henüz kayıt yok."){
+  return '<tr><td colspan="'+cols+'" class="empty">'+esc(msg)+'</td></tr>';
 }
 function renderCustomers(){
- const q=val("customerSearch").toLocaleLowerCase("tr"),filter=val("customerFilter");
- const rows=data.customers.filter(c=>(!q||[c.name,c.phone,c.email].some(v=>String(v||"").toLocaleLowerCase("tr").includes(q)))&&(!filter||(filter==="marketing"&&c.marketing)));
- $("customersTable").innerHTML=rows.map(c=>`<tr><td><strong>${esc(c.name)}</strong></td><td>${esc(c.phone||"—")}</td><td>${esc(c.email||"—")}</td><td>${fmtDate(c.createdAt)}</td><td>${statusPill(c.marketing?"İzin verildi":"İzin yok")}</td><td>${actionButtons("customer",c.id)}</td></tr>`).join("")||tableEmpty(6);
+  const q=key(val("customerSearch"));
+  const rows=data.customers.filter(x=>!q||key([x.name,x.phone,x.email,x.notes].join(" ")).includes(q));
+  $("customersRows").innerHTML=rows.length?rows.map(x=>`<tr>
+    <td><strong>${esc(x.name)}</strong><div class="muted tiny">${esc(x.address||"")}</div></td>
+    <td>${esc(x.phone||"—")}</td><td>${esc(x.email||"—")}</td>
+    <td>${esc(x.notes||"—")}</td><td>${formatDate(x.createdAt)}</td>
+    <td>${actionButtons("customer",x.id)}</td></tr>`).join(""):emptyRow(6);
 }
 function renderStock(){
- const q=val("stockSearch").toLocaleLowerCase("tr"),rows=data.stock.filter(s=>!q||[s.name,s.code,s.category,s.supplier].some(v=>String(v||"").toLocaleLowerCase("tr").includes(q)));
- $("stockTable").innerHTML=rows.map(s=>`<tr><td><strong>${esc(s.name)}</strong></td><td>${esc(s.code||"—")}</td><td>${esc(s.category||"—")}</td><td>${Number(s.quantity)||0}</td><td>${Number(s.minStock)||0}</td><td>${money(s.buyPrice)}</td><td>${money(s.sellPrice)}</td><td>${statusPill(Number(s.quantity)<=Number(s.minStock)?"Kritik":"Normal")}</td><td>${actionButtons("stock",s.id)}</td></tr>`).join("")||tableEmpty(9);
- $("stockKinds").textContent=data.stock.length;$("stockUnits").textContent=data.stock.reduce((n,s)=>n+(Number(s.quantity)||0),0);
- $("stockCritical").textContent=data.stock.filter(s=>Number(s.quantity)<=Number(s.minStock)).length;
- $("stockCost").textContent=money(data.stock.reduce((n,s)=>n+(Number(s.quantity)||0)*(Number(s.buyPrice)||0),0));
+  const q=key(val("stockSearch")),f=val("stockFilter");
+  const rows=data.stock.filter(x=>{
+    const low=Number(x.qty)<=Number(x.minQty||0);
+    return (!q||key([x.name,x.code,x.category].join(" ")).includes(q))&&
+      (!f||(f==="low"&&low&&Number(x.qty)>0)||(f==="out"&&Number(x.qty)<=0));
+  });
+  $("stockRows").innerHTML=rows.length?rows.map(x=>{
+    const low=Number(x.qty)<=Number(x.minQty||0);
+    return `<tr><td><strong>${esc(x.name)}</strong><div class="muted tiny">${esc(x.category||"")}</div></td>
+    <td>${esc(x.code||"—")}</td><td>${esc(x.qty)}</td><td>${money(x.cost)}</td><td>${money(x.price)}</td>
+    <td>${Number(x.qty)<=0?statusPill("Stokta yok"):low?statusPill("Kritik stok"):statusPill("Normal")}</td>
+    <td>${actionButtons("stock",x.id)}</td></tr>`;
+  }).join(""):emptyRow(7);
 }
 function renderOrders(){
- const q=val("orderSearch").toLocaleLowerCase("tr"),st=val("orderStatusFilter");
- const rows=data.orders.filter(o=>(!q||[o.code,customerName(o.customerId),o.description].some(v=>String(v||"").toLocaleLowerCase("tr").includes(q)))&&(!st||o.status===st));
- $("ordersTable").innerHTML=rows.map(o=>`<tr><td>${fmtDate(o.date||o.createdAt)}</td><td><strong>${esc(o.code||"—")}</strong></td><td>${esc(customerName(o.customerId))}</td><td>${esc(o.kind||"—")}</td><td>${money(o.total)}</td><td>${money(o.paid)}</td><td>${statusPill(o.status)}</td><td>${actionButtons("order",o.id)}</td></tr>`).join("")||tableEmpty(8);
- $("orderCount").textContent=data.orders.length;$("orderTotal").textContent=money(data.orders.filter(o=>o.status!=="İptal").reduce((n,o)=>n+(Number(o.total)||0),0));
- $("orderPaid").textContent=money(data.orders.filter(o=>o.status!=="İptal").reduce((n,o)=>n+(Number(o.paid)||0),0));
- $("orderDue").textContent=money(data.orders.filter(o=>o.status!=="İptal").reduce((n,o)=>n+Math.max(0,(Number(o.total)||0)-(Number(o.paid)||0)),0));
+  const q=key(val("orderSearch")),f=val("orderStatusFilter");
+  const rows=data.orders.filter(x=>(!q||key([x.customer,x.item,x.notes].join(" ")).includes(q))&&(!f||x.status===f));
+  $("ordersRows").innerHTML=rows.length?rows.map(x=>`<tr><td>${formatDate(x.date)}</td><td>${esc(x.customer||"—")}</td>
+  <td><strong>${esc(x.item||"—")}</strong><div class="muted tiny">${esc(x.type||"Satış")}</div></td>
+  <td>${money(x.amount)}</td><td>${statusPill(x.status)}</td><td>${actionButtons("order",x.id)}</td></tr>`).join(""):emptyRow(6);
 }
 function renderServices(){
- const q=val("serviceSearch").toLocaleLowerCase("tr"),st=val("serviceStatusFilter");
- const rows=data.services.filter(s=>(!q||[s.code,customerName(s.customerId),s.device,s.problem,s.serial].some(v=>String(v||"").toLocaleLowerCase("tr").includes(q)))&&(!st||s.status===st));
- $("servicesTable").innerHTML=rows.map(s=>`<tr><td><strong>${esc(s.code||"—")}</strong></td><td>${esc(customerName(s.customerId))}</td><td>${esc(s.deviceType||"")} ${esc(s.device||"")}</td><td>${esc(s.problem)}</td><td>${fmtDate(s.date)}</td><td>${statusPill(s.status==="Tamamlandı"&&s.deliveryStatus!=="Teslim edildi"?"Teslim bekliyor":s.status)}</td><td>${money(s.fee)}</td><td><div class="row-actions"><button class="btn small-btn" data-complete="${esc(s.id)}">Sonuçlandır</button><button class="btn small-btn" data-print="${esc(s.id)}">Yazdır</button>${actionButtons("service",s.id)}</div></td></tr>`).join("")||tableEmpty(8);
+  const q=key(val("serviceSearch")),f=val("serviceStatusFilter");
+  const rows=data.services.filter(x=>(!q||key([x.customer,x.device,x.serial,x.problem].join(" ")).includes(q))&&(!f||x.status===f));
+  $("serviceRows").innerHTML=rows.length?rows.map(x=>`<tr><td><strong>${esc(x.number||"—")}</strong></td>
+  <td>${esc(x.customer||"—")}<div class="muted tiny">${esc(x.phone||"")}</div></td>
+  <td>${esc(x.device||"—")}<div class="muted tiny">${esc(x.serial||"")}</div></td>
+  <td>${esc(x.problem||"—")}</td><td>${statusPill(x.status)}</td><td>${formatDate(x.date)}</td>
+  <td>${actionButtons("service",x.id)} <button class="btn sm" data-print-service="${esc(x.id)}">Form</button></td></tr>`).join(""):emptyRow(7);
 }
 function renderTasks(){
- const q=val("taskSearch").toLocaleLowerCase("tr"),st=val("taskStatusFilter");
- const rows=data.tasks.filter(t=>(!q||[t.title,t.person,t.notes].some(v=>String(v||"").toLocaleLowerCase("tr").includes(q)))&&(!st||(st==="done"?t.status==="Tamamlandı":st==="open"?t.status!=="Tamamlandı":true)));
- $("tasksTable").innerHTML=rows.map(t=>`<tr><td><strong>${esc(t.title)}</strong><div class="muted tiny">${esc(t.notes||"")}</div></td><td>${esc(t.person||"—")}</td><td>${fmtDate(t.dueDate)}</td><td>${statusPill(t.priority||"Normal")}</td><td>${statusPill(t.status||"Bekliyor")}</td><td>${actionButtons("task",t.id)}</td></tr>`).join("")||tableEmpty(6);
+  const q=key(val("taskSearch")),f=val("taskStatusFilter");
+  const rows=data.tasks.filter(x=>(!q||key([x.title,x.assignee,x.notes].join(" ")).includes(q))&&(!f||x.status===f));
+  $("tasksRows").innerHTML=rows.length?rows.map(x=>`<tr><td><strong>${esc(x.title)}</strong><div class="muted tiny">${esc(x.notes||"")}</div></td>
+  <td>${esc(x.assignee||"—")}</td><td>${formatDate(x.due)}</td><td>${statusPill(x.priority||"Normal")}</td>
+  <td>${statusPill(x.status)}</td><td>${actionButtons("task",x.id)}</td></tr>`).join(""):emptyRow(6);
+}
+function renderProperties(){
+  const q=key(val("propertySearch")),f=val("propertyFilter");
+  const rows=data.properties.filter(x=>(!q||key([x.title,x.location,x.contact].join(" ")).includes(q))&&(!f||x.deal===f));
+  $("propertiesRows").innerHTML=rows.length?rows.map(x=>`<tr><td><strong>${esc(x.title)}</strong><div class="muted tiny">${esc(x.contact||"")}</div></td>
+  <td>${esc(x.deal)}</td><td>${esc(x.kind||"—")}</td><td>${esc(x.location||"—")}</td><td>${money(x.price)}</td>
+  <td>${statusPill(x.status)}</td><td>${actionButtons("property",x.id)}</td></tr>`).join(""):emptyRow(7);
 }
 function renderDashboard(){
- $("statCustomers").textContent=data.customers.length;$("statStock").textContent=data.stock.length;$("statServices").textContent=activeCount(data.services);$("statTasks").textContent=data.tasks.filter(t=>t.status!=="Tamamlandı").length;
- const critical=data.stock.filter(s=>Number(s.quantity)<=Number(s.minStock));
- const overdue=data.tasks.filter(t=>t.status!=="Tamamlandı"&&t.dueDate&&t.dueDate<today());
- const unpaidOrders=data.orders.filter(o=>o.status!=="İptal"&&(Number(o.total)||0)>(Number(o.paid)||0));
- const uncollected=data.services.filter(s=>s.status==="Tamamlandı"&&s.deliveryStatus!=="Teslim edildi");
- const unpaidServices=data.services.filter(s=>s.status!=="İptal"&&Number(s.fee)>0&&!["Ödendi","Ücretsiz işlem"].includes(s.paymentStatus));
- const alerts=[
-  {label:"Kritik stok kalemi",n:critical.length,page:"stock"},
-  {label:"Gecikmiş görev",n:overdue.length,page:"tasks"},
-  {label:"Ödemesi kalan satış / sipariş",n:unpaidOrders.length,page:"orders"},
-  {label:"Teslim alınmayı bekleyen cihaz",n:uncollected.length,page:"service"},
-  {label:"Ödemesi kontrol edilecek servis",n:unpaidServices.length,page:"service"}
- ];
- $("alertsList").innerHTML=alerts.map(a=>`<button class="kpi-row" data-jump="${a.page}" style="border:0;background:transparent;text-align:left;padding:0;color:var(--ink);width:100%"><span>${esc(a.label)}</span>${statusPill(a.n+" kayıt")}</button>`).join("");
- $("criticalStock").innerHTML=critical.length?critical.slice(0,6).map(s=>`<div class="kpi-row" style="margin-bottom:12px"><span>${esc(s.name)}<div class="muted tiny">Mevcut: ${Number(s.quantity)||0} · Min: ${Number(s.minStock)||0}</div></span>${statusPill("Kritik")}</div>`).join(""):'<div class="empty">Kritik seviyede stok yok.</div>';
- const acts=data.activity.slice(0,7);
- $("recentActivity").innerHTML=acts.length?acts.map(a=>`<div class="activity-item"><span class="activity-dot"></span><div>${esc(a.label)}<div class="muted tiny">${new Date(a.date).toLocaleString("tr-TR")}</div></div></div>`).join(""):'<div class="empty">Henüz hareket yok. İlk kaydını oluşturabilirsin.</div>';
+  $("statCustomers").textContent=data.customers.length;
+  $("statStock").textContent=data.stock.length;
+  $("statServices").textContent=data.services.filter(x=>x.status!=="Teslim edildi").length;
+  $("statTasks").textContent=data.tasks.filter(x=>x.status!=="Tamamlandı").length;
+  const alerts=[];
+  const low=data.stock.filter(x=>Number(x.qty)<=Number(x.minQty||0));
+  if(low.length)alerts.push({title:low.length+" ürün kritik stok seviyesinde",text:"Yeniden sipariş gerekip gerekmediğini kontrol et.",type:"warning"});
+  const overdue=data.tasks.filter(x=>x.status!=="Tamamlandı"&&x.due&&x.due<today());
+  if(overdue.length)alerts.push({title:overdue.length+" görevin son tarihi geçmiş",text:"Görev listesini kontrol edip tarihleri güncelle.",type:"warning"});
+  const waiting=data.services.filter(x=>x.status==="Parça bekliyor");
+  if(waiting.length)alerts.push({title:waiting.length+" servis parça bekliyor",text:"Tedarik durumlarını takip et.",type:"warning"});
+  if(!alerts.length)alerts.push({title:"Şu an tanımlı kritik uyarı yok",text:"Yeni kayıtlar eklendikçe durumlar burada gösterilir.",type:""});
+  $("alertsList").innerHTML=alerts.map(a=>`<div class="notice ${a.type}"><strong>${esc(a.title)}</strong><br>${esc(a.text)}</div>`).join("");
+}
+function renderActivity(){
+  const rows=data.activity.slice(0,8);
+  $("activityList").innerHTML=rows.length?rows.map(x=>`<div class="activity-item"><span class="activity-dot"></span><div>${esc(x.label)}<time>${esc(x.by||"Kullanıcı")} · ${new Date(x.date).toLocaleString("tr-TR")}</time></div></div>`).join(""):'<div class="muted small">Henüz hareket kaydı yok.</div>';
 }
 function renderReports(){
- const cost=data.stock.reduce((n,s)=>n+(Number(s.quantity)||0)*(Number(s.buyPrice)||0),0);
- const sales=data.orders.filter(o=>o.status!=="İptal").reduce((n,o)=>n+(Number(o.total)||0),0);
- $("reportCustomers").textContent=data.customers.length;$("reportSales").textContent=money(sales);$("reportStock").textContent=money(cost);$("reportTasks").textContent=data.tasks.filter(t=>t.status!=="Tamamlandı").length;
- const sorted=[...data.stock].sort((a,b)=>(Number(a.quantity)-Number(a.minStock))-(Number(b.quantity)-Number(b.minStock)));
- $("stockAnalysis").innerHTML=sorted.length?sorted.slice(0,8).map(s=>`<div style="margin-bottom:14px"><div class="kpi-row"><span>${esc(s.name)}</span><strong>${Number(s.quantity)||0} adet</strong></div><div class="progress"><span style="width:${Math.min(100,Number(s.minStock)>0?Number(s.quantity)/Number(s.minStock)*100:100)}%"></span></div><div class="muted tiny">Kritik seviye: ${Number(s.minStock)||0}</div></div>`).join(""):'<div class="empty">Analiz için stok kaydı ekle.</div>';
- $("dataSummary").innerHTML='<div class="kpi-list">'+LISTS.map(k=>`<div class="kpi-row"><span>${({customers:"Müşteriler",stock:"Stok",orders:"Satış ve sipariş",services:"Teknik servis",tasks:"Görevler"})[k]}</span><strong>${data[k].length}</strong></div>`).join("")+`<div class="kpi-row"><span>Çalışma alanı</span><strong>${esc(SECTORS[data.sector])}</strong></div></div>`;
+  const revenue=data.orders.filter(x=>x.status!=="İptal").reduce((n,x)=>n+Number(x.amount||0),0);
+  const stockCost=data.stock.reduce((n,x)=>n+Number(x.qty||0)*Number(x.cost||0),0);
+  $("reportRevenue").textContent=money(revenue);
+  $("reportStockCost").textContent=money(stockCost);
+  $("reportOpenService").textContent=data.services.filter(x=>x.status!=="Teslim edildi").length;
+  $("reportOpenTasks").textContent=data.tasks.filter(x=>x.status!=="Tamamlandı").length;
+  const low=data.stock.filter(x=>Number(x.qty)<=Number(x.minQty||0));
+  $("stockAnalysis").innerHTML=[
+    `<div class="activity-item"><span class="activity-dot"></span><div>Toplam stok çeşidi<strong style="display:block">${data.stock.length}</strong></div></div>`,
+    `<div class="activity-item"><span class="activity-dot"></span><div>Kritik seviyedeki ürün<strong style="display:block">${low.length}</strong></div></div>`,
+    `<div class="activity-item"><span class="activity-dot"></span><div>Mevcut stok maliyeti<strong style="display:block">${money(stockCost)}</strong></div></div>`,
+    ...low.slice(0,8).map(x=>`<div class="activity-item"><span class="activity-dot"></span><div>${esc(x.name)} — ${esc(x.qty)} adet kaldı</div></div>`)
+  ].join("");
+  $("businessReport").innerHTML=[
+    `<div class="activity-item"><span class="activity-dot"></span><div>Müşteri sayısı<strong style="display:block">${data.customers.length}</strong></div></div>`,
+    `<div class="activity-item"><span class="activity-dot"></span><div>İşlem kaydı<strong style="display:block">${data.orders.length}</strong></div></div>`,
+    `<div class="activity-item"><span class="activity-dot"></span><div>Teknik servis kaydı<strong style="display:block">${data.services.length}</strong></div></div>`,
+    `<div class="activity-item"><span class="activity-dot"></span><div>Portföy kaydı<strong style="display:block">${data.properties.length}</strong></div></div>`
+  ].join("");
 }
-function renderAll(){
- renderCustomers();renderStock();renderOrders();renderServices();renderTasks();renderDashboard();renderReports();renderProfileSettings();
- $("lockMinutes").value=String(data.settings.lockMinutes||account?.settings?.lockMinutes||10);
- $("settingsSector").value=data.sector;$("sectorSwitcher").value=data.sector;
- $("systemStatus").innerHTML=`<p>Depolama: Bu tarayıcının yerel alanı</p><p>Sunucu veritabanı: Bağlı değil</p><p>Çoklu cihaz senkronizasyonu: Etkin değil</p><p>Sunucu taraflı kimlik doğrulama: Etkin değil</p><p>Aktif çalışma alanı: ${esc(SECTORS[data.sector])}</p><p>Aktif kayıt sayısı: ${LISTS.reduce((n,k)=>n+data[k].length,0)}</p>`;
+function renderStaff(){
+  if(!account||!user||!isAdmin())return;
+  const list=account.users||[];
+  $("staffList").innerHTML=list.map(u=>`<div class="staff-row">
+    <div><strong>${esc(u.name)}</strong><div class="muted tiny">${esc(u.username)} · ${u.role==="founder"?"Kurucu":u.role==="manager"?"Yönetici":"Kullanıcı"}</div></div>
+    <div class="row-actions">${u.id!==user.id&&u.role!=="founder"?`<button class="btn sm" data-toggle-user="${esc(u.id)}">${u.active===false?"Etkinleştir":"Devre dışı bırak"}</button>`:""}</div>
+  </div>`).join("");
 }
+function renderSystemStatus(){
+  $("systemStatus").innerHTML=`
+    <div class="activity-item"><span class="activity-dot"></span><div>Depolama<strong style="display:block">Bu tarayıcının yerel alanı</strong></div></div>
+    <div class="activity-item"><span class="activity-dot"></span><div>Sunucu veritabanı<strong style="display:block">Bağlı değil</strong></div></div>
+    <div class="activity-item"><span class="activity-dot"></span><div>Çoklu cihaz senkronizasyonu<strong style="display:block">Etkin değil</strong></div></div>
+    <div class="activity-item"><span class="activity-dot"></span><div>Sunucu taraflı kimlik doğrulama<strong style="display:block">Etkin değil</strong></div></div>
+    <div class="activity-item"><span class="activity-dot"></span><div>Aktif sektör<strong style="display:block">${esc(SECTORS[data.sector])}</strong></div></div>
+    <div class="activity-item"><span class="activity-dot"></span><div>Son yedekleme<strong style="display:block">Kullanıcı tarafından indirilmeli</strong></div></div>`;
+}
+
+function field(label,name,type="text",opts={}){
+  const full=opts.full?" full":"";
+  let control="";
+  if(type==="textarea"){
+    control=`<textarea id="f_${name}" name="${name}" ${opts.required?"required":""} maxlength="${opts.maxlength||2000}" placeholder="${esc(opts.placeholder||"")}"></textarea>`;
+  }else if(type==="select"){
+    control=`<select id="f_${name}" name="${name}" ${opts.required?"required":""}>${(opts.options||[]).map(o=>`<option value="${esc(o)}">${esc(o)}</option>`).join("")}</select>`;
+  }else{
+    control=`<input id="f_${name}" name="${name}" type="${type}" ${opts.required?"required":""} ${opts.min!==undefined?`min="${opts.min}"`:""} ${opts.step?`step="${opts.step}"`:""} maxlength="${opts.maxlength||250}" placeholder="${esc(opts.placeholder||"")}">`;
+  }
+  return `<div class="field${full}"><label for="f_${name}">${esc(label)}</label>${control}</div>`;
+}
+const FORMS={
+ customer:{
+  title:"Müşteri kaydı",list:"customers",fields:[
+   ["name","Ad / kurum","text",{required:true,full:true}],
+   ["phone","Telefon","tel",{}],["email","E-posta","email",{}],
+   ["address","Adres","textarea",{full:true}],
+   ["notes","Notlar","textarea",{full:true}]
+  ]
+ },
+ stock:{
+  title:"Stok kaydı",list:"stock",fields:[
+   ["name","Ürün adı","text",{required:true,full:true}],
+   ["code","Ürün / parça kodu","text",{}],["category","Kategori","text",{}],
+   ["qty","Mevcut adet","number",{required:true,min:0,step:"1"}],
+   ["minQty","Kritik stok seviyesi","number",{min:0,step:"1"}],
+   ["cost","Alış fiyatı (TL)","number",{min:0,step:"0.01"}],
+   ["price","Satış fiyatı (TL)","number",{min:0,step:"0.01"}],
+   ["notes","Notlar","textarea",{full:true}]
+  ]
+ },
+ order:{
+  title:"Satış / sipariş kaydı",list:"orders",fields:[
+   ["type","İşlem türü","select",{options:["Satış","Sipariş","Alış","İade"]}],
+   ["customer","Müşteri / firma","text",{required:true}],
+   ["item","Ürün / işlem açıklaması","text",{required:true,full:true}],
+   ["amount","Toplam tutar (TL)","number",{min:0,step:"0.01"}],
+   ["date","Tarih","date",{required:true}],
+   ["status","Durum","select",{options:["Bekliyor","Hazırlanıyor","Tamamlandı","İptal"]}],
+   ["notes","Notlar","textarea",{full:true}]
+  ]
+ },
+ service:{
+  title:"Teknik servis kabul formu",list:"services",fields:[
+   ["customer","Müşteri adı","text",{required:true}],
+   ["phone","Telefon","tel",{}],
+   ["device","Cihaz / ürün","text",{required:true}],
+   ["serial","Seri no / IMEI","text",{}],
+   ["accessories","Teslim alınan aksesuarlar","text",{full:true}],
+   ["problem","Müşterinin bildirdiği arıza","textarea",{required:true,full:true}],
+   ["diagnosis","Teknik inceleme / tespit","textarea",{full:true}],
+   ["price","Tahmini ücret (TL)","number",{min:0,step:"0.01"}],
+   ["warranty","Garanti durumu","select",{options:["Bilinmiyor","Garanti kapsamında","Garanti dışı"]}],
+   ["status","Servis durumu","select",{options:["Kabul edildi","İnceleniyor","Parça bekliyor","Onarım tamamlandı","Teslim edildi"]}],
+   ["date","Kabul tarihi","date",{required:true}],
+   ["notes","Ek notlar","textarea",{full:true}]
+  ]
+ },
+ task:{
+  title:"Görev / hatırlatma",list:"tasks",fields:[
+   ["title","Görev başlığı","text",{required:true,full:true}],
+   ["assignee","Sorumlu kişi","text",{}],
+   ["due","Son tarih","date",{}],
+   ["priority","Öncelik","select",{options:["Normal","Önemli","Acil"]}],
+   ["status","Durum","select",{options:["Bekliyor","Devam ediyor","Tamamlandı"]}],
+   ["notes","Açıklama","textarea",{full:true}]
+  ]
+ },
+ property:{
+  title:"Gayrimenkul portföy kaydı",list:"properties",fields:[
+   ["title","İlan / portföy başlığı","text",{required:true,full:true}],
+   ["deal","İşlem türü","select",{options:["Satılık","Kiralık"]}],
+   ["kind","Gayrimenkul türü","select",{options:["Daire","Müstakil ev","Arsa","İşyeri","Ofis","Diğer"]}],
+   ["location","Konum / adres","text",{required:true,full:true}],
+   ["price","Fiyat (TL)","number",{min:0,step:"0.01"}],
+   ["contact","İlgili kişi / müşteri","text",{}],
+   ["phone","Telefon","tel",{}],
+   ["status","Durum","select",{options:["Aktif","Beklemede","Tamamlandı"]}],
+   ["notes","Açıklama","textarea",{full:true}]
+  ]
+ }
+};
+function openForm(type,id=null){
+  if(!FORMS[type])return;
+  if(type==="property"&&data.sector!=="realestate"){toast("Portföy kayıtları gayrimenkul sektöründe kullanılabilir.");return}
+  currentType=type;editingId=id;
+  const schema=FORMS[type],existing=id?data[schema.list].find(x=>x.id===id):null;
+  $("modalTitle").textContent=existing?"Kaydı düzenle":schema.title;
+  $("modalFields").innerHTML=schema.fields.map(([name,label,type,opts])=>field(label,name,type,opts||{})).join("");
+  if(existing){
+    schema.fields.forEach(([name,label,type])=>{
+      const el=$("f_"+name);
+      if(el&&existing[name]!==undefined)el.value=existing[name];
+    });
+  }else{
+    const dateField=$("f_date");
+    if(dateField)dateField.value=today();
+    if(type==="task")$("f_status").value="Bekliyor";
+    if(type==="service")$("f_status").value="Kabul edildi";
+    if(type==="stock"){$("f_qty").value="0";$("f_minQty").value="2"}
+    if(type==="property")$("f_status").value="Aktif";
+  }
+  $("modalBackdrop").hidden=false;
+  setTimeout(()=>$("modalFields").querySelector("input,select,textarea")?.focus(),50);
+}
+function closeForm(){$("modalBackdrop").hidden=true;currentType="";editingId=null}
+$("modalClose").addEventListener("click",closeForm);
+$("modalCancel").addEventListener("click",closeForm);
+$("modalBackdrop").addEventListener("click",e=>{if(e.target===$("modalBackdrop"))closeForm()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("modalBackdrop").hidden)closeForm()});
+
+document.body.addEventListener("click",e=>{
+  const create=e.target.closest("[data-create]");
+  if(create){openForm(create.dataset.create);return}
+  const edit=e.target.closest("[data-edit]");
+  if(edit){openForm(edit.dataset.edit,edit.dataset.id);return}
+  const del=e.target.closest("[data-delete]");
+  if(del){deleteRecord(del.dataset.delete,del.dataset.id);return}
+  const toggle=e.target.closest("[data-toggle-user]");
+  if(toggle){toggleUser(toggle.dataset.toggleUser);return}
+  const printService=e.target.closest("[data-print-service]");
+  if(printService){printServiceForm(printService.dataset.printService);return}
+});
+
+$("quickAdd").addEventListener("click",()=>{
+  const choice=prompt("Yeni kayıt türü:\n1 Müşteri\n2 Stok\n3 Satış / sipariş\n4 Teknik servis\n5 Görev\n6 Gayrimenkul portföyü\n\nNumara gir:");
+  const map={"1":"customer","2":"stock","3":"order","4":"service","5":"task","6":"property"};
+  if(map[choice])openForm(map[choice]);
+});
+$("recordForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  if(!currentType||!FORMS[currentType])return;
+  const schema=FORMS[currentType];
+  const record={};
+  for(const [name,label,type] of schema.fields){
+    const el=$("f_"+name);
+    if(!el)continue;
+    record[name]=type==="number"?(el.value===""?0:Number(el.value)):el.value.trim();
+  }
+  if(currentType==="service"&&!record.number){
+    record.number="SRV-"+new Date().getFullYear()+"-"+String(data.services.length+1).padStart(4,"0");
+  }
+  const list=data[schema.list];
+  if(editingId){
+    const idx=list.findIndex(x=>x.id===editingId);
+    if(idx<0){toast("Düzenlenecek kayıt bulunamadı.");closeForm();return}
+    list[idx]={...list[idx],...record,updatedAt:new Date().toISOString()};
+    addActivity(schema.title+" güncellendi");
+  }else{
+    record.id=uid();
+    record.createdAt=new Date().toISOString();
+    if(currentType==="customer")record.createdAt=today();
+    if(currentType==="service")record.number="SRV-"+new Date().getFullYear()+"-"+String(data.services.length+1).padStart(4,"0");
+    list.unshift(record);
+    addActivity(schema.title+" oluşturuldu");
+  }
+  if(persist()){closeForm();renderAll();toast("Kayıt kaydedildi.")}
+});
+function deleteRecord(type,id){
+  if(!FORMS[type])return;
+  if(!confirm("Bu kayıt silinsin mi? Bu işlem geri alınamaz."))return;
+  const list=data[FORMS[type].list],idx=list.findIndex(x=>x.id===id);
+  if(idx<0)return;
+  const old=list.splice(idx,1)[0];
+  addActivity(FORMS[type].title+" silindi");
+  if(!persist()){list.splice(idx,0,old);return}
+  renderAll();toast("Kayıt silindi.");
+}
+function toggleUser(id){
+  if(!requireAdmin())return;
+  const u=account.users.find(x=>x.id===id);
+  if(!u||u.role==="founder")return;
+  u.active=u.active===false;
+  if(saveAccounts()){renderStaff();toast(u.active?"Kullanıcı etkinleştirildi.":"Kullanıcı devre dışı bırakıldı.")}
+}
+$("staffForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  if(!requireAdmin())return;
+  const first=val("staffFirstName"),last=val("staffLastName"),username=key(val("staffUsername")),password=$("staffPassword").value;
+  if(username.length<3||password.length<8){toast("Kullanıcı adı en az 3, şifre en az 8 karakter olmalı.");return}
+  if(accounts[username]){toast("Bu kullanıcı adı başka bir hesap tarafından kullanılıyor.");return}
+  if((account.users||[]).some(x=>x.username===username)){toast("Bu kullanıcı adı işletmede zaten kayıtlı.");return}
+  const u={id:uid(),username,name:first+" "+last,password,role:val("staffRole"),active:true};
+  account.users.push(u);
+  accounts[username]=account;
+  if(saveAccounts()){e.target.reset();renderStaff();toast("Kullanıcı eklendi.")}
+});
+$("saveLockSettings").addEventListener("click",()=>{
+  if(!requireAdmin())return;
+  const mins=Number(val("lockMinutes"));
+  if(!Number.isInteger(mins)||mins<1||mins>60){toast("Kilit süresi 1–60 dakika arasında olmalı.");return}
+  account.settings={...(account.settings||{}),lockMinutes:mins};
+  data.settings.lockMinutes=mins;
+  if(saveAccounts()&&persist())toast("Oturum kilidi süresi kaydedildi.");
+});
+$("settingsForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  if(!requireAdmin())return;
+  const old={...data.settings};
+  const oldSector=account.sector;
+  data.settings.businessName=val("settingBusinessName");
+  data.settings.ownerName=val("settingOwnerName");
+  data.settings.businessPhone=val("settingPhone");
+  data.settings.businessAddress=val("settingAddress");
+  const newSector=val("settingsSector");
+  if(!SECTORS[newSector]){toast("Geçersiz sektör.");data.settings=old;return}
+  account.businessName=data.settings.businessName;
+  account.ownerName=data.settings.ownerName;
+  account.sector=newSector;
+  data.sector=newSector;
+  addActivity("İşletme ayarları güncellendi");
+  if(!persist()){data.settings=old;account.sector=oldSector;return}
+  if(!saveAccounts())return;
+  renderAll();applyPermissions();toast("İşletme ayarları kaydedildi.");
+});
+$("sectorSwitcher").addEventListener("change",e=>{
+  if(!requireAdmin()){e.target.value=data.sector;return}
+  const next=e.target.value;
+  if(!SECTORS[next])return;
+  account.sector=next;data.sector=next;
+  data.settings.businessName=account.businessName;
+  if(!saveAccounts()||!persist())return;
+  $("settingsSector").value=next;
+  renderAll();applyPermissions();toast("Çalışma alanı değiştirildi.");
+});
+$("clearDataBtn").addEventListener("click",()=>{
+  if(!requireAdmin())return;
+  if(!confirm("Bu işletmenin tüm kayıtları silinecek. Önce yedek aldığından emin ol. Devam edilsin mi?"))return;
+  const old=data;
+  data=emptyData(account.sector);
+  data.settings={...old.settings};
+  if(!persist()){data=old;return}
+  renderAll();toast("İşletme kayıtları temizlendi.");
+});
+
 function exportFile(filename,content,mime="application/json"){
- const blob=new Blob([content],{type:mime+";charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  const blob=new Blob([content],{type:mime+";charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 function backup(){
- const packet={app:"Gündeşli Soft Ofis360",version:3,exportedAt:new Date().toISOString(),data};
- exportFile("ofis360-yedek-"+today()+"-"+data.sector+".json",JSON.stringify(packet,null,2));toast("Yedek dosyası oluşturuldu.");
+  if(!data||!account)return;
+  const packet={app:"Gündeşli Soft Ofis360",version:4,exportedAt:new Date().toISOString(),business:{id:account.id,name:account.businessName,sector:account.sector},data};
+  exportFile("ofis360-yedek-"+today()+".json",JSON.stringify(packet,null,2));
+  toast("Yedek dosyası indirildi.");
 }
-function csvCell(v){let s=String(v??"");if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'}
-function exportCSV(filename,headers,rows){exportFile(filename,"\uFEFF"+[headers,...rows].map(row=>row.map(csvCell).join(";")).join("\r\n"),"text/csv")}
-function exportCustomers(){exportCSV("ofis360-musteriler-"+today()+".csv",["Ad / kurum","Telefon","E-posta","Adres","Notlar","İletişim izni","Kayıt tarihi"],data.customers.map(c=>[c.name,c.phone,c.email,c.address,c.notes,c.marketing?"Var":"Yok",c.createdAt]))}
-function exportStock(){exportCSV("ofis360-stok-"+today()+".csv",["Ürün","Kod","Kategori","Miktar","Kritik seviye","Maliyet","Satış fiyatı","Tedarikçi","Notlar"],data.stock.map(s=>[s.name,s.code,s.category,s.quantity,s.minStock,s.buyPrice,s.sellPrice,s.supplier,s.notes]))}
-function exportOrders(){exportCSV("ofis360-islemler-"+today()+".csv",["Tarih","İşlem kodu","Müşteri","Tür","Toplam","Ödenen","Durum","Açıklama"],data.orders.map(o=>[o.date, o.code,customerName(o.customerId),o.kind,o.total,o.paid,o.status,o.notes]))}
-function restoreBackup(file){
- if(!file)return;if(file.size>20*1024*1024){toast("Yedek dosyası 20 MB sınırını aşıyor.");return}
- const reader=new FileReader();reader.onload=()=>{
-  try{const packet=JSON.parse(reader.result),incoming=packet?.data;
-   if(!incoming||typeof incoming!=="object"||!LISTS.every(k=>Array.isArray(incoming[k])))throw new Error("Yedek dosyasının biçimi geçersiz.");
-   if(incoming.sector!==data.sector&&!confirm("Yedek farklı çalışma alanına ait. Bu yedeği aktif alana yine de yüklemek istiyor musun?"))return;
-   if(!confirm("Geri yükleme aktif çalışma alanındaki kayıtların üzerine yazacak. Devam edilsin mi?"))return;
-   const old=data,next=emptyData();for(const k of LISTS)next[k]=incoming[k].filter(x=>x&&typeof x==="object"&&!Array.isArray(x));
-   next.settings={...next.settings,...(incoming.settings||{})};next.sector=data.sector;next.activity=Array.isArray(incoming.activity)?incoming.activity.slice(0,80):[];
-   data=next;if(!persist()){data=old;return}renderAll();toast("Yedek geri yüklendi.");
-  }catch(e){toast("Yedek okunamadı: "+e.message)}finally{$("restoreFile").value=""}
- };reader.onerror=()=>toast("Dosya okunamadı.");reader.readAsText(file);
+$("backupBtn").addEventListener("click",backup);
+$("dashExport").addEventListener("click",backup);
+$("restoreFile").addEventListener("change",async e=>{
+  if(!requireAdmin()){e.target.value="";return}
+  const file=e.target.files?.[0];if(!file)return;
+  try{
+    const packet=JSON.parse(await file.text());
+    if(packet.app!=="Gündeşli Soft Ofis360"||!packet.data||!Array.isArray(packet.data.customers)){
+      toast("Bu dosya geçerli bir Ofis360 yedeği değil.");return;
+    }
+    if(!confirm("Mevcut kayıtlar yedekteki kayıtlarla değiştirilecek. Devam edilsin mi?"))return;
+    const incoming=packet.data;
+    const fresh=emptyData(incoming.sector||account.sector);
+    data={...fresh,...incoming,settings:{...fresh.settings,...(incoming.settings||{})}};
+    account.sector=data.sector;
+    if(saveAccounts()&&persist()){renderAll();applyPermissions();toast("Yedek geri yüklendi.")}
+  }catch{toast("Yedek dosyası okunamadı.")}
+  finally{e.target.value=""}
+});
+
+function csvCell(v){
+  let s=String(v??"");
+  if(/^[=+\-@\t\r]/.test(s))s="'"+s;
+  return '"'+s.replace(/"/g,'""')+'"';
 }
-function printService(id){
- const s=data.services.find(x=>x.id===id);if(!s)return;
- const rows=[["Servis numarası",s.code],["İşletme",data.settings.businessName],["Müşteri",customerName(s.customerId)],["Telefon",data.customers.find(c=>c.id===s.customerId)?.phone],["Cihaz türü",s.deviceType],["Marka / model",s.device],["Seri numarası",s.serial],["Aksesuarlar",s.accessories],["Arıza / müşteri beyanı",s.problem],["Yapılan işlem",s.work],["Kabul tarihi",s.date?fmtDate(s.date):""],["Tamamlanma tarihi",s.completedAt?fmtDate(s.completedAt):""],["Teslim tarihi",s.deliveredAt?fmtDate(s.deliveredAt):""],["Durum",s.status],["Ödeme durumu",s.paymentStatus],["Teslim alan",s.receiverName],["Teslim notu",s.deliveryNote],["Servis ücreti",s.fee!==""&&s.fee!==undefined?money(s.fee):""],["Notlar",s.notes]].filter(([k,v])=>v!==""&&v!==null&&v!==undefined);
- const w=window.open("","_blank","width=800,height=850");if(!w){toast("Yazdırma penceresi engellendi. Tarayıcı açılır pencerelerine izin ver.");return}
- w.document.write(`<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>Servis Formu</title><style>body{font:14px Arial;padding:30px;color:#182338}h1{font-size:22px}p{color:#667}table{width:100%;border-collapse:collapse}td{padding:10px;border-bottom:1px solid #ddd;vertical-align:top}td:first-child{width:32%;font-weight:bold}footer{margin-top:55px;display:flex;justify-content:space-between}@media print{button{display:none}}</style></head><body><h1>Gündeşli Soft · Ofis360</h1><p>Teknik Servis / Cihaz Kabul ve Teslim Formu</p><table>${rows.map(([k,v])=>`<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join("")}</table><footer><span>Müşteri imzası: __________________</span><span>Yetkili imzası: __________________</span></footer><script>window.onload=()=>window.print()<\\/script></body></html>`);w.document.close();
+function exportCSV(filename,headers,rows){
+  exportFile(filename,"\uFEFF"+[headers,...rows].map(row=>row.map(csvCell).join(";")).join("\r\n"),"text/csv");
 }
-function completeService(id){
- const s=data.services.find(x=>x.id===id);if(!s)return;
- editing={type:"serviceComplete",id};$("recordForm").dataset.type="serviceComplete";
- $("modalTitle").textContent="Servis Sonuçlandırma";
- $("modalBody").innerHTML='<div class="notice">Servis <strong>'+esc(s.code)+'</strong> · '+esc(customerName(s.customerId))+' · '+esc(s.device)+'</div><div class="form-grid">'+field("Yapılan işlem","work","textarea",{required:true,full:true,placeholder:"Yapılan işlemleri açıkça yaz..."})+field("Servis ücreti (₺)","fee","number",{required:true,min:0,step:"0.01"})+field("Ödeme durumu","paymentStatus","select",{required:true,options:["Ödendi","Ödenmedi","Kısmen ödendi","Ücretsiz işlem"]})+field("Teslim alan","receiverType","select",{required:true,options:["Müşteri","Başka kişi"]})+field("Teslim alan kişi adı soyadı","receiverName","text",{required:true,maxlength:160})+field("Teslim notu","deliveryNote","textarea",{full:true,placeholder:"İsteğe bağlı teslim açıklaması"})+'</div><div class="field"><label><input type="checkbox" id="deliverNow" style="width:auto;margin-right:7px">Cihaz şu anda teslim edildi</label></div>';
- $("f_work").value=s.work||"";$("f_fee").value=s.fee??0;$("f_paymentStatus").value=s.paymentStatus||"Ödenmedi";$("f_receiverType").value=s.receiverType||"Müşteri";$("f_receiverName").value=s.receiverName||customerName(s.customerId);$("f_deliveryNote").value=s.deliveryNote||"";$("deliverNow").checked=s.deliveryStatus==="Teslim edildi";
- $("f_receiverType").addEventListener("change",()=>{if($("f_receiverType").value==="Müşteri")$("f_receiverName").value=customerName(s.customerId)});
- $("modalBackdrop").classList.add("open");
+$("exportCustomers").addEventListener("click",()=>exportCSV("ofis360-musteriler-"+today()+".csv",
+  ["Ad / kurum","Telefon","E-posta","Adres","Not","Kayıt tarihi"],
+  data.customers.map(x=>[x.name,x.phone,x.email,x.address,x.notes,x.createdAt])));
+$("exportStock").addEventListener("click",()=>exportCSV("ofis360-stok-"+today()+".csv",
+  ["Ürün","Kod","Kategori","Adet","Minimum","Alış","Satış"],
+  data.stock.map(x=>[x.name,x.code,x.category,x.qty,x.minQty,x.cost,x.price])));
+$("exportOrders").addEventListener("click",()=>exportCSV("ofis360-islemler-"+today()+".csv",
+  ["Tarih","Müşteri","Tür","Açıklama","Tutar","Durum"],
+  data.orders.map(x=>[x.date,x.customer,x.type,x.item,x.amount,x.status])));
+
+function printServiceForm(id){
+  const s=data.services.find(x=>x.id===id);if(!s)return;
+  const w=window.open("","_blank");
+  if(!w){toast("Yazdırma penceresi tarayıcı tarafından engellendi.");return}
+  const lines=[
+    ["Servis numarası",s.number],["Kabul tarihi",s.date],["Müşteri",s.customer],
+    ["Telefon",s.phone],["Cihaz",s.device],["Seri no / IMEI",s.serial],
+    ["Aksesuarlar",s.accessories],["Arıza bildirimi",s.problem],
+    ["Teknik tespit",s.diagnosis],["Garanti",s.warranty],
+    ["Durum",s.status],["Tahmini ücret",s.price?money(s.price):""],["Ek not",s.notes]
+  ].filter(x=>x[1]!==undefined&&x[1]!==null&&String(x[1]).trim()!=="");
+  w.document.write(`<!DOCTYPE html><html lang="tr"><meta charset="UTF-8"><title>Ofis360 Servis Formu</title>
+  <style>body{font:14px Arial;padding:35px;color:#172338}h1{font-size:22px}p{color:#65738a}.line{padding:10px 0;border-bottom:1px solid #ddd;display:grid;grid-template-columns:180px 1fr;gap:15px}b{color:#526078}@media print{button{display:none}}</style>
+  <h1>Gündeşli Soft — Ofis360</h1><p>Teknik servis kabul / takip formu</p>
+  ${lines.map(x=>`<div class="line"><b>${esc(x[0])}</b><span>${esc(x[1])}</span></div>`).join("")}
+  <br><p>Müşteri imzası: ____________________ &nbsp;&nbsp; Teslim alan: ____________________</p>
+  <button onclick="window.print()">Yazdır</button></html>`);
+  w.document.close();
 }
-function saveServiceCompletion(e){
- e.preventDefault();const s=data.services.find(x=>x.id===editing?.id);if(!s){toast("Servis kaydı bulunamadı.");return}
- const work=val("f_work"),fee=Number(val("f_fee")),receiverName=val("f_receiverName");
- if(!work||!receiverName){toast("Yapılan işlem ve teslim alan kişinin adı soyadı zorunludur.");return}
- if(!Number.isFinite(fee)||fee<0){toast("Geçerli bir ücret gir.");return}
- const old={...s};s.work=work;s.fee=fee;s.paymentStatus=val("f_paymentStatus");s.receiverType=val("f_receiverType");s.receiverName=receiverName;s.deliveryNote=val("f_deliveryNote");s.status="Tamamlandı";s.completedAt=today();s.deliveryStatus=$("deliverNow").checked?"Teslim edildi":"Teslim bekliyor";if(s.deliveryStatus==="Teslim edildi")s.deliveredAt=today();
- setActivity("Servis sonuçlandırıldı: "+s.code);if(!persist()){Object.assign(s,old);return}
- closeModal();$("recordForm").dataset.type="";renderAll();toast(s.deliveryStatus==="Teslim edildi"?"Servis tamamlandı ve teslim edildi.":"Servis tamamlandı; teslim bekliyor.");
+function runAnalysis(){
+  const result=[];
+  const low=data.stock.filter(x=>Number(x.qty)<=Number(x.minQty||0));
+  if(low.length){
+    result.push(["Stok uyarısı",low.length+" ürün minimum stok seviyesinde veya altında. "+low.slice(0,5).map(x=>x.name+" ("+x.qty+")").join(", ")+" ürünlerini gözden geçir."]);
+  }else result.push(["Stok durumu","Minimum stok seviyesi girilmiş ürünlerde kritik bir durum görünmüyor."]);
+  const waiting=data.services.filter(x=>["Parça bekliyor","İnceleniyor","Kabul edildi"].includes(x.status));
+  if(waiting.length)result.push(["Servis takibi",waiting.length+" servis henüz tamamlanmamış. Durumları ve müşteriye verilecek tahmini süreyi kontrol et."]);
+  const overdue=data.tasks.filter(x=>x.status!=="Tamamlandı"&&x.due&&x.due<today());
+  if(overdue.length)result.push(["Görev takibi",overdue.length+" görevin son tarihi geçmiş. Öncelik verip sorumlu kişiyi netleştir."]);
+  const pending=data.orders.filter(x=>["Bekliyor","Hazırlanıyor"].includes(x.status));
+  if(pending.length)result.push(["Sipariş takibi",pending.length+" sipariş tamamlanmayı bekliyor. Tedarik ve teslimat durumlarını kontrol et."]);
+  if(!data.customers.length)result.push(["Müşteri kayıtları","Müşteri geçmişini takip edebilmek için müşteri kartlarını düzenli oluştur."]);
+  if(!data.activity.length)result.push(["Kayıt düzeni","Düzenli kayıt ve yedek alışkanlığı oluştur."]);
+  $("guideResults").innerHTML=result.map(x=>`<div class="notice"><strong>${esc(x[0])}</strong><br>${esc(x[1])}</div>`).join("");
 }
-function guideAnswer(q){
- const s=q.toLocaleLowerCase("tr");
- if(/servis|arıza|cihaz kabul/.test(s))return "1. Teknik Servis bölümünü aç.\\n2. Cihaz Kabul düğmesine bas.\\n3. Müşteri seç; bulunmuyorsa Yeni müşteri kaydı oluştur düğmesini kullan.\\n4. Cihaz ve arıza bilgilerini doldurup kaydet.\\n5. İşlem bitince Servis Sonuçlandır düğmesine bas. Ödeme ve teslim durumunu ayrı ayrı kaydet.";
- if(/stok|kritik|ürün|parça/.test(s))return "1. Stok Yönetimi bölümüne gir.\\n2. Ürün adını, miktarı, kritik seviyeyi ve fiyatları kaydet.\\n3. Minimum seviyeye inen ürünler Genel Bakış ekranındaki radarda görünür.\\nNot: Bu prototipte stok hareketi ve satış sonrası otomatik stok düşümü henüz uygulanmıyor.";
- if(/yedek|backup|aktar/.test(s))return "Ayarlar ve Yedekleme bölümünden JSON yedeği indir. CSV dışa aktarma tablolar içindir. JSON yedeğini güvenli bir yerde sakla. Geri yükleme aktif çalışma alanındaki kayıtları değiştirir.";
- if(/müşteri/.test(s))return "Müşteriler bölümünü aç ve Müşteri ekle düğmesine bas. Ad-soyad veya kurum adı zorunludur. Telefon, e-posta, adres ve notları girip kaydet. Aynı telefonla kayıt varsa sistem uyarı verir.";
- if(/kârlılık|kar|kâr|maliyet/.test(s))return "Gerçek kârlılık için satış geliri, parça maliyeti ve işçilik maliyeti birlikte tutulmalıdır. Bu prototip stok maliyetini ve satış toplamlarını raporlar; eksik işçilik/parça maliyetlerini tamamlanmış kâr gibi göstermez.";
- if(/şifre|lisans|kurucu|güvenlik/.test(s))return "Bu sürümdeki hesap ve PIN kontrolü yalnızca tarayıcı prototipidir. Gerçek güvenlik için sunucu tarafında parola özeti, oturum yönetimi, rol kontrolü, deneme sınırı ve lisans servisi gerekir.";
- if(/fatura|e-fatura/.test(s))return "Bu sürüm resmî e-fatura veya muhasebe uygulaması değildir. Resmî fatura entegrasyonu, yasal mevzuat uyumu ve yetkili altyapı gerektirir.";
- return "Müşteri, stok, sipariş, teknik servis, görev veya yedekleme konusunu biraz daha ayrıntılı yaz. Bu rehber yerel ve kural tabanlıdır; haricî yapay zekâ hesabına bağlı değildir.";
+$("runAnalysis").addEventListener("click",runAnalysis);
+$("askGuide").addEventListener("click",()=>{
+  const q=key(val("guideQuestion"));
+  let answer="Kayıtlarını düzenli tut, kritik stok seviyeleri belirle ve tamamlanmamış işleri periyodik olarak kontrol et.";
+  if(q.includes("stok")||q.includes("ürün")||q.includes("sipariş")){
+    const low=data.stock.filter(x=>Number(x.qty)<=Number(x.minQty||0));
+    answer=low.length?"Kontrol edilmesi gereken ürünler: "+low.map(x=>x.name+" ("+x.qty+" adet)").join(", ")+". Satış hızını ve tedarik süresini de değerlendir.":"Kayıtlı ürünlerde kritik stok görünmüyor. Daha iyi tahmin için ürünlerin minimum stok seviyelerini ve satış kayıtlarını düzenli güncelle.";
+  }else if(q.includes("müşteri")){
+    answer="Müşteri kartlarına doğru telefon, e-posta ve notları ekle. İletişim öncesinde müşterinin izinlerini ve işletmenin geçerli kurallarını gözet.";
+  }else if(q.includes("servis")||q.includes("arıza")){
+    const open=data.services.filter(x=>x.status!=="Teslim edildi");
+    answer="Tamamlanmamış servis sayısı: "+open.length+". Kabul tarihi, arıza bildirimi, yapılan işlemler ve teslim durumunu kaydet; müşteriye otomatik mesaj gönderilmez.";
+  }else if(q.includes("görev")||q.includes("hatırlat")){
+    const tasks=data.tasks.filter(x=>x.status!=="Tamamlandı");
+    answer="Tamamlanmamış görev sayısı: "+tasks.length+". Son tarihi geçmiş görevleri önce kontrol et ve sorumluları belirle.";
+  }else if(q.includes("gelir")||q.includes("satış")||q.includes("kazanç")){
+    const total=data.orders.filter(x=>x.status!=="İptal").reduce((n,x)=>n+Number(x.amount||0),0);
+    answer="İptal olmayan kayıtlı işlemlerin toplam tutarı "+money(total)+". Bu değer net kâr değildir; maliyet, gider, vergi ve iadeler ayrıca hesaplanmalıdır.";
+  }
+  $("guideAnswer").textContent=answer;
+});
+["customerSearch","stockSearch","orderSearch","serviceSearch","taskSearch","propertySearch"].forEach(id=>{
+  $(id)?.addEventListener("input",()=>{
+    if(!data)return;
+    if(id==="customerSearch")renderCustomers();
+    if(id==="stockSearch")renderStock();
+    if(id==="orderSearch")renderOrders();
+    if(id==="serviceSearch")renderServices();
+    if(id==="taskSearch")renderTasks();
+    if(id==="propertySearch")renderProperties();
+  });
+});
+["stockFilter","orderStatusFilter","serviceStatusFilter","taskStatusFilter","propertyFilter"].forEach(id=>{
+  $(id)?.addEventListener("change",()=>{
+    if(id==="stockFilter")renderStock();
+    if(id==="orderStatusFilter")renderOrders();
+    if(id==="serviceStatusFilter")renderServices();
+    if(id==="taskStatusFilter")renderTasks();
+    if(id==="propertyFilter")renderProperties();
+  });
+});
+
+function boot(){
+  if(Object.keys(accounts).length){
+    showLogin();
+  }else{
+    showRegister();
+  }
 }
-function init(){
- $("recordForm").addEventListener("submit",e=>{if(editing?.type==="serviceComplete"){saveServiceCompletion(e);return}saveRecord(e)});
- $("mainNav").addEventListener("click",e=>{const b=e.target.closest("button[data-page]");if(b)gotoPage(b.dataset.page)});
- document.addEventListener("click",e=>{
-  const c=e.target.closest("[data-create]");if(c){openRecord(c.dataset.create);return}
-  const edit=e.target.closest("[data-edit]");if(edit){editing={type:edit.dataset.edit,id:edit.dataset.id};$("recordForm").dataset.type=edit.dataset.edit;openRecord(edit.dataset.edit,edit.dataset.id);$("recordForm").dataset.type=edit.dataset.edit;return}
-  const del=e.target.closest("[data-delete]");if(del){deleteRecord(del.dataset.delete,del.dataset.id);return}
-  const jump=e.target.closest("[data-jump], [data-goto]");if(jump){gotoPage(jump.dataset.jump||jump.dataset.goto);return}
-  const stat=e.target.closest("[data-jump]");if(stat){gotoPage(stat.dataset.jump);return}
-  const print=e.target.closest("[data-print]");if(print){printService(print.dataset.print);return}
-  const complete=e.target.closest("[data-complete]");if(complete){completeService(complete.dataset.complete);return}
-  const guide=e.target.closest("[data-guide]");if(guide){const q={service:"Teknik servis kaydı nasıl açılır?",stock:"Stok nasıl takip edilir?",backup:"Yedek nasıl alınır?",customer:"Müşteri nasıl eklenir?"}[guide.dataset.guide];$("guideQuestion").value=q;$("guideAnswer").textContent=guideAnswer(q);gotoPage("guide")}
- });
- $("modalClose").addEventListener("click",closeModal);$("modalCancel").addEventListener("click",closeModal);
- $("modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeModal()});
- document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
- $("mobileMenu").addEventListener("click",()=>$("sidebar").classList.toggle("open"));
- $("quickAdd").addEventListener("click",()=>{const answer=prompt("Yeni kayıt türü:\\nMüşteri\\nStok\\nSatış / sipariş\\nTeknik servis\\nGörev");if(!answer)return;const types={"müşteri":"customer","stok":"stock","satış / sipariş":"order","teknik servis":"service","görev":"task"};const t=types[answer.trim().toLocaleLowerCase("tr")];if(t)openRecord(t);else toast("Listeden bir kayıt türü yaz.")});
- $("sectorSwitcher").addEventListener("change",e=>applySector(e.target.value));$("saveSector").addEventListener("click",()=>applySector(val("settingsSector")));
- $("settingsForm").addEventListener("submit",e=>{e.preventDefault();const f=e.currentTarget,old={...data.settings};data.settings={...data.settings,businessName:f.elements.businessName.value.trim(),ownerName:f.elements.ownerName.value.trim(),businessPhone:f.elements.businessPhone.value.trim(),businessAddress:f.elements.businessAddress.value.trim()};setActivity("İşletme ayarları güncellendi");if(!persist()){data.settings=old;return}$("businessSubtitle").textContent=data.settings.businessName+" · "+SECTORS[data.sector];toast("İşletme bilgileri kaydedildi.")});
- ["customerSearch","customerFilter","stockSearch","orderSearch","orderStatusFilter","serviceSearch","serviceStatusFilter","taskSearch","taskStatusFilter"].forEach(id=>{if($(id)){$(id).addEventListener("input",renderAll);$(id).addEventListener("change",renderAll)}});
- $("backupBtn").addEventListener("click",backup);$("dashExport").addEventListener("click",backup);$("reportBackup").addEventListener("click",backup);
- $("restoreFile").addEventListener("change",e=>restoreBackup(e.target.files?.[0]));
- $("exportCustomers").addEventListener("click",exportCustomers);$("exportAllCsv").addEventListener("click",exportCustomers);$("exportStock").addEventListener("click",exportStock);$("exportOrders").addEventListener("click",exportOrders);
- $("clearDataBtn").addEventListener("click",()=>{if(!requireFounder())return;if(!confirm("Aktif çalışma alanındaki bütün kayıtlar silinecek. Önce yedek aldığından emin ol. Devam edilsin mi?"))return;const old=data;data=emptyData();data.sector=old.sector;data.settings={...old.settings};if(!persist()){data=old;return}renderAll();toast("Aktif çalışma alanı kayıtları silindi.")});
- $("askGuide").addEventListener("click",()=>{$("guideAnswer").textContent=val("guideQuestion")?guideAnswer(val("guideQuestion")):"Önce bir soru yaz."});
- $("saveProfiles").addEventListener("click",saveProfileSettings);$("saveLockSettings").addEventListener("click",saveLockSettings);
- document.addEventListener("pointerdown",markActivity,{passive:true});document.addEventListener("keydown",markActivity);document.addEventListener("input",markActivity,{passive:true});
- document.querySelectorAll("[data-jump]").forEach(b=>b.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();gotoPage(b.dataset.jump)}}));
-}
-const oldOpenRecord=openRecord;
-openRecord=function(type,id=null){$("recordForm").dataset.type=type;oldOpenRecord(type,id);$("recordForm").dataset.type=type};
-const oldSaveRecord=saveRecord;
-saveRecord=function(e){$("recordForm").dataset.type=editing?.type||$("recordForm").dataset.type;oldSaveRecord(e)};
-init();
-initAuth();
+boot();
 </script>
 </body>
 </html>
